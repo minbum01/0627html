@@ -1,0 +1,6 @@
+# 작업용 임시 캡처 파일
+_*.png
+*.tmp
+
+# Claude Code 로컬 설정
+.claude/

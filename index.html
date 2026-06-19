@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>2026 원샷원킬 설명회 · 필기 합격선 배치표</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+<style>
+  :root{
+    --blue:#1E4FC4;
+    --blue-bright:#2C6BF0;
+    --navy:#0C2A6B;
+    --navy-deep:#061A45;
+    --ink:#0B1020;
+    --white:#ffffff;
+    --soft:#E8EEFB;
+    --ease:cubic-bezier(.65,.02,.2,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    font-family:"Pretendard","Pretendard Variable",system-ui,-apple-system,"Malgun Gothic",sans-serif;
+    background:#05122e;
+    overflow:hidden;
+    color:var(--white);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== Stage (16:9, scaled to fit) ===== */
+  #stageWrap{position:fixed;inset:0;overflow:hidden;}
+  #stage{
+    position:absolute;left:50%;top:50%;
+    width:1280px;height:720px;
+    transform:translate(-50%,-50%);
+    transform-origin:center center;
+    background:
+      radial-gradient(120% 90% at 50% -10%, rgba(120,160,255,.25) 0%, transparent 60%),
+      linear-gradient(180deg,#0a1f57 0%,#123a9e 42%,#2f63d6 70%,#d8e4fb 100%);
+    box-shadow:0 40px 120px rgba(0,0,0,.6);
+    overflow:hidden;
+  }
+
+  /* ===== Slides ===== */
+  .slide{
+    position:absolute;inset:0;
+    padding:64px 72px;
+    opacity:0;visibility:hidden;
+    transform:scale(1.04);
+    transition:opacity .6s var(--ease),transform .7s var(--ease),visibility .6s;
+    display:flex;flex-direction:column;
+  }
+  .slide.active{opacity:1;visibility:visible;transform:scale(1);}
+  .slide.prev{transform:scale(.97);}
+
+  /* staged entrance */
+  .anim{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+  .slide.active .anim{opacity:1;transform:none;}
+  .slide.active .anim:nth-child(1){transition-delay:.10s}
+  .slide.active .d1{transition-delay:.18s}
+  .slide.active .d2{transition-delay:.28s}
+  .slide.active .d3{transition-delay:.38s}
+  .slide.active .d4{transition-delay:.48s}
+  .slide.active .d5{transition-delay:.58s}
+
+  /* ===== Brand bits ===== */
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.5px;}
+  .logo svg{width:26px;height:26px;display:block}
+  .logo b{color:#fff}
+
+  /* morphing badge (shared across slides) */
+  #brandBadge{
+    position:absolute;z-index:40;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:radial-gradient(140% 140% at 50% 0%, #14336f 0%, #0a1f4d 100%);
+    border:2px solid rgba(255,255,255,.85);
+    border-radius:50%;
+    color:#fff;text-align:center;line-height:1;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    transition:left .8s var(--ease),top .8s var(--ease),width .8s var(--ease),
+               height .8s var(--ease),font-size .8s var(--ease),border-radius .8s var(--ease);
+    pointer-events:none;
+  }
+  #brandBadge .b1{font-size:.62em;font-weight:700;opacity:.92}
+  #brandBadge .b2{font-size:1.55em;font-weight:900;margin:.06em 0;letter-spacing:-1px}
+  #brandBadge .b3{font-size:.7em;font-weight:800}
+  .badgeSlot{position:absolute;}
+
+  /* ===== ONE SHOT KILL wordmark ===== */
+  .osk{font-style:italic;font-weight:900;letter-spacing:-2px;line-height:.92}
+  .osk .oline{display:flex;align-items:baseline;gap:.12em}
+  .osk span{position:relative}
+  .osk .pipe{color:var(--blue-bright);font-weight:800;margin:0 .04em}
+
+  /* ===== Cover ===== */
+  #s1 .topbar{display:flex;justify-content:space-between;align-items:flex-start;width:100%}
+  #s1 .osk .oline{justify-content:flex-end}
+  .eyebrow{display:inline-flex;align-items:center;gap:13px;font-weight:800;font-size:26px;color:#cfe0ff;
+           letter-spacing:0;margin-top:96px}
+  .eyebrow::before{content:"";width:44px;height:4px;background:var(--blue-bright);border-radius:3px}
+  #s1 h1{font-size:104px;font-weight:900;letter-spacing:-4px;line-height:.98;margin-top:14px;
+         text-shadow:0 6px 30px rgba(0,0,0,.3)}
+  .subpill{display:inline-flex;align-items:center;gap:10px;margin-top:26px;
+           background:var(--blue);color:#fff;font-weight:800;font-size:21px;
+           padding:13px 22px;border-radius:8px;box-shadow:0 8px 22px rgba(20,50,140,.5)}
+  .subpill i{font-style:normal;opacity:.65}
+  #s1 .oskWrap{margin-top:auto;margin-bottom:24px;display:flex;align-items:flex-end;justify-content:space-between;gap:30px}
+  #s1 .oskGroup{text-align:right;flex-shrink:0}
+  #s1 .osk{font-size:92px;color:#0a1330}
+  #s1 .oskSub{font-style:italic;font-weight:900;font-size:44px;color:#0a1330;letter-spacing:-1px;margin-top:10px}
+  #s1 .oskSub .hk{display:inline-block;font-style:italic;background:#0a1330;color:#fff;border-radius:12px;
+                  padding:2px 16px 4px;margin-left:8px;box-shadow:0 8px 20px rgba(0,0,0,.4)}
+  #s1 .coverInfo{font-size:18px;font-weight:700;color:#e3ecff;line-height:1.85;white-space:nowrap;
+                 flex-shrink:0;padding-bottom:10px}
+  #s1 .coverInfo span{display:inline-block;min-width:46px;color:#9ec1ff;font-weight:800;margin-right:8px}
+  #stage:has(#s1.active) .footmark{opacity:0}
+  .startBtn{
+    cursor:pointer;border:none;font-family:inherit;
+    background:#0a1330;color:#fff;font-weight:800;font-size:20px;
+    padding:18px 30px;border-radius:50px;display:inline-flex;align-items:center;gap:12px;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);transition:transform .25s var(--ease),background .25s}
+  .startBtn:hover{transform:translateY(-3px);background:var(--blue)}
+  .startBtn .arr{transition:transform .3s var(--ease)}
+  .startBtn:hover .arr{transform:translateX(6px)}
+
+  /* ===== Content slide shell ===== */
+  .head{display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .kicker{font-weight:800;font-size:17px;color:#bcd0ff;letter-spacing:3px;text-transform:uppercase}
+  .stitle{font-size:52px;font-weight:900;letter-spacing:-2px;margin-top:6px}
+  .stitle .hl{color:#9ec1ff}
+
+  /* agenda cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:54px}
+  .card{
+    cursor:pointer;background:#fff;color:var(--ink);border-radius:20px;padding:34px 30px;
+    box-shadow:0 18px 40px rgba(4,16,48,.4);position:relative;overflow:hidden;
+    transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+  .card:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(4,16,48,.55)}
+  .card .num{font-style:italic;font-weight:900;font-size:46px;color:var(--soft);line-height:1}
+  .card:hover .num{color:#cdddff}
+  .card h3{font-size:27px;font-weight:900;margin-top:14px;letter-spacing:-1px}
+  .card p{font-size:16px;color:#43507a;margin-top:12px;line-height:1.55;font-weight:500}
+  .card .go{position:absolute;right:26px;bottom:26px;font-weight:900;color:var(--blue);
+            font-size:22px;opacity:0;transform:translateX(-8px);transition:.3s var(--ease)}
+  .card:hover .go{opacity:1;transform:none}
+  .card::before{content:"";position:absolute;left:0;top:0;height:6px;width:100%;
+                background:linear-gradient(90deg,var(--blue),var(--blue-bright))}
+
+  /* table */
+  .panel{background:#fff;color:var(--ink);border-radius:22px;margin-top:30px;overflow:hidden;
+          box-shadow:0 20px 50px rgba(4,16,48,.45);flex:1;display:flex;flex-direction:column}
+  table{width:100%;border-collapse:collapse}
+  thead th{background:var(--navy);color:#fff;font-weight:800;font-size:18px;padding:18px 26px;text-align:left}
+  thead th.r,tbody td.r{text-align:right}
+  tbody td{padding:17px 26px;font-size:20px;font-weight:700;border-top:1px solid #eef1f8}
+  tbody tr{cursor:pointer;transition:background .2s}
+  tbody tr:hover{background:#f1f5ff}
+  tbody tr.sel{background:#e4ecff}
+  td .job{font-weight:900}
+  .up{color:#d63b3b;font-weight:900}
+  .down{color:#1e7a3a;font-weight:900}
+  .rowNote{font-size:15px;color:#5a6488;font-weight:600;padding:0 26px}
+  .hint{margin-top:14px;font-size:15px;color:#cfe0ff;font-weight:600;display:flex;align-items:center;gap:8px}
+
+  /* score diagnose */
+  .diagWrap{margin-top:36px;background:#fff;color:var(--ink);border-radius:22px;padding:42px 46px;
+            box-shadow:0 20px 50px rgba(4,16,48,.45);flex:1;display:flex;flex-direction:column;justify-content:center}
+  .diagWrap h3{font-size:24px;font-weight:900;letter-spacing:-1px}
+  .diagWrap .sub{color:#5a6488;font-weight:600;margin-top:6px;font-size:16px}
+  .chips{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .chip{cursor:pointer;border:2px solid #d6deef;background:#fff;color:#2a3c66;
+        font-weight:800;font-size:19px;padding:12px 22px;border-radius:50px;transition:.2s var(--ease)}
+  .chip:hover{border-color:var(--blue)}
+  .chip.on{background:var(--blue);border-color:var(--blue);color:#fff;transform:translateY(-2px)}
+  .gauge{margin-top:38px;height:26px;border-radius:50px;position:relative;
+         background:linear-gradient(90deg,#ffcaca 0%,#ffe7b0 45%,#bdeccb 75%,#7fd49b 100%)}
+  .gauge .line{position:absolute;top:-12px;bottom:-12px;width:4px;background:var(--navy);border-radius:4px;
+               left:0%;transition:left .7s var(--ease)}
+  .gauge .line::after{content:attr(data-label);position:absolute;top:-34px;left:50%;transform:translateX(-50%);
+                      white-space:nowrap;background:var(--navy);color:#fff;font-size:13px;font-weight:800;
+                      padding:4px 10px;border-radius:6px}
+  .gscale{display:flex;justify-content:space-between;margin-top:16px;font-size:14px;color:#8a93ad;font-weight:700}
+  .verdict{margin-top:30px;font-size:26px;font-weight:900;letter-spacing:-1px;min-height:34px;transition:.3s}
+  .verdict b{color:var(--blue)}
+
+  /* ===== Infographic: comparison (S2) ===== */
+  .lead{margin-top:20px;font-size:21px;font-weight:600;color:#dbe6ff;line-height:1.55;max-width:1040px}
+  .lead b{color:#fff;font-weight:800}
+  .cmp{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:28px}
+  .cmpCard{background:#fff;color:var(--ink);border-radius:20px;padding:26px 26px 28px;position:relative;overflow:hidden;
+           cursor:pointer;box-shadow:0 18px 40px rgba(4,16,48,.4);transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+  .cmpCard:hover{transform:translateY(-8px);box-shadow:0 28px 56px rgba(4,16,48,.55)}
+  .cmpCard::before{content:"";position:absolute;left:0;top:0;width:100%;height:7px;background:#9ab4ea}
+  .cmpCard.primary::before{height:9px;background:linear-gradient(90deg,var(--blue),var(--blue-bright))}
+  .cmpIcon{width:68px;height:68px;border-radius:17px;background:var(--soft);display:grid;place-items:center}
+  .cmpIcon svg{width:38px;height:38px}
+  .cmpName{font-size:31px;font-weight:900;letter-spacing:-1px;margin-top:15px}
+  .cmpName .en{display:block;font-style:italic;font-size:13px;color:#9aa6c2;font-weight:800;letter-spacing:1px;margin-top:1px}
+  .cmpItem{margin-top:15px;border-top:1px solid #eef1f8;padding-top:12px}
+  .cmpItem .lab{font-size:13px;font-weight:800;color:var(--blue)}
+  .cmpItem .val{font-size:16px;font-weight:600;color:#33405f;line-height:1.4;margin-top:4px}
+
+  .tl{margin-top:22px;background:#fff;color:var(--ink);border-radius:18px;padding:18px 32px;
+      box-shadow:0 16px 36px rgba(4,16,48,.4);display:flex;align-items:center;gap:22px}
+  .tlItem{display:flex;align-items:center;gap:13px;flex-shrink:0}
+  .tlMonth{font-style:italic;font-weight:900;font-size:30px;color:var(--blue);letter-spacing:-1px}
+  .tlName{font-size:20px;font-weight:800}
+  .tlName em{font-style:normal;color:var(--blue)}
+  .tlBar{flex:1;height:4px;border-radius:4px;background:linear-gradient(90deg,#cdddff,var(--blue-bright));position:relative}
+  .tlBar::after{content:"";position:absolute;right:-1px;top:50%;transform:translateY(-50%);
+                border-left:11px solid var(--blue-bright);border-top:7px solid transparent;border-bottom:7px solid transparent}
+  .tlNote{flex-shrink:0;background:var(--navy);color:#fff;font-weight:800;font-size:15px;padding:10px 16px;border-radius:10px}
+
+  /* ===== Infographic: residency (S3) ===== */
+  .contrast{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:26px}
+  .cPanel{border-radius:22px;padding:26px 30px;position:relative;overflow:hidden;box-shadow:0 18px 40px rgba(4,16,48,.4)}
+  .cPanel.no{background:#fff;color:var(--ink)}
+  .cPanel.yes{background:radial-gradient(140% 140% at 0 0,#1a3f9e,#0c2a6b);color:#fff;border:1px solid rgba(255,255,255,.12)}
+  .cTag{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:800;letter-spacing:1px}
+  .cPanel.no .cTag{color:#1e7a3a}
+  .cPanel.yes .cTag{color:#9ec1ff}
+  .cBig{font-size:40px;font-weight:900;letter-spacing:-2px;margin-top:8px}
+  .cWho{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .chipS{font-size:16px;font-weight:800;padding:7px 15px;border-radius:50px}
+  .cPanel.no .chipS{background:var(--soft);color:var(--navy)}
+  .cPanel.yes .chipS{background:rgba(255,255,255,.16);color:#fff}
+  .cDesc{margin-top:15px;font-size:17px;font-weight:600;line-height:1.5}
+  .cPanel.no .cDesc{color:#33405f}
+  .cPanel.yes .cDesc{color:#dbe6ff}
+  .cNote{margin-top:14px;display:inline-block;font-size:15px;font-weight:800;background:#0a1330;color:#fff;padding:8px 14px;border-radius:8px}
+
+  .reqHead{margin-top:26px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .reqLabel{font-weight:800;font-size:17px;color:#cfe0ff;letter-spacing:1px}
+  .reqRow{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px}
+  .reqCard{background:#fff;color:var(--ink);border-radius:18px;padding:24px 26px;display:flex;gap:18px;align-items:flex-start;
+           box-shadow:0 14px 32px rgba(4,16,48,.35)}
+  .reqNo{flex-shrink:0;width:50px;height:50px;border-radius:14px;background:var(--blue);color:#fff;
+         font-style:italic;font-weight:900;font-size:25px;display:grid;place-items:center}
+  .reqCard h4{font-size:21px;font-weight:900;letter-spacing:-.5px}
+  .reqCard p{font-size:16px;font-weight:600;color:#44507a;line-height:1.5;margin-top:6px}
+  .reqCard p b{color:var(--blue);font-weight:800}
+
+  /* closing */
+  #s5{align-items:center;justify-content:center;text-align:center}
+  #s5 .big{font-size:74px;font-weight:900;letter-spacing:-3px;line-height:1.05}
+  #s5 .big em{font-style:normal;color:#9ec1ff}
+  #s5 .osk{font-size:66px;color:#0a1330;margin-top:26px}
+  #s5 .osk .oline{justify-content:center}
+  #s5 .contact{margin-top:44px;display:flex;gap:40px;font-weight:800;font-size:22px}
+  #s5 .contact div{display:flex;align-items:center;gap:10px}
+  #s5 .contact span{opacity:.6;font-weight:700}
+
+  /* ===== Controls ===== */
+  #nav{position:absolute;z-index:60;left:0;right:0;bottom:26px;display:flex;align-items:center;
+       justify-content:center;gap:18px;pointer-events:none}
+  .dot{pointer-events:auto;cursor:pointer;width:11px;height:11px;border-radius:50%;
+       background:rgba(255,255,255,.4);transition:.3s var(--ease)}
+  .dot.on{background:#fff;width:30px;border-radius:6px}
+  /* faint left/right arrows, top-right under the badge */
+  #navArrows{position:absolute;z-index:60;right:74px;top:176px;display:flex;gap:7px}
+  .navArr{cursor:pointer;width:32px;height:32px;border-radius:50%;border:none;
+          background:rgba(255,255,255,.10);color:rgba(255,255,255,.5);font-size:16px;line-height:1;
+          display:grid;place-items:center;transition:.2s var(--ease)}
+  .navArr:hover{background:rgba(255,255,255,.26);color:#fff}
+  #counter{position:absolute;z-index:60;right:30px;top:28px;font-weight:800;font-size:15px;
+           color:rgba(255,255,255,.7);letter-spacing:1px}
+  #counter b{color:#fff;font-size:18px}
+
+  /* floating button (S3) */
+  .fab{cursor:pointer;border:none;font-family:inherit;display:inline-flex;align-items:center;gap:9px;
+       font-weight:800;font-size:16px;color:#fff;white-space:nowrap;
+       background:linear-gradient(90deg,var(--blue),var(--blue-bright));padding:13px 22px;border-radius:50px;
+       box-shadow:0 12px 30px rgba(20,50,140,.5);transition:transform .25s var(--ease);
+       animation:fabPulse 2.4s var(--ease) infinite}
+  .fab:hover{transform:translateY(-3px)}
+  .fab .fabIco{font-size:19px;line-height:1}
+  @keyframes fabPulse{0%,100%{box-shadow:0 12px 30px rgba(20,50,140,.5)}
+                      50%{box-shadow:0 12px 30px rgba(20,50,140,.5),0 0 0 9px rgba(44,107,240,.16)}}
+
+  /* dim modal */
+  .modal{position:absolute;inset:0;z-index:75;display:flex;align-items:center;justify-content:center;padding:60px;
+         background:rgba(4,12,32,.74);backdrop-filter:blur(3px);opacity:0;visibility:hidden;
+         transition:opacity .35s var(--ease),visibility .35s}
+  .modal.open{opacity:1;visibility:visible}
+  .modalCard{background:#fff;color:var(--ink);border-radius:24px;padding:38px 44px 34px;max-width:780px;width:100%;
+             position:relative;box-shadow:0 40px 110px rgba(0,0,0,.55);
+             transform:translateY(20px) scale(.97);transition:transform .4s var(--ease)}
+  .modal.open .modalCard{transform:none}
+  .modalClose{position:absolute;right:20px;top:18px;cursor:pointer;border:none;background:#eef1f8;color:#5a6488;
+              width:38px;height:38px;border-radius:50%;font-size:22px;line-height:1;transition:.2s var(--ease)}
+  .modalClose:hover{background:#dde4f2;color:#0a1330}
+  .modalTag{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:14px;letter-spacing:1px;
+            color:#b9791a;background:#fff3df;border:1px solid #f0d9a8;padding:7px 14px;border-radius:50px}
+  .modalCard h3{font-size:30px;font-weight:900;letter-spacing:-1px;margin-top:16px}
+  .reqNo.plan{background:#b9791a}
+  .modalFoot{margin-top:20px;font-size:14px;font-weight:600;color:#8a93ad;line-height:1.5}
+
+  /* ===== S4 subjects ===== */
+  .subjGrid{display:grid;grid-template-columns:1.45fr 1fr;gap:24px;margin-top:30px}
+  .subjCard{background:#fff;color:var(--ink);border-radius:22px;padding:30px 32px;position:relative;overflow:hidden;
+            box-shadow:0 18px 40px rgba(4,16,48,.4)}
+  .subjCard.hot{background:linear-gradient(160deg,#10357f,#0a1f4d);color:#fff;border:1px solid rgba(255,255,255,.12)}
+  .subjGrade{display:flex;align-items:baseline;gap:13px}
+  .subjGrade .g{font-style:italic;font-weight:900;font-size:46px;letter-spacing:-2px;line-height:1}
+  .subjCard.hot .subjGrade .g{color:#9ec1ff}
+  .subjGrade .who{font-size:17px;font-weight:700;color:#5a6488}
+  .subjCard.hot .subjGrade .who{color:#bcd0ff}
+  .subjTag{position:absolute;right:24px;top:24px;font-size:13px;font-weight:800;letter-spacing:1px;
+           background:var(--blue-bright);color:#fff;padding:6px 13px;border-radius:50px}
+  .subjList{margin-top:22px;display:flex;flex-wrap:wrap;gap:12px}
+  .subjPill{font-size:21px;font-weight:800;padding:13px 22px;border-radius:14px;background:var(--soft);color:var(--navy)}
+  .subjCard.hot .subjPill{background:rgba(255,255,255,.14);color:#fff}
+  .subjPill.major{background:#dbe6ff}
+  .subjCard.hot .subjPill.major{background:rgba(158,193,255,.26)}
+  .subjMeta{margin-top:20px;font-size:16px;font-weight:600;color:#5a6488}
+  .subjCard.hot .subjMeta{color:#cfe0ff}
+
+  /* ===== S5 reform (before → after) ===== */
+  .reformRow{display:flex;flex-direction:column;gap:22px;margin-top:34px}
+  .reformCard{background:#fff;color:var(--ink);border-radius:22px;padding:26px 34px;display:flex;align-items:center;gap:26px;
+              box-shadow:0 18px 40px rgba(4,16,48,.4)}
+  .reformWho{flex-shrink:0;width:180px;font-size:25px;font-weight:900;letter-spacing:-1px}
+  .reformWho .sub{display:block;font-size:14px;font-weight:700;color:#9aa6c2;margin-top:4px}
+  .baCol{display:flex;align-items:center;gap:26px;flex:1}
+  .baItem{text-align:center}
+  .baItem .lab{font-size:13px;font-weight:800;color:#9aa6c2;letter-spacing:1px}
+  .baItem .v{font-size:26px;font-weight:900;letter-spacing:-1px;margin-top:7px;padding:13px 26px;border-radius:14px;display:inline-block}
+  .baItem.old .v{background:#f1f3f8;color:#9aa6c2;text-decoration:line-through;text-decoration-color:#d63b3b;text-decoration-thickness:3px}
+  .baItem.new .v{background:linear-gradient(90deg,var(--blue),var(--blue-bright));color:#fff;box-shadow:0 10px 26px rgba(20,50,140,.4)}
+  .baArrow{font-size:34px;color:var(--blue);font-weight:900}
+
+  /* ===== S6 trend ===== */
+  .trendGrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+  .trendCard{background:#fff;color:var(--ink);border-radius:22px;padding:28px 32px;box-shadow:0 18px 40px rgba(4,16,48,.4)}
+  .trendCard h3{font-size:29px;font-weight:900;letter-spacing:-1px;display:flex;align-items:center;gap:12px}
+  .trendCard .tdot{width:16px;height:16px;border-radius:50%;background:var(--blue)}
+  .trendBA{margin-top:18px;display:flex;align-items:center;gap:13px;font-weight:800;flex-wrap:wrap}
+  .trendBA .o{color:#9aa6c2;font-size:18px}
+  .trendBA .a{color:var(--blue);font-size:20px}
+  .trendBA .arr{color:var(--blue);font-size:20px}
+  .trendCard p{margin-top:16px;font-size:16px;font-weight:600;color:#44507a;line-height:1.55}
+  .trendCard p b{color:var(--blue)}
+
+  /* ===== S7 distribution chart ===== */
+  .distWrap{display:grid;grid-template-columns:1fr 318px;gap:24px;margin-top:24px;flex:1}
+  .chartPanel{background:#fff;border-radius:22px;padding:20px 24px 14px;box-shadow:0 18px 40px rgba(4,16,48,.4);
+              display:flex;flex-direction:column;justify-content:center}
+  .chartTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+  .legend{display:flex;gap:8px}
+  .legChip{cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-weight:800;font-size:14px;color:#33405f;
+           background:#f1f4fa;padding:7px 13px;border-radius:50px;transition:.2s var(--ease);user-select:none}
+  .legChip .sw{width:15px;height:4px;border-radius:3px}
+  .legChip.off{opacity:.35}
+  #distChart{width:100%;height:auto;display:block}
+  .distSide{display:flex;flex-direction:column;gap:18px;justify-content:center}
+  .distNote{background:#fff;color:var(--ink);border-radius:18px;padding:22px 24px;box-shadow:0 14px 32px rgba(4,16,48,.35)}
+  .distNote .h{font-size:14px;font-weight:800;color:var(--blue);letter-spacing:1px}
+  .distNote .b{font-size:20px;font-weight:800;letter-spacing:-.5px;margin-top:8px;line-height:1.4}
+  .distNote .b b{color:var(--blue)}
+  .distNote.dark{background:radial-gradient(140% 140% at 0 0,#1a3f9e,#0c2a6b);color:#fff}
+  .distNote.dark .h{color:#9ec1ff}
+  .distNote.dark .b b{color:#9ec1ff}
+
+  .footmark{position:absolute;left:72px;bottom:30px;z-index:50;font-size:13px;
+            color:rgba(255,255,255,.55);font-weight:600}
+
+  #help{position:fixed;left:18px;bottom:14px;color:rgba(255,255,255,.45);font-size:12.5px;font-weight:600;z-index:80}
+</style>
+</head>
+<body>
+<div id="stageWrap">
+  <div id="stage">
+
+    <!-- shared morphing badge -->
+    <div id="brandBadge"><span class="b1">공무원</span><span class="b2">1위</span><span class="b3">해커스</span></div>
+
+    <div id="counter"><b id="cur">01</b> / <span id="tot">08</span></div>
+
+    <!-- ============ S1 COVER ============ -->
+    <section class="slide" id="s1">
+      <div class="topbar">
+        <div class="logo anim">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2 2 7h20L12 2Z" fill="#fff"/><rect x="4" y="9" width="2.4" height="9" fill="#fff"/><rect x="8.5" y="9" width="2.4" height="9" fill="#fff"/><rect x="13" y="9" width="2.4" height="9" fill="#fff"/><rect x="17.5" y="9" width="2.4" height="9" fill="#fff"/><rect x="2" y="19.5" width="20" height="2.4" fill="#fff"/></svg>
+          <b>해커스공무원</b>
+        </div>
+        <div class="badgeSlot" data-badge style="right:72px;top:58px;width:108px;height:108px"></div>
+      </div>
+
+      <div class="eyebrow anim d1">2027 합격전략 설명회</div>
+      <h1 class="anim d2">해커스공무원<br>단기합격 설명회</h1>
+
+      <div class="oskWrap">
+        <div class="coverInfo anim d5">
+          <div><span>장소</span> 메가스터디타워 5층</div>
+          <div><span>일시</span> 5월 27일 (토)</div>
+        </div>
+        <div class="oskGroup">
+          <div class="osk anim d4">
+            <div class="oline"><span>ONE</span><span>SHOT</span><span class="pipe">/</span><span>ONE</span><span class="kill">KILL</span></div>
+          </div>
+          <div class="oskSub anim d4">원샷 원킬 <span class="hk">해커스</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ S2 국가직·지방직·서울시 ============ -->
+    <section class="slide" id="s2">
+      <div class="head">
+        <div>
+          <div class="kicker anim">시험의 종류</div>
+          <div class="stitle anim d1">국가직 · 지방직 · 서울시, <span class="hl">무엇이 다를까?</span></div>
+        </div>
+        <div class="badgeSlot" data-badge style="right:72px;top:60px;width:72px;height:72px"></div>
+      </div>
+
+      <div class="lead anim d2">9급 수험생이 응시할 수 있는 시험은 <b>딱 2가지</b> — <b>국가직</b>, 그리고 <b>지방직 · 서울시</b>.
+      과거 3번 보던 서울시도 이제 지방직과 같은 날 시행되어, 한 해 최대 <b>2번</b>만 응시할 수 있습니다.</div>
+
+      <div class="cmp">
+        <div class="cmpCard primary anim d3">
+          <div class="cmpIcon"><svg viewBox="0 0 24 24" fill="#1E4FC4"><path d="M12 2 2 7h20L12 2Z"/><rect x="4" y="9" width="2.4" height="9"/><rect x="8.5" y="9" width="2.4" height="9"/><rect x="13.1" y="9" width="2.4" height="9"/><rect x="17.6" y="9" width="2.4" height="9"/><rect x="2" y="19.5" width="20" height="2.4"/></svg></div>
+          <div class="cmpName">국가직<span class="en">NATIONAL</span></div>
+          <div class="cmpItem"><div class="lab">근무지</div><div class="val">전국 — 정부 부처 및 산하 소속기관</div></div>
+          <div class="cmpItem"><div class="lab">업무 성격</div><div class="val">국가 정책 집행 · 전문적·전국 단위 업무</div></div>
+        </div>
+        <div class="cmpCard anim d4">
+          <div class="cmpIcon"><svg viewBox="0 0 24 24" fill="#1E4FC4"><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v3h4a1 1 0 0 1 1 1v12H4Z"/><g fill="#fff"><rect x="6.5" y="7" width="2.2" height="2.2"/><rect x="10.3" y="7" width="2.2" height="2.2"/><rect x="6.5" y="11" width="2.2" height="2.2"/><rect x="10.3" y="11" width="2.2" height="2.2"/><rect x="17" y="11" width="2" height="2.2"/><rect x="6.5" y="15" width="2.2" height="2.2"/><rect x="10.3" y="15" width="2.2" height="2.2"/><rect x="17" y="15" width="2" height="2.2"/></g></svg></div>
+          <div class="cmpName">지방직<span class="en">LOCAL</span></div>
+          <div class="cmpItem"><div class="lab">근무지</div><div class="val">해당 지자체 — 시/도청, 시/군/구청, 동 주민센터</div></div>
+          <div class="cmpItem"><div class="lab">업무 성격</div><div class="val">지역 주민 밀착 행정 · 민원 처리 · 복지</div></div>
+        </div>
+        <div class="cmpCard anim d5">
+          <div class="cmpIcon"><svg viewBox="0 0 24 24" fill="#1E4FC4"><rect x="11" y="9" width="2" height="12"/><circle cx="12" cy="7" r="3.2"/><path d="M12 1.4 13.1 4h-2.2z"/><rect x="8" y="20" width="8" height="2" rx="1"/></svg></div>
+          <div class="cmpName">서울시<span class="en">SEOUL</span></div>
+          <div class="cmpItem"><div class="lab">근무지</div><div class="val">서울 — 서울시청, 25개 자치구청, 동 주민센터</div></div>
+          <div class="cmpItem"><div class="lab">업무 성격</div><div class="val">서울 시민 대상 행정 (지방직과 유사)</div></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============ S3 거주지 제한 ============ -->
+    <section class="slide" id="s3">
+      <div class="head">
+        <div>
+          <div class="kicker anim">응시 자격</div>
+          <div class="stitle anim d1">거주지 제한, <span class="hl">어디에 지원할 수 있나?</span></div>
+        </div>
+        <div class="badgeSlot" data-badge style="right:72px;top:60px;width:72px;height:72px"></div>
+      </div>
+
+      <div class="contrast">
+        <div class="cPanel no anim d2">
+          <div class="cTag">✓ 거주지 제한 없음</div>
+          <div class="cBig">전국 어디서나</div>
+          <div class="cWho"><span class="chipS">국가직</span><span class="chipS">서울시</span></div>
+          <div class="cDesc">제주·부산에 살아도 서울시 공무원이 될 수 있습니다.</div>
+          <div class="cNote">그래서 서울시 = 제2의 국가직</div>
+        </div>
+        <div class="cPanel yes anim d3">
+          <div class="cTag">! 거주지 제한 있음</div>
+          <div class="cBig">정해진 지역만</div>
+          <div class="cWho"><span class="chipS">지방직</span><span class="chipS">교육청</span></div>
+          <div class="cDesc">현재 주민등록 주소지, 또는 과거 3년 이상 거주한 지역에만 응시할 수 있습니다.</div>
+        </div>
+      </div>
+
+      <div class="reqHead anim d4">
+        <div class="reqLabel">지방직 응시 요건 — 아래 둘 중 <span style="color:#fff">하나만</span> 충족하면 응시 가능</div>
+        <button class="fab" data-modal="resModal"><span class="fabIco">＋</span> 2027 신설 예정 요건 보기</button>
+      </div>
+      <div class="reqRow">
+        <div class="reqCard anim d4">
+          <div class="reqNo">1</div>
+          <div><h4>계속 거주</h4><p>2026.1.1 이전부터 <b>최종 시험일(면접)</b>까지 해당 지역에 주민등록 유지 (전출·말소·거주불명 기록 없을 것)</p></div>
+        </div>
+        <div class="reqCard anim d5">
+          <div class="reqNo">2</div>
+          <div><h4>합산 3년 거주</h4><p>과거 거주기간을 모두 합산해 <b>총 3년(36개월) 이상</b> · 연속 아니어도 합산 · 잔여 30일↑은 1개월 인정</p></div>
+        </div>
+      </div>
+
+      <!-- dim modal: 2027 도입 예정(미확정) 요건 -->
+      <div class="modal" id="resModal">
+        <div class="modalCard">
+          <button class="modalClose" data-close>×</button>
+          <div class="modalTag">⚠ 2027 도입 예정 · 아직 확정 전</div>
+          <h3>추가 검토 중인 응시 요건</h3>
+          <div class="reqRow" style="margin-top:22px">
+            <div class="reqCard" style="grid-column:1 / -1">
+              <div class="reqNo plan">3</div>
+              <div><h4>해당 지역 소재</h4><p>해당 지역에 <b>소재한 대학</b>에 재학·졸업한 경우, 실거주 여부와 별개로 <b>거주요건을 충족한 것으로 인정</b>하는 방안 <b>(예정)</b></p></div>
+            </div>
+          </div>
+          <p class="modalFoot">※ 2027년 시험 도입이 검토 중인 항목으로, 최종 시행 여부·세부 기준은 추후 시험 공고로 확정됩니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ S4 시험 과목 구성 ============ -->
+    <section class="slide" id="sSubj">
+      <div class="head">
+        <div>
+          <div class="kicker anim">공통점 — 시험 과목</div>
+          <div class="stitle anim d1">차이를 봤다면, 이제 <span class="hl">공통점</span></div>
+        </div>
+        <div class="badgeSlot" data-badge style="right:72px;top:60px;width:72px;height:72px"></div>
+      </div>
+
+      <div class="lead anim d2">직렬이 달라도 <b>시험 과목의 틀은 같습니다.</b> 핵심은 <b>9급</b> 구성입니다.</div>
+
+      <div class="subjGrid">
+        <div class="subjCard hot anim d3">
+          <div class="subjTag">핵심</div>
+          <div class="subjGrade"><span class="g">9급</span><span class="who">국가직 · 지방직 공통</span></div>
+          <div class="subjList">
+            <span class="subjPill">국어</span>
+            <span class="subjPill">영어</span>
+            <span class="subjPill major">전공 ①</span>
+            <span class="subjPill major">전공 ②</span>
+          </div>
+          <div class="subjMeta">필수 2과목(국어·영어) + 전공 2과목 = 총 4과목</div>
+        </div>
+        <div class="subjCard anim d4">
+          <div class="subjGrade"><span class="g">7급</span><span class="who">국가직 · 지방직</span></div>
+          <div class="subjList">
+            <span class="subjPill">PSAT</span>
+            <span class="subjPill major">전공 4과목</span>
+          </div>
+          <div class="subjMeta">언어·자료·상황판단(PSAT) + 전공 4과목</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ S5 2027 개편 ============ -->
+    <section class="slide" id="sReform">
+      <div class="head">
+        <div>
+          <div class="kicker anim">2027 시험 개편</div>
+          <div class="stitle anim d1">2027, <span class="hl">이렇게 바뀝니다</span></div>
+        </div>
+        <div class="badgeSlot" data-badge style="right:72px;top:60px;width:72px;height:72px"></div>
+      </div>
+
+      <div class="reformRow">
+        <div class="reformCard anim d2">
+          <div class="reformWho">9급<span class="sub">국가직 · 지방직</span></div>
+          <div class="baCol">
+            <div class="baItem old"><div class="lab">현행</div><div class="v">한국사</div></div>
+            <div class="baArrow">→</div>
+            <div class="baItem new"><div class="lab">2027~</div><div class="v">한능검 대체</div></div>
+          </div>
+        </div>
+        <div class="reformCard anim d3">
+          <div class="reformWho">지방직 7급<span class="sub">7급 공채</span></div>
+          <div class="baCol">
+            <div class="baItem old"><div class="lab">현행</div><div class="v">국어</div></div>
+            <div class="baArrow">→</div>
+            <div class="baItem new"><div class="lab">2027~</div><div class="v">PSAT 도입</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lead anim d4" style="margin-top:30px">9급은 <b>한국사 → 한국사능력검정시험(한능검)</b>으로 대체되고, 지방직 7급은 <b>국어가 빠지고 PSAT</b>이 들어옵니다.</div>
+    </section>
+
+    <!-- ============ S6 2025 출제기조 전환 ============ -->
+    <section class="slide" id="sTrend">
+      <div class="head">
+        <div>
+          <div class="kicker anim">2025 출제기조 전환</div>
+          <div class="stitle anim d1">국어 · 영어, <span class="hl">이렇게 달라졌다</span></div>
+        </div>
+        <div class="badgeSlot" data-badge style="right:72px;top:60px;width:72px;height:72px"></div>
+      </div>
+
+      <div class="lead trendLead anim d2">지엽적 <b>문법·어휘 암기</b>는 덜어내고, <b>보도자료·이메일·매뉴얼</b>을 읽는 <b>실무 독해·추론</b> 능력을 평가합니다. <b>(PSAT·NCS형)</b></div>
+
+      <div class="trendGrid">
+        <div class="trendCard anim d3">
+          <h3><span class="tdot"></span>국어</h3>
+          <div class="trendBA"><span class="o">규정·맞춤법 암기</span><span class="arr">→</span><span class="a">직무형 논리 독해</span></div>
+          <p>공문서·보도자료 초안을 주고 흐름·논리에 맞게 고치게 합니다. 규정 암기가 아니라 <b>문서를 읽고 오류를 잡는 문해력</b>이 점수를 좌우합니다.</p>
+        </div>
+        <div class="trendCard anim d4">
+          <h3><span class="tdot"></span>영어</h3>
+          <div class="trendBA"><span class="o">지엽적 고난도 어휘</span><span class="arr">→</span><span class="a">실용 이메일·매뉴얼</span></div>
+          <p>업무 이메일·기기 매뉴얼 같은 실무 지문이 등장합니다. <b>핵심 요구사항을 빠르게 읽는 감각</b>이 중요해졌죠. (단, 기본 어휘 준비는 여전히 필수)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ S7 점수 분포 ============ -->
+    <section class="slide" id="sDist">
+      <div class="head">
+        <div>
+          <div class="kicker anim">필기 점수 분포 · 2024~2026</div>
+          <div class="stitle anim d1">쉬워진 시험, <span class="hl">높아진 합격선</span></div>
+        </div>
+        <div class="badgeSlot" data-badge style="right:72px;top:60px;width:72px;height:72px"></div>
+      </div>
+
+      <div class="distWrap">
+        <div class="chartPanel anim d2">
+          <div class="chartTop">
+            <div style="font-weight:800;color:#5a6488;font-size:15px">응시자 점수대 분포 (정규분포)</div>
+            <div class="legend" id="legend"></div>
+          </div>
+          <svg id="distChart" viewBox="0 0 1000 380"></svg>
+        </div>
+        <div class="distSide">
+          <div class="distNote anim d3">
+            <div class="h">2025 변화</div>
+            <div class="b"><b>90점↑ 고득점자 급증</b><br>→ 합격선 상승 (일반행정 <b>90→93</b>)</div>
+          </div>
+          <div class="distNote dark anim d4">
+            <div class="h">결론</div>
+            <div class="b">국어·영어는 쉬워졌지만<br><b>고득점 경쟁</b>으로 체감 난이도는 오히려 <b>↑</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ S5 CLOSING ============ -->
+    <section class="slide" id="s5">
+      <div class="badgeSlot" data-badge style="right:72px;top:60px;width:72px;height:72px"></div>
+      <div class="big anim d1">원샷 원킬,<br><em>올해 반드시 끝냅니다.</em></div>
+      <div class="osk anim d2">
+        <div class="oline"><span>ONE</span><span>SHOT</span><span class="pipe">/</span><span>ONE</span><span class="kill">KILL</span></div>
+      </div>
+      <div class="contact anim d3">
+        <div><span>상담문의</span> 02-599-0500</div>
+        <div><span>홈페이지</span> gosi.Hackers.com</div>
+      </div>
+    </section>
+
+    <div class="footmark">해커스공무원 · 2026 원샷원킬 설명회 (목업)</div>
+
+    <!-- faint left/right arrows, top-right under the badge -->
+    <div id="navArrows">
+      <button class="navArr" id="prev">‹</button>
+      <button class="navArr" id="next">›</button>
+    </div>
+    <!-- slide dots (bottom center) -->
+    <div id="nav"><div id="dots"></div></div>
+  </div>
+</div>
+<div id="help">← / → 또는 클릭으로 이동 · 객체 클릭 가능</div>
+
+<script>
+(function(){
+  const stage=document.getElementById('stage');
+  const slides=[...document.querySelectorAll('.slide')];
+  const badge=document.getElementById('brandBadge');
+  const dotsWrap=document.getElementById('dots');
+  const curEl=document.getElementById('cur');
+  let idx=0, scale=1;
+
+  /* ---- fit stage to viewport ---- */
+  function fit(){
+    scale=Math.min(window.innerWidth/1280, window.innerHeight/720);
+    stage.style.transform=`translate(-50%,-50%) scale(${scale})`;
+  }
+  window.addEventListener('resize',()=>{fit();placeBadge();});
+  fit();
+
+  /* ---- dots ---- */
+  slides.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='dot'; d.onclick=()=>go(i);
+    dotsWrap.appendChild(d);
+  });
+  const dots=[...dotsWrap.children];
+  dotsWrap.style.display='flex';
+  dotsWrap.style.gap='10px';
+  dotsWrap.style.alignItems='center';
+
+  /* ---- morph badge: move it to the active slide's slot ---- */
+  function placeBadge(){
+    const slot=slides[idx].querySelector('[data-badge]');
+    if(!slot){badge.style.opacity=0;return;}
+    badge.style.opacity=1;
+    const sr=stage.getBoundingClientRect();
+    const r=slot.getBoundingClientRect();
+    const left=(r.left-sr.left)/scale;
+    const top=(r.top-sr.top)/scale;
+    const w=r.width/scale, h=r.height/scale;
+    badge.style.left=left+'px';
+    badge.style.top=top+'px';
+    badge.style.width=w+'px';
+    badge.style.height=h+'px';
+    badge.style.fontSize=(h*0.16)+'px';
+    badge.style.borderRadius='50%';
+  }
+
+  /* ---- navigation ---- */
+  function go(n){
+    n=Math.max(0,Math.min(slides.length-1,n));
+    if(n===idx){return;}
+    slides[idx].classList.remove('active');
+    slides[idx].classList.add('prev');
+    idx=n;
+    slides.forEach(s=>s.classList.remove('prev'));
+    slides[idx].classList.add('active');
+    dots.forEach((d,i)=>d.classList.toggle('on',i===idx));
+    curEl.textContent=String(idx+1).padStart(2,'0');
+    if(history.replaceState){history.replaceState(null,'','#'+(idx+1));}
+    // wait a frame so layout settles, then morph badge
+    requestAnimationFrame(()=>requestAnimationFrame(placeBadge));
+  }
+  function next(){go(idx+1);}
+  function prev(){go(idx-1);}
+
+  document.getElementById('next').onclick=next;
+  document.getElementById('prev').onclick=prev;
+  window.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')next();
+    if(e.key==='ArrowLeft'||e.key==='PageUp')prev();
+    if(e.key==='Home')go(0);
+    if(e.key==='End')go(slides.length-1);
+  });
+
+  /* ---- clickable: go buttons / cards ---- */
+  document.querySelectorAll('[data-go]').forEach(el=>{
+    el.addEventListener('click',()=>go(parseInt(el.dataset.go,10)));
+  });
+
+  /* ---- clickable: table rows ---- */
+  const rowNote=document.getElementById('rowNote');
+  document.querySelectorAll('#tbl tr').forEach(tr=>{
+    tr.addEventListener('click',()=>{
+      document.querySelectorAll('#tbl tr').forEach(r=>r.classList.remove('sel'));
+      tr.classList.add('sel');
+      rowNote.innerHTML='<b style="color:#1E4FC4">▸</b> '+tr.dataset.note;
+    });
+  });
+
+  /* ---- clickable: score chips ---- */
+  const line=document.getElementById('gline');
+  const verdict=document.getElementById('verdict');
+  const cut=392.0, min=350, max=430;
+  document.querySelectorAll('#chips .chip').forEach(c=>{
+    c.addEventListener('click',()=>{
+      document.querySelectorAll('#chips .chip').forEach(x=>x.classList.remove('on'));
+      c.classList.add('on');
+      const sc=parseFloat(c.dataset.score);
+      const pct=Math.max(0,Math.min(100,(sc-min)/(max-min)*100));
+      line.style.left=pct+'%';
+      line.dataset.label=sc+'점';
+      const diff=(sc-cut).toFixed(1);
+      if(sc>=cut+8){verdict.innerHTML='합격 가능성 <b>매우 높음</b> · 합격선 +'+diff+'점';}
+      else if(sc>=cut){verdict.innerHTML='합격 가능성 <b>높음</b> · 합격선 +'+diff+'점';}
+      else if(sc>=cut-12){verdict.innerHTML='<b style="color:#d68a1e">경계선</b> · 합격선 '+diff+'점 (추가 학습 필요)';}
+      else{verdict.innerHTML='<b style="color:#d63b3b">합격선 미달</b> · '+diff+'점 (전략 보완 필요)';}
+    });
+  });
+
+  /* ---- distribution chart (S7): three normal-distribution curves ---- */
+  function renderDist(){
+    const svg=document.getElementById('distChart');
+    if(!svg) return;
+    const NS='http://www.w3.org/2000/svg';
+    const bands=['~50','50','55','60','65','70','75','80','85','90','95↑'];
+    const years=[
+      {y:'2024',color:'#9aa6c2',w:3,data:[71,277,715,1104,1353,1527,1680,1534,1062,419,49]},
+      {y:'2025',color:'#1E4FC4',w:5,data:[9,122,392,757,1080,1246,1283,1242,1072,681,211]},
+      {y:'2026',color:'#F0A13A',w:3,data:[76,298,656,1135,1419,1565,1548,1332,875,323,38]}
+    ];
+    const W=1000,H=380,L=54,R=14,T=18,B=42;
+    const pw=W-L-R, ph=H-T-B, maxY=1800, n=bands.length;
+    const X=i=>L+i*pw/(n-1);
+    const Y=v=>T+(1-v/maxY)*ph;
+    const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+    // y gridlines + labels
+    [0,500,1000,1500].forEach(v=>{
+      svg.appendChild(mk('line',{x1:L,y1:Y(v),x2:W-R,y2:Y(v),stroke:'#eef1f8','stroke-width':1.5}));
+      const tx=mk('text',{x:L-10,y:Y(v)+4,'text-anchor':'end',fill:'#aab3c7','font-size':13,'font-weight':700});
+      tx.textContent=v.toLocaleString();svg.appendChild(tx);
+    });
+    // x labels
+    bands.forEach((b,i)=>{
+      const tx=mk('text',{x:X(i),y:H-16,'text-anchor':'middle',fill:'#8a93ad','font-size':13,'font-weight':700});
+      tx.textContent=b;svg.appendChild(tx);
+    });
+    // smooth path (Catmull-Rom -> bezier)
+    function smooth(pts){
+      let d='M'+pts[0][0]+','+pts[0][1];
+      for(let i=0;i<pts.length-1;i++){
+        const p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+        const c1x=p1[0]+(p2[0]-p0[0])/6,c1y=p1[1]+(p2[1]-p0[1])/6;
+        const c2x=p2[0]-(p3[0]-p1[0])/6,c2y=p2[1]-(p3[1]-p1[1])/6;
+        d+=' C'+c1x+','+c1y+' '+c2x+','+c2y+' '+p2[0]+','+p2[1];
+      }
+      return d;
+    }
+    const paths={};
+    years.forEach(yr=>{
+      const pts=yr.data.map((v,i)=>[X(i),Y(v)]);
+      const g=mk('g',{});
+      const p=mk('path',{d:smooth(pts),fill:'none',stroke:yr.color,'stroke-width':yr.w,
+                         'stroke-linecap':'round','stroke-linejoin':'round'});
+      g.appendChild(p);
+      pts.forEach(pt=>g.appendChild(mk('circle',{cx:pt[0],cy:pt[1],r:yr.w+0.5,fill:yr.color})));
+      svg.appendChild(g);
+      paths[yr.y]=g;
+    });
+    // legend (clickable to toggle each year)
+    const leg=document.getElementById('legend');
+    if(leg && !leg.childElementCount){
+      years.forEach(yr=>{
+        const c=document.createElement('div');c.className='legChip';
+        c.innerHTML='<span class="sw" style="background:'+yr.color+'"></span>'+yr.y;
+        c.addEventListener('click',()=>{
+          c.classList.toggle('off');
+          paths[yr.y].style.display=c.classList.contains('off')?'none':'';
+        });
+        leg.appendChild(c);
+      });
+    }
+  }
+
+  /* ---- clickable: dim modals (floating button → overlay card) ---- */
+  document.querySelectorAll('[data-modal]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const m=document.getElementById(btn.dataset.modal);
+      if(m){ m.classList.add('open'); }
+    });
+  });
+  document.querySelectorAll('.modal').forEach(m=>{
+    m.addEventListener('click',e=>{
+      if(e.target===m || e.target.hasAttribute('data-close')){ m.classList.remove('open'); }
+    });
+  });
+  window.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){ document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open')); }
+  });
+
+  /* ---- init (supports deep-link via #N, e.g. ...index.html#3) ---- */
+  renderDist();
+  const totEl=document.getElementById('tot');
+  if(totEl) totEl.textContent=String(slides.length).padStart(2,'0');
+  slides[0].classList.add('active');
+  dots[0].classList.add('on');
+  curEl.textContent='01';
+  const startHash=parseInt((location.hash||'').replace('#',''),10);
+  if(startHash>=2 && startHash<=slides.length){
+    go(startHash-1);
+  }else{
+    requestAnimationFrame(()=>requestAnimationFrame(placeBadge));
+  }
+  // react to manual hash changes / browser back-forward
+  window.addEventListener('hashchange',()=>{
+    const h=parseInt((location.hash||'').replace('#',''),10);
+    if(h>=1 && h<=slides.length){ go(h-1); }
+  });
+  // re-place badge once webfont loads (layout shift)
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(()=>placeBadge());}
+})();
+</script>
+</body>
+</html>
