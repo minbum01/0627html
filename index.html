@@ -255,12 +255,17 @@
   .dot{pointer-events:auto;cursor:pointer;width:11px;height:11px;border-radius:50%;
        background:rgba(255,255,255,.4);transition:.3s var(--ease)}
   .dot.on{background:#fff;width:30px;border-radius:6px}
-  /* faint left/right arrows, top-right under the badge */
-  #navArrows{position:absolute;z-index:60;right:74px;top:176px;display:flex;gap:7px}
-  .navArr{cursor:pointer;width:32px;height:32px;border-radius:50%;border:none;
-          background:rgba(255,255,255,.10);color:rgba(255,255,255,.5);font-size:16px;line-height:1;
+  /* 세로 컨트롤: 슬라이드 패딩(오른쪽)에 위 ◀ / 중간 ▶ / 아래 🔍 */
+  #navArrows{position:absolute;z-index:60;right:22px;top:50%;transform:translateY(-50%);
+             display:flex;flex-direction:column;gap:12px}
+  .navArr{cursor:pointer;width:34px;height:34px;border-radius:50%;border:none;
+          background:rgba(255,255,255,.12);color:rgba(255,255,255,.55);font-size:16px;line-height:1;
           display:grid;place-items:center;transition:.2s var(--ease)}
-  .navArr:hover{background:rgba(255,255,255,.26);color:#fff}
+  .navArr:hover{background:rgba(255,255,255,.30);color:#fff}
+  .navArr.on{background:#1E4FC4;color:#fff;box-shadow:0 0 0 4px rgba(44,107,240,.25)}
+  #magBtn{font-size:15px}
+  .magSelBox{border:2px dashed #2C6BF0;background:rgba(44,107,240,.14);border-radius:5px;pointer-events:none}
+  .magOverlay{cursor:zoom-out}
   #counter{position:absolute;z-index:60;right:30px;top:28px;font-weight:800;font-size:15px;
            color:rgba(255,255,255,.7);letter-spacing:1px}
   #counter b{color:#fff;font-size:18px}
@@ -350,7 +355,11 @@
            background:#f1f4fa;padding:7px 13px;border-radius:50px;transition:.2s var(--ease);user-select:none}
   .legChip .sw{width:15px;height:4px;border-radius:3px}
   .legChip.off{opacity:.35}
-  #distChart{width:100%;height:auto;display:block}
+  .zoomBtn{cursor:pointer;border:none;font-family:inherit;font-weight:800;font-size:13px;white-space:nowrap;
+           color:#1E4FC4;background:#eaf0ff;padding:7px 13px;border-radius:50px;transition:.2s var(--ease)}
+  .zoomBtn:hover{background:#dbe6ff}
+  .zoomBtn.on{background:#1E4FC4;color:#fff}
+  #distChart{width:100%;height:auto;display:block;transition:opacity .2s}
   .distSide{display:flex;flex-direction:column;gap:18px;justify-content:center}
   .distNote{background:#fff;color:var(--ink);border-radius:18px;padding:22px 24px;box-shadow:0 14px 32px rgba(4,16,48,.35)}
   .distNote .h{font-size:14px;font-weight:800;color:var(--blue);letter-spacing:1px}
@@ -359,6 +368,49 @@
   .distNote.dark{background:radial-gradient(140% 140% at 0 0,#1a3f9e,#0c2a6b);color:#fff}
   .distNote.dark .h{color:#9ec1ff}
   .distNote.dark .b b{color:#9ec1ff}
+
+  /* S7 결론 노트 (난이도↓ · BUT · 체감난이도↑) */
+  .concl{margin-top:14px}
+  .conclRow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .conclRow .t{font-size:18px;font-weight:800;letter-spacing:-.4px;line-height:1.15}
+  .conclRow .t small{display:block;font-size:12px;font-weight:700;opacity:.68;margin-top:3px;letter-spacing:0}
+  .conclArr{flex-shrink:0;width:42px;height:42px;border-radius:13px;display:grid;place-items:center;
+            font-size:24px;font-weight:900;line-height:1}
+  .conclArr.dn{background:rgba(127,212,155,.16);color:#7fd49b;box-shadow:inset 0 0 0 1.5px rgba(127,212,155,.4)}
+  .conclArr.up{background:rgba(255,143,143,.16);color:#ff8f8f;box-shadow:inset 0 0 0 1.5px rgba(255,143,143,.45)}
+  .conclBut{display:flex;align-items:center;gap:12px;margin:13px 0}
+  .conclBut::before,.conclBut::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.16)}
+  .conclBut b{font-style:italic;font-size:16px;font-weight:900;letter-spacing:3px;color:#ffd27f}
+
+  /* ===== S8 연간 커리큘럼 로드맵 ===== */
+  .road{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:34px;align-items:stretch}
+  .rp{border-radius:14px;padding:15px 20px;display:flex;flex-direction:column;justify-content:center;gap:3px;
+      background:#eaf0ff;color:var(--navy)}
+  .rp.hot{background:linear-gradient(120deg,#F0A13A,#dd7a10);color:#fff;box-shadow:0 8px 22px rgba(200,110,20,.35)}
+  .rp b{font-size:19px;font-weight:900;letter-spacing:-.5px}
+  .rp i{font-style:normal;font-size:13px;font-weight:800;opacity:.72}
+  .rp.hot i{opacity:1;color:#fff3df}
+  .rstep{position:relative;background:#fff;color:var(--ink);border-radius:16px;padding:24px 12px 20px;
+         box-shadow:0 14px 30px rgba(4,16,48,.35);display:flex;flex-direction:column;align-items:center;
+         gap:11px;overflow:hidden;text-align:center}
+  .rstep::before{content:"";position:absolute;left:0;top:0;width:100%;height:5px;
+                 background:linear-gradient(90deg,var(--blue),var(--blue-bright))}
+  .rstep .mon{font-style:italic;font-weight:900;font-size:22px;color:var(--blue);letter-spacing:-.5px;line-height:1}
+  .rstep .ti{font-size:16px;font-weight:800;line-height:1.32;color:#23304f}
+  .rstep .no{position:absolute;right:11px;top:10px;font-style:italic;font-weight:900;font-size:13px;color:#cdd8ef}
+  .rstep.real{background:linear-gradient(160deg,#f4a73c,#dd7a10);color:#fff;box-shadow:0 16px 34px rgba(200,110,20,.4)}
+  .rstep.real::before{background:linear-gradient(90deg,#ffe0b0,#F0A13A)}
+  .rstep.real .mon{color:#fff}
+  .rstep.real .ti{color:#fff}
+  .rstep.real .no{color:rgba(255,255,255,.55)}
+  .rstep:not(:last-child)::after{content:"›";position:absolute;right:-12px;top:50%;transform:translateY(-50%);
+         color:#9ec1ff;font-weight:900;font-size:23px;z-index:3}
+  .roadFoot{margin-top:26px;display:flex;align-items:center;gap:13px;background:#fff;color:var(--ink);
+            border-radius:16px;padding:18px 26px;box-shadow:0 14px 32px rgba(4,16,48,.35);font-weight:700}
+  .roadFoot .tag{flex-shrink:0;font-style:italic;font-weight:900;font-size:15px;color:#fff;background:var(--blue);
+                 padding:8px 15px;border-radius:50px}
+  .roadFoot .tx{font-size:17px;color:#33405f}
+  .roadFoot .tx b{color:var(--blue);font-weight:900}
 
   .footmark{position:absolute;left:72px;bottom:30px;z-index:50;font-size:13px;
             color:rgba(255,255,255,.55);font-weight:600}
@@ -600,7 +652,8 @@
       </div>
 
       <div class="distWrap">
-        <div class="chartPanel anim d2">
+        <div class="chartPanel anim d2" style="justify-content:flex-start;padding-top:26px">
+          <div style="align-self:flex-start;font-weight:900;color:#0C2A6B;font-size:30px;letter-spacing:-1px;line-height:1.1;padding:2px 4px 14px">국가직 9급 일반행정 · 3개년 점수분포</div>
           <div class="chartTop">
             <div style="font-weight:800;color:#5a6488;font-size:15px">응시자 점수대 분포 (정규분포)</div>
             <div class="legend" id="legend"></div>
@@ -609,14 +662,54 @@
         </div>
         <div class="distSide">
           <div class="distNote anim d3">
-            <div class="h">2025 변화</div>
-            <div class="b"><b>90점↑ 고득점자 급증</b><br>→ 합격선 상승 (일반행정 <b>90→93</b>)</div>
+            <div class="h">과락자 수 (명) · 연도별</div>
+            <svg id="failBar" viewBox="0 0 300 158" style="width:100%;height:auto;margin-top:8px;display:block"></svg>
           </div>
           <div class="distNote dark anim d4">
             <div class="h">결론</div>
-            <div class="b">국어·영어는 쉬워졌지만<br><b>고득점 경쟁</b>으로 체감 난이도는 오히려 <b>↑</b></div>
+            <div class="concl">
+              <div class="conclRow">
+                <div class="t">국어·영어 난이도<small>출제기조 전환 · 쉬워짐</small></div>
+                <div class="conclArr dn">↓</div>
+              </div>
+              <div class="conclBut"><b>BUT</b></div>
+              <div class="conclRow">
+                <div class="t">체감 난이도<small>고득점 경쟁 심화</small></div>
+                <div class="conclArr up">↑</div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ============ S8 연간 커리큘럼 ============ -->
+    <section class="slide" id="sCurr">
+      <div class="head">
+        <div>
+          <div class="kicker anim">2027 대비 연간 커리큘럼</div>
+          <div class="stitle anim d1">합격까지, <span class="hl">한 사이클 로드맵</span></div>
+        </div>
+        <div class="badgeSlot" data-badge style="right:72px;top:60px;width:72px;height:72px"></div>
+      </div>
+
+      <div class="lead anim d2">기본기부터 실전 동형까지 — <b>7월에 시작해 다음 해 6월</b>, 딱 한 바퀴로 완성하는 단계별 커리큘럼.</div>
+
+      <div class="road">
+        <div class="rp anim d2" style="grid-column:1 / 3"><b>STEP 1 · 이론 완성</b><i>7월 → 10월</i></div>
+        <div class="rp hot anim d2" style="grid-column:3 / 7"><b>STEP 2 · 실전 대비</b><i>11월 → 이듬해 6월</i></div>
+
+        <div class="rstep anim d3"><div class="no">01</div><div class="mon">7-8월</div><div class="ti">기본 이론</div></div>
+        <div class="rstep anim d3"><div class="no">02</div><div class="mon">9-10월</div><div class="ti">심화 · 문제풀이</div></div>
+        <div class="rstep anim d4"><div class="no">03</div><div class="mon">11-12월</div><div class="ti">기출문제풀이</div></div>
+        <div class="rstep anim d4"><div class="no">04</div><div class="mon">1-2월</div><div class="ti">요약 · 예상문제풀이</div></div>
+        <div class="rstep real anim d5"><div class="no">05</div><div class="mon">3월</div><div class="ti">국가직<br>동형모의고사</div></div>
+        <div class="rstep real anim d5"><div class="no">06</div><div class="mon">4-6월</div><div class="ti">지방직<br>동형모의고사</div></div>
+      </div>
+
+      <div class="roadFoot anim d5">
+        <span class="tag">한 사이클</span>
+        <span class="tx">이론 → 문풀 → 기출 → 요약, 그리고 <b>국가직·지방직 동형</b>까지 — 흐름이 끊기지 않게 설계된 12개월.</span>
       </div>
     </section>
 
@@ -637,8 +730,9 @@
 
     <!-- faint left/right arrows, top-right under the badge -->
     <div id="navArrows">
-      <button class="navArr" id="prev">‹</button>
-      <button class="navArr" id="next">›</button>
+      <button class="navArr" id="prev" title="이전 슬라이드">‹</button>
+      <button class="navArr" id="next" title="다음 슬라이드">›</button>
+      <button class="navArr" id="magBtn" title="영역 드래그 확대 (모든 슬라이드)">🔍</button>
     </div>
     <!-- slide dots (bottom center) -->
     <div id="nav"><div id="dots"></div></div>
@@ -654,6 +748,19 @@
   const dotsWrap=document.getElementById('dots');
   const curEl=document.getElementById('cur');
   let idx=0, scale=1;
+  const failBars={};                                  // 과락 막대 참조
+  const distPaths={}, distCutoffs={}, distChips={};   // 연도별 곡선/합격선/범례칩 참조
+  const yearOff={'2024':false,'2025':true,'2026':true}; // 디폴트: 2024만 활성화
+  let distView='full';                                // 'full' | 'zoom'
+  let magSelecting=false;                             // 돋보기 영역선택 모드 on/off
+  function applyYearVis(y){
+    const off=yearOff[y];
+    if(distPaths[y])   distPaths[y].style.display = off?'none':'';
+    if(distCutoffs[y]) distCutoffs[y].style.display = off?'none':'';
+    if(distChips[y])   distChips[y].classList.toggle('off',off);
+    if(failBars[y])    failBars[y].style.opacity = off?'.18':'1';
+  }
+  function toggleYear(y){ yearOff[y]=!yearOff[y]; applyYearVis(y); }
 
   /* ---- fit stage to viewport ---- */
   function fit(){
@@ -707,12 +814,15 @@
     // wait a frame so layout settles, then morph badge
     requestAnimationFrame(()=>requestAnimationFrame(placeBadge));
   }
-  function next(){go(idx+1);}
-  function prev(){go(idx-1);}
+  function navLocked(){ return magSelecting || document.querySelector('.magOverlay'); }
+  function next(){ if(navLocked()) return; go(idx+1); }
+  function prev(){ if(navLocked()) return; go(idx-1); }
 
   document.getElementById('next').onclick=next;
   document.getElementById('prev').onclick=prev;
   window.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){ const o=document.querySelector('.magOverlay'); if(o){ o.remove(); return; } }
+    if(navLocked()) return;                           // 확대/선택 중에는 슬라이드 이동 잠금
     if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')next();
     if(e.key==='ArrowLeft'||e.key==='PageUp')prev();
     if(e.key==='Home')go(0);
@@ -758,17 +868,22 @@
   function renderDist(){
     const svg=document.getElementById('distChart');
     if(!svg) return;
+    svg.innerHTML='';                          // 다시 그리기 (확대/전체 전환 지원)
     const NS='http://www.w3.org/2000/svg';
     const bands=['~50','50','55','60','65','70','75','80','85','90','95↑'];
+    const reps =[  47,  50,  55,  60,  65,  70,  75,  80,  85,  90,  95 ]; // 눈금=각 구간 하한 점수(합격선·과락이 눈금에 정확히 정렬됨)
     const years=[
       {y:'2024',color:'#9aa6c2',w:3,data:[71,277,715,1104,1353,1527,1680,1534,1062,419,49]},
-      {y:'2025',color:'#1E4FC4',w:5,data:[9,122,392,757,1080,1246,1283,1242,1072,681,211]},
-      {y:'2026',color:'#F0A13A',w:3,data:[76,298,656,1135,1419,1565,1548,1332,875,323,38]}
+      {y:'2025',color:'#1E4FC4',w:7,data:[9,122,392,757,1080,1246,1283,1242,1072,681,211]},
+      {y:'2026',color:'#F0A13A',w:6,data:[76,298,656,1135,1419,1565,1548,1332,875,323,38]}
     ];
+    const zoom = distView==='zoom';
+    const sMin = zoom?78:38, sMax = zoom?97:100, maxY = zoom?1700:1800; // zoom=95~80 구간 확대
     const W=1000,H=380,L=54,R=14,T=18,B=42;
-    const pw=W-L-R, ph=H-T-B, maxY=1800, n=bands.length;
-    const X=i=>L+i*pw/(n-1);
+    const pw=W-L-R, ph=H-T-B;
+    const X=s=>L+(sMax-s)/(sMax-sMin)*pw;     // 점수 → x좌표 (고득점=왼쪽)
     const Y=v=>T+(1-v/maxY)*ph;
+    const inDom=s=>s>=sMin && s<=sMax;
     const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
     // y gridlines + labels
     [0,500,1000,1500].forEach(v=>{
@@ -778,8 +893,39 @@
     });
     // x labels
     bands.forEach((b,i)=>{
-      const tx=mk('text',{x:X(i),y:H-16,'text-anchor':'middle',fill:'#8a93ad','font-size':13,'font-weight':700});
+      if(reps[i]<sMin) return;                 // 도메인 밖 구간 라벨 생략
+      const tx=mk('text',{x:X(reps[i]),y:H-16,'text-anchor':'middle',fill:'#8a93ad','font-size':13,'font-weight':700});
       tx.textContent=b;svg.appendChild(tx);
+    });
+    // ---- 기준선: 과락(40점) · 합격선(93점) ----
+    const mkLine=(x,color,dash)=>mk('line',{x1:x,y1:T,x2:x,y2:T+ph,stroke:color,'stroke-width':2,
+                                            'stroke-dasharray':dash,opacity:.9});
+    // 과락 기준선(40점) — 전체 보기에서만 (확대 시 도메인 밖)
+    if(inDom(40)){
+      const x=X(40), label='과락 40점', tw=label.length*11+14;
+      svg.appendChild(mkLine(x,'#d63b3b','6 5'));
+      svg.appendChild(mk('rect',{x:x-tw/2,y:0,width:tw,height:18,rx:5,fill:'#d63b3b'}));
+      const tx=mk('text',{x:x,y:13,'text-anchor':'middle',fill:'#fff','font-size':12,'font-weight':800});
+      tx.textContent=label;svg.appendChild(tx);
+    }
+    // 연도별 합격선 — 범례 색상별 (일반행정 기준), 도메인 안의 것만 그림
+    const cutoffs=[
+      {y:'2024',score:90,color:'#9aa6c2'},
+      {y:'2025',score:93,color:'#1E4FC4'},
+      {y:'2026',score:90,color:'#F0A13A'}
+    ];
+    const sortedCut=cutoffs.slice().sort((a,b)=>b.score-a.score);
+    sortedCut.forEach((c,row)=>{
+      if(!inDom(c.score)) return;
+      // 같은 점수(겹치는) 선은 3px씩 어긋나게 그려 색이 모두 보이도록
+      const dup=sortedCut.filter((o,j)=>o.score===c.score && j<row).length;
+      const x=X(c.score)+dup*3, lx=X(c.score), label="'"+c.y.slice(2)+" 합격 "+c.score, tw=label.length*7.2+12, ly=T+4+row*22;
+      const g=mk('g',{});
+      g.appendChild(mkLine(x,c.color,'5 4'));
+      g.appendChild(mk('rect',{x:lx-tw/2,y:ly,width:tw,height:17,rx:5,fill:c.color}));
+      const tx=mk('text',{x:lx,y:ly+12,'text-anchor':'middle',fill:'#fff','font-size':11,'font-weight':800});
+      tx.textContent=label;g.appendChild(tx);
+      svg.appendChild(g); distCutoffs[c.y]=g;
     });
     // smooth path (Catmull-Rom -> bezier)
     function smooth(pts){
@@ -792,30 +938,122 @@
       }
       return d;
     }
-    const paths={};
     years.forEach(yr=>{
-      const pts=yr.data.map((v,i)=>[X(i),Y(v)]);
-      const g=mk('g',{});
+      const pts=yr.data.map((v,i)=>[X(reps[i]),Y(v)]);
+      const g=mk('g',{style:'cursor:pointer'});
       const p=mk('path',{d:smooth(pts),fill:'none',stroke:yr.color,'stroke-width':yr.w,
                          'stroke-linecap':'round','stroke-linejoin':'round'});
       g.appendChild(p);
       pts.forEach(pt=>g.appendChild(mk('circle',{cx:pt[0],cy:pt[1],r:yr.w+0.5,fill:yr.color})));
+      g.addEventListener('click',()=>{ if(magSelecting) return; toggleYear(yr.y); }); // 곡선 클릭 토글(돋보기 모드 제외)
       svg.appendChild(g);
-      paths[yr.y]=g;
+      distPaths[yr.y]=g;
     });
-    // legend (clickable to toggle each year)
+    // 범례 재생성 (확대/전체 전환 시에도 갱신)
     const leg=document.getElementById('legend');
-    if(leg && !leg.childElementCount){
+    if(leg){
+      leg.innerHTML='';
       years.forEach(yr=>{
         const c=document.createElement('div');c.className='legChip';
         c.innerHTML='<span class="sw" style="background:'+yr.color+'"></span>'+yr.y;
-        c.addEventListener('click',()=>{
-          c.classList.toggle('off');
-          paths[yr.y].style.display=c.classList.contains('off')?'none':'';
-        });
-        leg.appendChild(c);
+        c.addEventListener('click',()=>toggleYear(yr.y));
+        leg.appendChild(c); distChips[yr.y]=c;
       });
     }
+    // 현재 on/off 상태 반영
+    years.forEach(yr=>applyYearVis(yr.y));
+  }
+
+  /* ---- 과락자 막대그래프 (S7, 점수분포 차트 옆) ---- */
+  function renderFail(){
+    const svg=document.getElementById('failBar');
+    if(!svg) return;
+    const NS='http://www.w3.org/2000/svg';
+    const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+    const data=[
+      {y:'2024',v:10171,color:'#9aa6c2'},
+      {y:'2025',v:8798, color:'#1E4FC4'},
+      {y:'2026',v:10428,color:'#F0A13A'}
+    ];
+    const maxV=11000, base=124, top=34, cx=[68,150,232], bw=50;
+    svg.appendChild(mk('line',{x1:26,y1:base,x2:274,y2:base,stroke:'#e3e8f2','stroke-width':1.5}));
+    data.forEach((d,i)=>{
+      const h=(d.v/maxV)*(base-top), x=cx[i]-bw/2, y=base-h;
+      const r=mk('rect',{x:x,y:y,width:bw,height:h,rx:6,fill:d.color});
+      svg.appendChild(r); failBars[d.y]=r;
+      const vt=mk('text',{x:cx[i],y:y-7,'text-anchor':'middle',fill:'#33405f','font-size':14,'font-weight':800});
+      vt.textContent=d.v.toLocaleString(); svg.appendChild(vt);
+      const yt=mk('text',{x:cx[i],y:base+20,'text-anchor':'middle',fill:'#8a93ad','font-size':14,'font-weight':700});
+      yt.textContent=d.y; svg.appendChild(yt);
+    });
+  }
+
+  /* ---- 돋보기(전역): 버튼 누른 뒤 어느 슬라이드든 영역 드래그 → 딤 오버레이로 확대 ---- */
+  function toStage(e){
+    const r=stage.getBoundingClientRect();            // 스테이지 스케일 반영 → 1280×720 좌표로
+    return [(e.clientX-r.left)/scale,(e.clientY-r.top)/scale];
+  }
+  function setMag(on){
+    magSelecting=on;
+    const btn=document.getElementById('magBtn');
+    if(btn) btn.classList.toggle('on',on);
+    stage.style.cursor=on?'crosshair':'';
+  }
+  function openMag(x,y,w,h){
+    const k=Math.min(1180/w,600/h);                   // 최대 1180×600 박스에 맞춰 확대 배율
+    const clone=stage.cloneNode(true);                // 현재 화면 그대로 복제 (id 유지 → CSS 그대로 적용)
+    ['#navArrows','#nav','#counter','.footmark','.magOverlay','.magSelBox'].forEach(s=>{
+      const el=clone.querySelector(s); if(el) el.remove();          // 컨트롤류는 확대본에서 제외
+    });
+    clone.querySelectorAll('.anim,.slide').forEach(el=>el.style.transition='none');
+    Object.assign(clone.style,{position:'absolute',left:(-x*k)+'px',top:(-y*k)+'px',
+      width:'1280px',height:'720px',transform:'scale('+k+')',transformOrigin:'0 0',
+      transition:'none',boxShadow:'none',margin:'0'});
+    const wrap=document.createElement('div');
+    Object.assign(wrap.style,{position:'absolute',overflow:'hidden',borderRadius:'14px',
+      boxShadow:'0 30px 90px rgba(0,0,0,.6)',background:'#05122e',
+      width:(w*k)+'px',height:(h*k)+'px',left:((1280-w*k)/2)+'px',top:((720-h*k)/2)+'px'});
+    wrap.appendChild(clone);
+    const ov=document.createElement('div');
+    ov.className='magOverlay';
+    Object.assign(ov.style,{position:'absolute',inset:'0',zIndex:'90',background:'rgba(4,12,32,.8)'});
+    ov.appendChild(wrap);
+    ov.addEventListener('click',()=>ov.remove());     // 아무 곳이나 클릭하면 닫힘
+    stage.appendChild(ov);
+  }
+  function setupMagnifier(){
+    const btn=document.getElementById('magBtn');
+    if(!btn) return;
+    let sx=0,sy=0,box=null,swallow=false;
+    btn.addEventListener('click',()=>setMag(!magSelecting));
+    // 드래그 직후 발생하는 click이 카드/버튼을 누르는 것 방지
+    stage.addEventListener('click',e=>{ if(swallow){ e.stopPropagation(); e.preventDefault(); } },true);
+    stage.addEventListener('pointerdown',e=>{
+      if(!magSelecting) return;
+      if(e.target.closest('#navArrows')) return;      // 컨트롤 버튼 클릭은 통과
+      e.preventDefault(); e.stopPropagation();
+      const p=toStage(e); sx=p[0]; sy=p[1];
+      box=document.createElement('div'); box.className='magSelBox';
+      Object.assign(box.style,{position:'absolute',left:sx+'px',top:sy+'px',width:'0px',height:'0px',zIndex:'88'});
+      stage.appendChild(box);
+      try{stage.setPointerCapture(e.pointerId);}catch(_){}
+    },true);
+    stage.addEventListener('pointermove',e=>{
+      if(!magSelecting||!box) return;
+      const p=toStage(e);
+      box.style.left=Math.min(sx,p[0])+'px'; box.style.top=Math.min(sy,p[1])+'px';
+      box.style.width=Math.abs(p[0]-sx)+'px'; box.style.height=Math.abs(p[1]-sy)+'px';
+    },true);
+    stage.addEventListener('pointerup',e=>{
+      if(!magSelecting||!box) return;
+      const p=toStage(e);
+      let x=Math.min(sx,p[0]),y=Math.min(sy,p[1]),w=Math.abs(p[0]-sx),h=Math.abs(p[1]-sy);
+      box.remove(); box=null; setMag(false);
+      swallow=true; setTimeout(()=>swallow=false,0);  // 뒤따르는 click 1회 무시
+      if(w<30||h<30) return;                          // 너무 작은 선택 무시(오클릭)
+      x=Math.max(0,x); y=Math.max(0,y); w=Math.min(1280-x,w); h=Math.min(720-y,h);
+      openMag(x,y,w,h);
+    },true);
   }
 
   /* ---- clickable: dim modals (floating button → overlay card) ---- */
@@ -835,7 +1073,9 @@
   });
 
   /* ---- init (supports deep-link via #N, e.g. ...index.html#3) ---- */
-  renderDist();
+  renderFail();   // 막대 먼저 생성 → renderDist의 상태반영이 막대 흐림까지 처리
+  renderDist();   // 디폴트: 2024만 활성화(yearOff) — 설명하며 2025·2026을 켠다
+  setupMagnifier();   // 돋보기 버튼 → 영역 드래그 → 딤 오버레이로 확대
   const totEl=document.getElementById('tot');
   if(totEl) totEl.textContent=String(slides.length).padStart(2,'0');
   slides[0].classList.add('active');
