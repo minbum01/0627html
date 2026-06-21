@@ -69,9 +69,10 @@
   .logo b{color:#fff}
 
   /* morphing badge (shared across slides) */
+  /* 전 슬라이드 공통: 우측에 은은하게 떠 있는 image3 워터마크 */
   #brandBadge{
-    position:absolute;z-index:40;right:60px;top:46px;height:40px;
-    display:flex;align-items:center;pointer-events:none;
+    position:absolute;z-index:40;right:44px;top:50%;transform:translateY(-50%);height:150px;
+    opacity:.12;display:flex;align-items:center;pointer-events:none;
   }
   #brandBadge img{height:100%;width:auto;display:block}
   /* 표지: 우상단 워드마크 스택(크게·안쪽·반투명) — 표지에선 코너 로고 대신 이걸 사용 */
@@ -88,36 +89,23 @@
   .osk span{position:relative}
   .osk .pipe{color:#0a1330;font-weight:300;font-size:.86em;margin:0 .06em}
 
-  /* ===== Cover ===== */
-  #s1 .topbar{display:flex;justify-content:space-between;align-items:flex-start;width:100%}
-  #s1 .osk .oline{justify-content:flex-end}
-  .eyebrow{display:inline-flex;align-items:center;gap:13px;font-weight:800;font-size:26px;color:#cfe0ff;
-           letter-spacing:0;margin-top:96px}
+  /* ===== Cover (안3: 초대형 워터마크 + 좌측 타이틀 + 정보 배지) ===== */
+  /* 우측 초대형 ONE SHOT / ONE KILL 워터마크 (화면 밖으로 흘러나감) */
+  #s1 .cwmText{position:absolute;right:-110px;top:50%;transform:translateY(-50%);z-index:1;
+    display:flex;flex-direction:column;align-items:flex-end;line-height:.84;white-space:nowrap;
+    font-style:italic;font-weight:900;letter-spacing:-8px;color:#fff;opacity:.11;pointer-events:none}
+  #s1 .cwmText span{font-size:262px}
+  #s1 .titleBlock{position:relative;z-index:3;margin-top:118px;margin-left:64px}
+  #s1 h1 .ul{border-bottom:6px solid rgba(255,120,120,.65);padding-bottom:6px}
+  .eyebrow{display:inline-flex;align-items:center;gap:13px;font-weight:800;font-size:26px;color:#cfe0ff;letter-spacing:0}
   .eyebrow::before{content:"";width:44px;height:4px;background:var(--blue-bright);border-radius:3px}
-  #s1 h1{font-size:104px;font-weight:900;letter-spacing:-4px;line-height:.98;margin-top:14px;
-         text-shadow:0 6px 30px rgba(0,0,0,.3)}
-  .subpill{display:inline-flex;align-items:center;gap:10px;margin-top:26px;
-           background:var(--blue);color:#fff;font-weight:800;font-size:21px;
-           padding:13px 22px;border-radius:8px;box-shadow:0 8px 22px rgba(20,50,140,.5)}
-  .subpill i{font-style:normal;opacity:.65}
-  #s1 .oskWrap{margin-top:auto;margin-bottom:24px;display:flex;align-items:flex-end;justify-content:space-between;gap:30px}
-  #s1 .oskGroup{text-align:right;flex-shrink:0}
-  #s1 .osk{font-size:92px;color:#0a1330}
-  #s1 .oskSub{font-style:italic;font-weight:900;font-size:44px;color:#0a1330;letter-spacing:-1px;margin-top:10px}
-  #s1 .oskSub .hk{display:inline-block;font-style:italic;background:#0a1330;color:#fff;border-radius:12px;
-                  padding:2px 16px 4px;margin-left:8px;box-shadow:0 8px 20px rgba(0,0,0,.4)}
-  #s1 .coverInfo{font-size:26px;font-weight:700;color:#e3ecff;line-height:1.7;white-space:nowrap;
-                 flex-shrink:0;padding-bottom:10px}
-  #s1 .coverInfo span{display:inline-block;min-width:66px;color:#9ec1ff;font-weight:800;margin-right:10px}
+  #s1 h1{font-size:104px;font-weight:900;letter-spacing:-4px;line-height:1.0;margin-top:16px;text-shadow:0 6px 30px rgba(0,0,0,.3)}
+  #s1 .hot{display:inline-block;background:#fff;color:#0c2a6b;padding:0 .16em .05em;border-radius:14px;box-shadow:0 14px 38px rgba(0,0,0,.3)}
+  #s1 .coverInfo{position:absolute;left:0;right:0;bottom:50px;z-index:3;display:flex;justify-content:center;gap:36px}
+  .infoBadge{display:inline-flex;align-items:center;gap:13px}
+  .infoBadge .k{background:var(--blue-bright);color:#fff;font-weight:800;font-size:21px;padding:7px 18px;border-radius:50px}
+  .infoBadge .v{font-size:26px;font-weight:800;color:#0c2a6b}
   #stage:has(#s1.active) .footmark{opacity:0}
-  .startBtn{
-    cursor:pointer;border:none;font-family:inherit;
-    background:#0a1330;color:#fff;font-weight:800;font-size:20px;
-    padding:18px 30px;border-radius:50px;display:inline-flex;align-items:center;gap:12px;
-    box-shadow:0 12px 30px rgba(0,0,0,.35);transition:transform .25s var(--ease),background .25s}
-  .startBtn:hover{transform:translateY(-3px);background:var(--blue)}
-  .startBtn .arr{transition:transform .3s var(--ease)}
-  .startBtn:hover .arr{transform:translateX(6px)}
 
   /* ===== Content slide shell ===== */
   .head{display:flex;align-items:center;justify-content:space-between;gap:20px}
@@ -459,26 +447,23 @@
   <div id="stage">
 
     <!-- shared morphing badge -->
-    <div id="brandBadge"><img src="image1.png" alt="ONE SHOT ONE KILL"></div>
+    <div id="brandBadge"><img src="image3.png" alt="원샷 원킬 해커스"></div>
 
     <div id="counter"><b id="cur">01</b> / <span id="tot">08</span></div>
 
     <!-- ============ S1 COVER ============ -->
     <section class="slide" id="s1">
 
-      <div class="coverMark anim d1">
-        <img class="m1" src="image1.png" alt="ONE SHOT ONE KILL">
-        <img class="m3" src="image3.png" alt="원샷 원킬 해커스">
+      <div class="cwmText" aria-hidden="true"><span>ONE SHOT</span><span>ONE KILL</span></div>
+
+      <div class="titleBlock">
+        <div class="eyebrow anim d1">2027 합격전략 설명회</div>
+        <h1 class="anim d2"><span class="ul">해커스공무원</span><br>단기합격 설명회</h1>
       </div>
 
-      <div class="eyebrow anim d1">2027 합격전략 설명회</div>
-      <h1 class="anim d2">해커스공무원<br>단기합격 설명회</h1>
-
-      <div class="oskWrap">
-        <div class="coverInfo anim d5">
-          <div><span>장소</span> 메가스터디타워 5층</div>
-          <div><span>일시</span> 6월 27일 (토)</div>
-        </div>
+      <div class="coverInfo anim d5">
+        <div class="infoBadge"><span class="k">장소</span><span class="v">메가스터디타워 5층</span></div>
+        <div class="infoBadge"><span class="k">일시</span><span class="v">6월 27일 (토)</span></div>
       </div>
     </section>
 

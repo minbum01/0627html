@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>표지 시안 5종</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0a1020;font-family:"Pretendard",system-ui,"Malgun Gothic",sans-serif;color:#fff;padding:40px 0 80px}
+  .label{max-width:846px;margin:0 auto 10px;font-weight:800;font-size:18px;color:#cfe0ff;letter-spacing:.5px}
+  .label small{color:#8a93ad;font-weight:600;margin-left:8px}
+  .frameBox{width:846px;height:476px;margin:0 auto 46px;border-radius:14px;overflow:hidden;
+            box-shadow:0 24px 70px rgba(0,0,0,.55)}
+  .frame{width:1280px;height:720px;transform:scale(.6609);transform-origin:top left}
+
+  /* ===== cover base ===== */
+  .cover{position:relative;width:1280px;height:720px;overflow:hidden;color:#fff;
+    background:radial-gradient(120% 90% at 50% -10%, rgba(120,160,255,.25) 0%, transparent 60%),
+               linear-gradient(180deg,#0a1f57 0%,#123a9e 42%,#2f63d6 70%,#d8e4fb 100%);}
+  .titleBlock{position:absolute;left:72px;top:150px;z-index:3}
+  .eyebrow{display:inline-flex;align-items:center;gap:13px;font-weight:800;font-size:26px;color:#cfe0ff}
+  .eyebrow::before{content:"";width:44px;height:4px;background:#2C6BF0;border-radius:3px}
+  h1{font-size:104px;font-weight:900;letter-spacing:-4px;line-height:.98;margin-top:14px;text-shadow:0 6px 30px rgba(0,0,0,.3)}
+  .hot{display:inline-block;background:#fff;color:#0c2a6b;padding:0 .16em .05em;border-radius:14px;box-shadow:0 14px 38px rgba(0,0,0,.3)}
+  .coverInfo{position:absolute;left:72px;bottom:54px;z-index:3;font-size:26px;font-weight:700;color:#e3ecff;line-height:1.7}
+  .coverInfo span{display:inline-block;min-width:66px;color:#9ec1ff;font-weight:800;margin-right:10px}
+  .wm{position:absolute;display:block;height:auto;pointer-events:none}
+
+  /* ===== 안1 : 우상단 정돈 스택 ===== */
+  .v1 .m1{right:80px;top:70px;height:150px;opacity:.92}
+  .v1 .m3{right:80px;top:236px;height:112px;opacity:.92}
+
+  /* ===== 안2 : 하단 풀폭(꽉) ===== */
+  .v2 .titleBlock{top:96px}
+  .v2 .m1{left:50%;transform:translateX(-50%);bottom:150px;width:1180px;opacity:.96}
+  .v2 .m3{right:72px;bottom:70px;height:78px;opacity:.9}
+  .v2 .coverInfo{bottom:78px}
+
+  /* ===== 안3 : 초대형 중앙 워터마크 ===== */
+  .v3 .titleBlock{left:0;right:0;top:150px;text-align:center}
+  .v3 .eyebrow{justify-content:center}
+  .v3 .m1{left:50%;top:46%;transform:translate(-50%,-50%);width:1460px;opacity:.12}
+  .v3 .m3{left:50%;transform:translateX(-50%);bottom:120px;height:120px;opacity:.95;z-index:3}
+  .v3 .coverInfo{left:0;right:0;text-align:center;bottom:60px}
+  .v3 .coverInfo span{min-width:auto}
+
+  /* ===== 안4 : 우측 블리드 오버사이즈 ===== */
+  .v4 .m1{right:-160px;top:120px;width:1180px;opacity:.22}
+  .v4 .m3{right:84px;top:84px;height:120px;opacity:.95}
+
+  /* ===== 안5 : 중앙 히어로 ===== */
+  .v5 .titleBlock{left:0;right:0;top:104px;text-align:center}
+  .v5 .eyebrow{justify-content:center}
+  .v5 .m1{left:50%;transform:translateX(-50%);top:330px;width:980px;opacity:.96}
+  .v5 .m3{left:50%;transform:translateX(-50%);top:560px;height:108px;opacity:.96}
+  .v5 .coverInfo{left:0;right:0;text-align:center;bottom:40px}
+  .v5 .coverInfo span{min-width:auto}
+</style>
+</head>
+<body>
+
+<div class="label">안 1 <small>우상단 정돈 스택 · opacity .92 · 큼</small></div>
+<div class="frameBox"><div class="frame"><div class="cover v1">
+  <img class="wm m1" src="image1.png"><img class="wm m3" src="image3.png">
+  <div class="titleBlock"><div class="eyebrow">2027 합격전략 설명회</div><h1>해커스공무원<br><span class="hot">단기합격</span> 설명회</h1></div>
+  <div class="coverInfo"><div><span>장소</span> 메가스터디타워 5층</div><div><span>일시</span> 6월 27일 (토)</div></div>
+</div></div></div>
+
+<div class="label">안 2 <small>하단 풀폭(꽉 채움) · image1 1180px · opacity .96</small></div>
+<div class="frameBox"><div class="frame"><div class="cover v2">
+  <img class="wm m1" src="image1.png"><img class="wm m3" src="image3.png">
+  <div class="titleBlock"><div class="eyebrow">2027 합격전략 설명회</div><h1>해커스공무원<br><span class="hot">단기합격</span> 설명회</h1></div>
+  <div class="coverInfo"><div><span>장소</span> 메가스터디타워 5층</div><div><span>일시</span> 6월 27일 (토)</div></div>
+</div></div></div>
+
+<div class="label">안 3 <small>초대형 중앙 워터마크 · image1 opacity .12 · 타이틀 중앙</small></div>
+<div class="frameBox"><div class="frame"><div class="cover v3">
+  <img class="wm m1" src="image1.png"><img class="wm m3" src="image3.png">
+  <div class="titleBlock"><div class="eyebrow">2027 합격전략 설명회</div><h1>해커스공무원<br><span class="hot">단기합격</span> 설명회</h1></div>
+  <div class="coverInfo"><div><span>장소</span> 메가스터디타워 5층 &nbsp;·&nbsp; <span>일시</span> 6월 27일 (토)</div></div>
+</div></div></div>
+
+<div class="label">안 4 <small>우측 블리드 오버사이즈 워터마크 · image1 opacity .22</small></div>
+<div class="frameBox"><div class="frame"><div class="cover v4">
+  <img class="wm m1" src="image1.png"><img class="wm m3" src="image3.png">
+  <div class="titleBlock"><div class="eyebrow">2027 합격전략 설명회</div><h1>해커스공무원<br><span class="hot">단기합격</span> 설명회</h1></div>
+  <div class="coverInfo"><div><span>장소</span> 메가스터디타워 5층</div><div><span>일시</span> 6월 27일 (토)</div></div>
+</div></div></div>
+
+<div class="label">안 5 <small>중앙 히어로 · 타이틀→image1→image3 수직 중앙 정렬</small></div>
+<div class="frameBox"><div class="frame"><div class="cover v5">
+  <img class="wm m1" src="image1.png"><img class="wm m3" src="image3.png">
+  <div class="titleBlock"><div class="eyebrow">2027 합격전략 설명회</div><h1>해커스공무원 <span class="hot">단기합격</span> 설명회</h1></div>
+  <div class="coverInfo"><div><span>장소</span> 메가스터디타워 5층 &nbsp;·&nbsp; <span>일시</span> 6월 27일 (토)</div></div>
+</div></div></div>
+
+</body>
+</html>
