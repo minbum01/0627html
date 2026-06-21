@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>2026 원샷원킬 설명회 · 필기 합격선 배치표</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 <style>
@@ -28,7 +28,7 @@
   }
 
   /* ===== Stage (16:9, scaled to fit) ===== */
-  #stageWrap{position:fixed;inset:0;overflow:hidden;}
+  #stageWrap{position:fixed;inset:0;overflow:hidden;touch-action:manipulation;}
   #stage{
     position:absolute;left:50%;top:50%;
     width:1280px;height:720px;
@@ -70,10 +70,7 @@
 
   /* morphing badge (shared across slides) */
   /* 전 슬라이드 공통: 우측에 은은하게 떠 있는 image3 워터마크 */
-  #brandBadge{
-    position:absolute;z-index:40;right:44px;top:50%;transform:translateY(-50%);height:150px;
-    opacity:.12;display:flex;align-items:center;pointer-events:none;
-  }
+  #brandBadge{display:none}
   #brandBadge img{height:100%;width:auto;display:block}
   /* 표지: 우상단 워드마크 스택(크게·안쪽·반투명) — 표지에선 코너 로고 대신 이걸 사용 */
   #stage:has(#s1.active) #brandBadge{display:none}
@@ -91,12 +88,41 @@
 
   /* ===== Cover (안3: 초대형 워터마크 + 좌측 타이틀 + 정보 배지) ===== */
   /* 우측 초대형 ONE SHOT / ONE KILL 워터마크 (화면 밖으로 흘러나감) */
-  #s1 .cwmText{position:absolute;right:-110px;top:50%;transform:translateY(-50%);z-index:1;
-    display:flex;flex-direction:column;align-items:flex-end;line-height:.84;white-space:nowrap;
-    font-style:italic;font-weight:900;letter-spacing:-8px;color:#fff;opacity:.11;pointer-events:none}
-  #s1 .cwmText span{font-size:262px}
-  #s1 .titleBlock{position:relative;z-index:3;margin-top:118px;margin-left:64px}
-  #s1 h1 .ul{border-bottom:6px solid rgba(255,120,120,.65);padding-bottom:6px}
+  /* 우측 ONE SHOT / KILL 워드마크 이미지 (배경에 반투명으로 흘러나감) */
+  #s1 .coverImg{position:absolute;left:386px;top:95px;z-index:1;
+    width:1040px;height:auto;opacity:.26;pointer-events:none}
+
+  /* 2번~ 슬라이드 배경 워터마크 이미지 (편집 도구로 조절) */
+  .deco{position:absolute;z-index:-1;height:auto;display:block;pointer-events:none}
+  .deco.editing{z-index:60;pointer-events:auto;cursor:move;outline:2px dashed rgba(120,160,255,.65);outline-offset:4px}
+  .deco.sel{outline:3px solid #2C6BF0;outline-offset:4px}
+  /* 편집 가능한 텍스트 박스 */
+  .decoText{position:absolute;z-index:2;color:#0c2a6b;font-weight:900;letter-spacing:-1px;line-height:1.18;
+    white-space:pre-wrap;font-family:inherit;outline:none;pointer-events:none;max-width:1100px}
+  .decoText.editing{cursor:move;pointer-events:auto;outline:2px dashed rgba(120,160,255,.7);outline-offset:4px}
+  .decoText.sel{outline:3px solid #2C6BF0;outline-offset:4px}
+  .decoText.typing{cursor:text;outline:3px solid #2C6BF0;background:rgba(255,255,255,.10)}
+  /* 마지막 슬라이드의 기존 글씨를 편집 대상으로 (위치/내용/크기) */
+  [data-edit]{pointer-events:none}
+  [data-edit].editing{z-index:61;pointer-events:auto;cursor:move;outline:2px dashed rgba(120,160,255,.7);outline-offset:6px}
+  [data-edit].sel{outline:3px solid #2C6BF0;outline-offset:6px}
+  [data-edit].typing{cursor:text;outline:3px solid #2C6BF0;background:rgba(255,255,255,.10)}
+  #decoEditBtn{position:absolute;left:24px;bottom:24px;z-index:70;cursor:pointer;border:none;
+    font-family:inherit;font-weight:800;font-size:13px;color:#cfe0ff;background:rgba(255,255,255,.10);
+    padding:9px 15px;border-radius:50px;transition:.2s var(--ease)}
+  #decoEditBtn:hover{background:rgba(255,255,255,.22);color:#fff}
+  #decoEditBtn.on{background:var(--blue-bright);color:#fff}
+  #decoExportBtn{position:absolute;left:150px;bottom:24px;z-index:70;cursor:pointer;border:none;display:none;
+    font-family:inherit;font-weight:800;font-size:13px;color:#0c2a6b;background:#9ec1ff;
+    padding:9px 15px;border-radius:50px}
+  #decoEditBtn.on ~ #decoExportBtn{display:inline-block}
+  #decoHud{position:absolute;left:24px;bottom:66px;z-index:70;display:none;max-width:520px;pointer-events:none;
+    background:rgba(6,16,40,.94);color:#dbe6ff;font-size:12.5px;font-weight:600;line-height:1.6;
+    padding:12px 16px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.45);white-space:pre-wrap;
+    font-family:ui-monospace,Consolas,monospace;user-select:text}
+  #decoHud.show{display:block}
+  #decoHud b{color:#9ec1ff}
+  #s1 .titleBlock{position:relative;z-index:3;margin-top:145px;margin-left:64px}
   .eyebrow{display:inline-flex;align-items:center;gap:13px;font-weight:800;font-size:26px;color:#cfe0ff;letter-spacing:0}
   .eyebrow::before{content:"";width:44px;height:4px;background:var(--blue-bright);border-radius:3px}
   #s1 h1{font-size:104px;font-weight:900;letter-spacing:-4px;line-height:1.0;margin-top:16px;text-shadow:0 6px 30px rgba(0,0,0,.3)}
@@ -238,8 +264,9 @@
 
   /* closing */
   #s5{align-items:center;justify-content:center;text-align:center}
-  #s5 .big{font-size:74px;font-weight:900;letter-spacing:-3px;line-height:1.05}
-  #s5 .big em{font-style:normal;color:#9ec1ff}
+  #s5 .big{font-size:74px;font-weight:900;letter-spacing:-3px;line-height:1.05;color:#fff;
+           text-shadow:0 6px 26px rgba(8,18,46,.55),0 1px 2px rgba(8,18,46,.4)}
+  #s5 .big em{font-style:normal;color:#FFC83D;text-shadow:0 6px 26px rgba(8,18,46,.55)}
   #s5 .osk{font-size:66px;color:#0a1330;margin-top:26px}
   #s5 .osk .oline{justify-content:center}
   #s5 .contact{margin-top:44px;display:flex;gap:40px;font-weight:800;font-size:22px}
@@ -253,10 +280,11 @@
        background:rgba(255,255,255,.4);transition:.3s var(--ease)}
   .dot.on{background:#fff;width:30px;border-radius:6px}
   /* 세로 컨트롤: 슬라이드 패딩(오른쪽)에 위 ◀ / 중간 ▶ / 아래 🔍 */
-  #navArrows{position:absolute;z-index:60;right:22px;top:50%;transform:translateY(-50%);
-             display:flex;flex-direction:column;gap:12px}
-  .navArr{cursor:pointer;width:34px;height:34px;border-radius:50%;border:none;
-          background:rgba(255,255,255,.12);color:rgba(255,255,255,.55);font-size:16px;line-height:1;
+  #navArrows{position:absolute;z-index:97;right:14px;bottom:14px;
+             display:grid;grid-template-columns:repeat(2,1fr);gap:5px;
+             background:rgba(6,16,40,.55);padding:6px;border-radius:12px}
+  .navArr{cursor:pointer;width:26px;height:26px;border-radius:7px;border:none;
+          background:rgba(255,255,255,.12);color:rgba(255,255,255,.6);font-size:14px;line-height:1;
           display:grid;place-items:center;transition:.2s var(--ease)}
   .navArr:hover{background:rgba(255,255,255,.30);color:#fff}
   .navArr.on{background:#1E4FC4;color:#fff;box-shadow:0 0 0 4px rgba(44,107,240,.25)}
@@ -280,7 +308,7 @@
 
   /* dim modal */
   .modal{position:absolute;inset:0;z-index:75;display:flex;align-items:center;justify-content:center;padding:60px;
-         background:rgba(4,12,32,.74);backdrop-filter:blur(3px);opacity:0;visibility:hidden;
+         background:rgba(4,12,32,.74);backdrop-filter:blur(3px);opacity:0;visibility:hidden;touch-action:none;
          transition:opacity .35s var(--ease),visibility .35s}
   .modal.open{opacity:1;visibility:visible}
   .modalCard{background:#fff;color:var(--ink);border-radius:24px;padding:38px 44px 34px;max-width:780px;width:100%;
@@ -440,6 +468,30 @@
             color:rgba(255,255,255,.55);font-weight:600}
 
   #help{position:fixed;left:18px;bottom:14px;color:rgba(255,255,255,.45);font-size:12.5px;font-weight:600;z-index:80}
+
+  /* ===== 판서(주석) ===== */
+  #penCanvas{position:absolute;inset:0;width:1280px;height:720px;z-index:95;pointer-events:none;touch-action:none}
+  #penCanvas.on{pointer-events:auto;cursor:crosshair}
+  #penBar{position:absolute;right:14px;bottom:60px;z-index:96;display:none;
+    grid-template-columns:repeat(4,1fr);gap:5px;background:rgba(6,16,40,.94);padding:7px;
+    border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+  #penBar.show{display:grid}
+  #penBar .sep{display:none}
+  .penSw{width:25px;height:25px;border-radius:6px;cursor:pointer;border:2px solid rgba(255,255,255,.35);
+         padding:0;transition:.12s var(--ease)}
+  .penSw:hover{transform:scale(1.08)}
+  .penSw.on{border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.5)}
+  .penTool{width:25px;height:25px;border-radius:6px;cursor:pointer;border:none;font-family:inherit;font-size:13px;
+           color:#cfe0ff;background:rgba(255,255,255,.12);padding:0;transition:.12s var(--ease);
+           display:grid;place-items:center;line-height:1}
+  .penTool:hover{background:rgba(255,255,255,.26);color:#fff}
+  .penTool.on{background:var(--blue-bright);color:#fff}
+  .penWid{width:25px;height:25px;border-radius:6px;cursor:pointer;border:none;background:rgba(255,255,255,.12);
+          display:grid;place-items:center;transition:.12s var(--ease)}
+  .penWid:hover{background:rgba(255,255,255,.26)}
+  .penWid.on{background:var(--blue-bright)}
+  .penWid i{display:block;border-radius:50%;background:#fff}
+  #penToggle.on{background:#21a85a;color:#fff}
 </style>
 </head>
 <body>
@@ -454,11 +506,11 @@
     <!-- ============ S1 COVER ============ -->
     <section class="slide" id="s1">
 
-      <div class="cwmText" aria-hidden="true"><span>ONE SHOT</span><span>ONE KILL</span></div>
+      <img class="coverImg anim d3" src="image1.png" alt="" aria-hidden="true">
 
       <div class="titleBlock">
         <div class="eyebrow anim d1">2027 합격전략 설명회</div>
-        <h1 class="anim d2"><span class="ul">해커스공무원</span><br>단기합격 설명회</h1>
+        <h1 class="anim d2">해커스공무원<br>단기합격 설명회</h1>
       </div>
 
       <div class="coverInfo anim d5">
@@ -775,14 +827,7 @@
     <!-- ============ S5 CLOSING ============ -->
     <section class="slide" id="s5">
       <div class="badgeSlot" data-badge style="right:72px;top:60px;width:72px;height:72px"></div>
-      <div class="big anim d1">원샷 원킬,<br><em>올해 반드시 끝냅니다.</em></div>
-      <div class="osk anim d2">
-        <div class="oline"><span>ONE</span><span>SHOT</span><span class="pipe">/</span><span>ONE</span><span class="kill">KILL</span></div>
-      </div>
-      <div class="contact anim d3">
-        <div><span>상담문의</span> 02-599-0500</div>
-        <div><span>홈페이지</span> gosi.Hackers.com</div>
-      </div>
+      <div class="big anim d1" data-edit="big">올해 반드시 <em>합격</em>합니다.</div>
     </section>
 
     <div class="footmark">해커스공무원 · 2026 원샷원킬 설명회 (목업)</div>
@@ -792,9 +837,38 @@
       <button class="navArr" id="prev" title="이전 슬라이드">‹</button>
       <button class="navArr" id="next" title="다음 슬라이드">›</button>
       <button class="navArr" id="magBtn" title="영역 드래그 확대 (모든 슬라이드)">🔍</button>
+      <button class="navArr" id="penToggle" title="판서 켜기/끄기 (아무 곳이나 더블탭으로도 전환)">🖊️</button>
     </div>
     <!-- slide dots (bottom center) -->
     <div id="nav"><div id="dots"></div></div>
+
+    <!-- 판서 캔버스 + 도구바 (아무 곳이나 더블탭으로 펜↔이동 전환) -->
+    <canvas id="penCanvas" width="1280" height="720"></canvas>
+    <div id="penBar">
+      <button class="penTool" id="penMove" title="이동(슬라이드 조작)">✋</button>
+      <span class="sep"></span>
+      <button class="penTool on" data-tool="pen" title="펜">✏️</button>
+      <button class="penTool" data-tool="hl" title="형광펜">🖍️</button>
+      <button class="penTool" data-tool="eraser" title="지우개">🧹</button>
+      <span class="sep"></span>
+      <button class="penSw on" data-color="#111111" style="background:#111111"></button>
+      <button class="penSw" data-color="#e23b3b" style="background:#e23b3b"></button>
+      <button class="penSw" data-color="#2C6BF0" style="background:#2C6BF0"></button>
+      <button class="penSw" data-color="#FFC83D" style="background:#FFC83D"></button>
+      <button class="penSw" data-color="#21a85a" style="background:#21a85a"></button>
+      <button class="penSw" data-color="#ffffff" style="background:#ffffff"></button>
+      <span class="sep"></span>
+      <button class="penWid on" data-size="4" title="얇게"><i style="width:5px;height:5px"></i></button>
+      <button class="penWid" data-size="8" title="보통"><i style="width:9px;height:9px"></i></button>
+      <button class="penWid" data-size="14" title="굵게"><i style="width:15px;height:15px"></i></button>
+      <span class="sep"></span>
+      <button class="penTool" id="penClear" title="이 슬라이드 판서 전체 지우기">🗑️</button>
+    </div>
+
+    <!-- 이미지(image1/image3) 편집 도구 -->
+    <div id="decoHud"></div>
+    <button id="decoEditBtn" title="2번~ 슬라이드 이미지 위치/크기/투명도 편집">✎ 이미지 편집</button>
+    <button id="decoExportBtn" title="조절한 값 전체 출력">⤓ 값 내보내기</button>
   </div>
 </div>
 <div id="help">← / → 또는 클릭으로 이동 · 객체 클릭 가능</div>
@@ -855,10 +929,12 @@
     dots.forEach((d,i)=>d.classList.toggle('on',i===idx));
     curEl.textContent=String(idx+1).padStart(2,'0');
     if(history.replaceState){history.replaceState(null,'','#'+(idx+1));}
+    penClear();   // 슬라이드 바뀌면 판서 지움 (펜 모드는 유지)
     // wait a frame so layout settles, then morph badge
     requestAnimationFrame(()=>requestAnimationFrame(placeBadge));
   }
-  function navLocked(){ return magSelecting || document.querySelector('.magOverlay'); }
+  let decoEditing=false;
+  function navLocked(){ return magSelecting || decoEditing || document.querySelector('.magOverlay'); }
   function next(){ if(navLocked()) return; go(idx+1); }
   function prev(){ if(navLocked()) return; go(idx-1); }
 
@@ -878,10 +954,10 @@
     const surf=document.getElementById('stageWrap')||document.body;
     let sx=0,sy=0,active=false,lastNav=0,lockedAtStart=false;
     const THRESH=55;                                  // 최소 가로 이동(px)
-    const start=(x,y)=>{sx=x;sy=y;active=true;lockedAtStart=navLocked();};
+    const start=(x,y)=>{sx=x;sy=y;active=true;lockedAtStart=navLocked()||penOn;};
     const end=(x,y)=>{
       if(!active) return; active=false;
-      if(lockedAtStart||navLocked()||document.querySelector('.modal.open')) return; // 확대/모달 중엔 잠금
+      if(lockedAtStart||navLocked()||penOn||document.querySelector('.modal.open')) return; // 확대/모달/판서 중엔 잠금
       if(Date.now()-lastNav<450) return;              // 터치+포인터 중복 방지
       const dx=x-sx, dy=y-sy;
       if(Math.abs(dx)<THRESH || Math.abs(dx)<Math.abs(dy)*1.4) return; // 탭/세로 제스처 무시
@@ -1068,6 +1144,8 @@
     // 터치 드래그가 브라우저의 스크롤/팬 제스처에 가로채여 끊기지 않도록(전자칠판 핵심 수정)
     stage.style.touchAction=on?'none':'';
     stage.style.userSelect=on?'none':'';
+    const pc=document.getElementById('penCanvas');        // 영역선택 중엔 판서 캔버스 비활성(드래그 충돌 방지)
+    if(pc) pc.style.pointerEvents = on ? 'none' : '';
   }
   function openMag(x,y,w,h){
     const k=Math.min(1180/w,600/h);                   // 최대 1180×600 박스에 맞춰 확대 배율
@@ -1086,9 +1164,21 @@
     wrap.appendChild(clone);
     const ov=document.createElement('div');
     ov.className='magOverlay';
-    Object.assign(ov.style,{position:'absolute',inset:'0',zIndex:'90',background:'rgba(4,12,32,.8)'});
+    Object.assign(ov.style,{position:'absolute',inset:'0',zIndex:'90',background:'rgba(4,12,32,.8)',touchAction:'none'});
     ov.appendChild(wrap);
-    ov.addEventListener('click',()=>ov.remove());     // 아무 곳이나 클릭하면 닫힘
+    // 단일 클릭=닫힘(펜 모드 아닐 때) / 더블탭=펜 토글 — 포인터로 직접 감지(터치 안정성)
+    let closeT, oLastT=0, oLastP=[0,0], oDownT=0, oDownP=[0,0];
+    ov.addEventListener('pointerdown',e=>{ oDownT=e.timeStamp; oDownP=[e.clientX,e.clientY]; });
+    ov.addEventListener('pointerup',e=>{
+      const moved=Math.hypot(e.clientX-oDownP[0],e.clientY-oDownP[1]);
+      if(e.timeStamp-oDownT>260 || moved>14){ oLastT=0; return; }      // 탭이 아니면 무시
+      const near=Math.hypot(e.clientX-oLastP[0],e.clientY-oLastP[1])<45;
+      if(e.timeStamp-oLastT<380 && near){                              // 더블탭 → 펜 토글
+        clearTimeout(closeT); setPenFn(!penOn); oLastT=0; return;
+      }
+      oLastT=e.timeStamp; oLastP=[e.clientX,e.clientY];                // 단일 탭 → 잠시 후 닫기(펜 아닐 때)
+      clearTimeout(closeT); closeT=setTimeout(()=>{ if(!penOn) ov.remove(); },380);
+    });
     stage.appendChild(ov);
   }
   function setupMagnifier(){
@@ -1126,6 +1216,256 @@
     },true);
   }
 
+  /* ---- 2번~ 슬라이드 image1/image3 워터마크 배치 + 직접 편집 ---- */
+  function setupDeco(){
+    // 코드에 박힌 슬라이드별 기본값 (편집 후 "값 내보내기"로 이 객체를 교체)
+    const DEFAULTS={
+      _default:{ deco1:{l:1025,t:65,w:244,o:.12}, deco3:{l:1025,t:20,w:139,o:.27} },
+      // s5(마지막) — 이미지·글씨 개별 위치 (w: 이미지=폭 / 글씨=크기 px)
+      s5:{ deco1:{l:109,t:182,w:1083,o:1}, deco3:{l:109,t:49,w:469,o:1}, big:{l:385,t:464,w:90,o:1} }
+    };
+    // 위치는 오직 위 DEFAULTS 하나로 관리(localStorage 미사용). 편집은 화면에서 즉시 반영되고,
+    // "값 내보내기"로 받은 값을 위 DEFAULTS에 박으면 모든 환경에서 동일하게 고정됨.
+    try{ localStorage.removeItem('decoPositions'); }catch(_){}   // 예전 저장값 정리
+    const valOf=(sid,cls)=>{
+      const d=(DEFAULTS[sid]&&DEFAULTS[sid][cls])||DEFAULTS._default[cls];
+      return Object.assign({},d);
+    };
+
+    const imgs=[];   // {el,sid,cls}
+    const DECOS=[{cls:'deco1',src:'image1.png'},{cls:'deco3',src:'image3.png'}];
+    slides.forEach((slide,i)=>{
+      if(i===0) return;                 // 표지(s1) 제외 — 2번부터
+      const sid=slide.id;
+      DECOS.forEach(d=>{
+        const el=document.createElement('img');
+        el.src=d.src; el.alt=''; el.className='deco '+d.cls;
+        const v=valOf(sid,d.cls);
+        el.style.left=v.l+'px'; el.style.top=v.t+'px'; el.style.width=v.w+'px'; el.style.opacity=v.o;
+        slide.insertBefore(el, slide.firstChild);   // 콘텐츠 뒤(배경)로
+        imgs.push({el,sid,cls:d.cls});
+      });
+    });
+    // 편집 가능한 텍스트 요소도 같은 편집 대상에 등록
+    function applyVal(rec,v){
+      rec.el.style.left=v.l+'px'; rec.el.style.top=v.t+'px'; rec.el.style.opacity=v.o;
+      if(rec.isText){ rec.el.style.fontSize=v.w+'px'; if(v.text!==undefined) rec.el.textContent=v.text; }
+      else rec.el.style.width=v.w+'px';
+    }
+    document.querySelectorAll('[data-edit]').forEach(el=>{
+      const slide=el.closest('.slide'); if(!slide) return;
+      el.style.position='absolute';                 // 흐름 → 절대위치로 (드래그 이동 가능)
+      const rec={el,sid:slide.id,cls:el.dataset.edit,isText:true};
+      el.setAttribute('contenteditable','false');
+      applyVal(rec, valOf(slide.id, rec.cls));
+      imgs.push(rec);
+    });
+
+    const btn=document.getElementById('decoEditBtn');
+    const exportBtn=document.getElementById('decoExportBtn');
+    const hud=document.getElementById('decoHud');
+    if(!btn) return;
+    let sel=null, drag=false, ox=0, oy=0;
+
+    function curState(rec){
+      const el=rec.el;
+      return {l:parseFloat(el.style.left)||0,t:parseFloat(el.style.top)||0,
+              w:parseFloat(rec.isText?el.style.fontSize:el.style.width)||0,o:parseFloat(el.style.opacity)||0};
+    }
+    function setSize(rec,nw,cx){
+      if(rec.isText){ rec.el.style.fontSize=nw+'px'; }           // 텍스트: 좌상단 고정, 글자크기만
+      else{ rec.el.style.width=nw+'px'; rec.el.style.left=(cx-nw/2)+'px'; } // 이미지: 중심 고정
+    }
+    function persist(){ /* 인라인 style이 곧 현재 상태 — 별도 저장 없음 */ }
+    function showHud(rec){
+      if(!rec){ hud.innerHTML='클릭=선택 · 드래그=이동 · 휠/＋−=크기 · [ ]=투명도 · 방향키=미세  (텍스트는 더블클릭=글자입력)'; return; }
+      const s=curState(rec), szLab=rec.isText?'size':'width';
+      hud.innerHTML='<b>'+rec.sid+'</b> · '+rec.cls+(rec.isText?'  (더블클릭=글자입력 · 드래그=이동 · 휠/＋−=크기)':'  (드래그=이동 · 휠/＋−=크기 · [ ]=투명도)')+'\n'
+        +'<b>left</b> '+Math.round(s.l)+'   <b>top</b> '+Math.round(s.t)
+        +'   <b>'+szLab+'</b> '+Math.round(s.w)+'   <b>opacity</b> '+s.o.toFixed(2);
+    }
+    function select(rec){
+      imgs.forEach(o=>o.el.classList.remove('sel'));
+      sel=rec; if(rec) rec.el.classList.add('sel'); showHud(rec);
+    }
+    function setEdit(on){
+      decoEditing=on;
+      btn.classList.toggle('on',on); btn.textContent=on?'✓ 편집 끝':'✎ 이미지 편집';
+      hud.classList.toggle('show',on);
+      imgs.forEach(o=>{
+        o.el.classList.toggle('editing',on);
+        if(!on && o.isText){ o.el.setAttribute('contenteditable','false'); o.el.classList.remove('typing'); }
+      });
+      if(on) showHud(null); else select(null);
+    }
+    btn.addEventListener('click',()=>setEdit(!decoEditing));
+
+    imgs.forEach(rec=>{
+      rec.el.addEventListener('pointerdown',e=>{
+        if(!decoEditing) return;
+        if(rec.isText && rec.el.classList.contains('typing')) return;  // 글자 입력 중엔 드래그 안함
+        e.preventDefault(); e.stopPropagation();
+        select(rec); drag=true;
+        const s=curState(rec); ox=e.clientX/scale-s.l; oy=e.clientY/scale-s.t;
+        try{rec.el.setPointerCapture(e.pointerId);}catch(_){}
+      });
+      rec.el.addEventListener('pointermove',e=>{
+        if(!decoEditing||!drag||sel!==rec) return;
+        rec.el.style.left=(e.clientX/scale-ox)+'px'; rec.el.style.top=(e.clientY/scale-oy)+'px';
+        showHud(rec);
+      });
+      rec.el.addEventListener('pointerup',()=>{ if(drag){drag=false;persist();} });
+      rec.el.addEventListener('wheel',e=>{
+        if(!decoEditing) return; e.preventDefault(); select(rec);
+        const s=curState(rec), k=e.deltaY<0?1.04:1/1.04;
+        setSize(rec, Math.max(rec.isText?12:80, s.w*k), s.l+s.w/2);
+        showHud(rec);
+      },{passive:false});
+      if(rec.isText){
+        rec.el.addEventListener('dblclick',e=>{
+          if(!decoEditing) return; e.stopPropagation();
+          rec.el.setAttribute('contenteditable','true'); rec.el.classList.add('typing'); rec.el.focus();
+        });
+        rec.el.addEventListener('blur',()=>{
+          rec.el.setAttribute('contenteditable','false'); rec.el.classList.remove('typing'); showHud(rec);
+        });
+      }
+    });
+
+    window.addEventListener('keydown',e=>{
+      if(!decoEditing||!sel) return;
+      if(sel.isText && sel.el.classList.contains('typing')) return;   // 글자 입력 중엔 방향키=커서이동
+      const s=curState(sel), step=e.shiftKey?10:1; let hit=true;
+      if(e.key==='ArrowLeft') sel.el.style.left=(s.l-step)+'px';
+      else if(e.key==='ArrowRight') sel.el.style.left=(s.l+step)+'px';
+      else if(e.key==='ArrowUp') sel.el.style.top=(s.t-step)+'px';
+      else if(e.key==='ArrowDown') sel.el.style.top=(s.t+step)+'px';
+      else if(e.key==='+'||e.key==='=') setSize(sel, s.w*1.04, s.l+s.w/2);
+      else if(e.key==='-'||e.key==='_') setSize(sel, Math.max(sel.isText?12:80, s.w/1.04), s.l+s.w/2);
+      else if(e.key==='[') sel.el.style.opacity=Math.max(0,s.o-.02);
+      else if(e.key===']') sel.el.style.opacity=Math.min(1,s.o+.02);
+      else hit=false;
+      if(hit){ e.preventDefault(); e.stopPropagation(); showHud(sel); persist(); }
+    },true);
+
+    // 값 내보내기: DEFAULTS 객체 형태로 전체 출력 (복사해서 전달 → 코드에 고정)
+    if(exportBtn) exportBtn.addEventListener('click',()=>{
+      const out={};
+      imgs.forEach(rec=>{
+        const s=curState(rec);
+        const obj={l:Math.round(s.l),t:Math.round(s.t),w:Math.round(s.w),o:+s.o.toFixed(2)};
+        if(rec.isText) obj.text=rec.el.innerText;
+        (out[rec.sid]=out[rec.sid]||{})[rec.cls]=obj;
+      });
+      const lines=Object.keys(out).map(sid=>{
+        const o=out[sid];
+        const parts=Object.keys(o).map(c=>{
+          const v=o[c], t=(v.text!==undefined)?",text:'"+String(v.text).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\n/g,'\\n')+"'":'';
+          return c+':{l:'+v.l+',t:'+v.t+',w:'+v.w+',o:'+v.o+t+'}';
+        });
+        return '  '+sid+':{ '+parts.join(', ')+' }';
+      });
+      hud.classList.add('show');
+      hud.textContent='const DEFAULTS={\n'+lines.join(',\n')+'\n};';
+    });
+  }
+
+  /* ---- 판서: 더블탭 토글(펜↔이동) · 펜/형광펜/지우개/색상 ---- */
+  let penOn=false;
+  let penClear=()=>{};
+  let setPenFn=()=>{};   // 딤 오버레이 등 외부에서 펜 토글
+  function setupPen(){
+    const canvas=document.getElementById('penCanvas');
+    const bar=document.getElementById('penBar');
+    const toggleBtn=document.getElementById('penToggle');
+    if(!canvas||!bar) return;
+    const ctx=canvas.getContext('2d');
+    ctx.lineCap='round'; ctx.lineJoin='round';
+    let tool='pen', color='#111111', drawing=false, last=null, penSize=4;
+    const widthFor=()=> tool==='hl' ? penSize*4 : tool==='eraser' ? Math.max(24,penSize*5) : penSize;
+
+    penClear=()=>ctx.clearRect(0,0,1280,720);   // 슬라이드 전환 시 호출됨
+
+    let barTimer;
+    function showBar(){   // 상세 도구바 표시 + 2초 무조작 시 접힘(기본 플로팅)
+      if(!penOn) return;
+      bar.classList.add('show');
+      clearTimeout(barTimer);
+      barTimer=setTimeout(()=>bar.classList.remove('show'),2000);
+    }
+    function setPen(on){
+      penOn=on;
+      canvas.classList.toggle('on',on);
+      if(toggleBtn) toggleBtn.classList.toggle('on',on);
+      if(on) showBar(); else { bar.classList.remove('show'); clearTimeout(barTimer); }
+    }
+    setPenFn=setPen;   // 외부(딤 오버레이)에서 토글 가능하게
+    bar.addEventListener('pointerdown',()=>showBar());   // 도구바 누르면 다시 펼치고 타이머 리셋
+    function pos(e){ const r=stage.getBoundingClientRect(); return [(e.clientX-r.left)/scale,(e.clientY-r.top)/scale]; }
+    function stroke(a,b){
+      ctx.globalCompositeOperation = tool==='eraser' ? 'destination-out' : 'source-over';
+      if(tool==='hl'){ ctx.strokeStyle=color; ctx.globalAlpha=.32; }
+      else{ ctx.strokeStyle=color; ctx.globalAlpha=1; }
+      ctx.lineWidth=widthFor();
+      ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke();
+      ctx.globalAlpha=1;
+    }
+    // 그리기
+    canvas.addEventListener('pointerdown',e=>{
+      if(!penOn) return; e.preventDefault();
+      drawing=true; last=pos(e);
+      stroke(last,[last[0]+0.01,last[1]+0.01]);   // 점 한 번 찍기
+      try{canvas.setPointerCapture(e.pointerId);}catch(_){}
+    });
+    canvas.addEventListener('pointermove',e=>{
+      if(!penOn||!drawing) return;
+      const p=pos(e); stroke(last,p); last=p;
+    });
+    canvas.addEventListener('pointerup',()=>{ drawing=false; });
+
+    // 도구바
+    bar.querySelectorAll('[data-tool]').forEach(b=>b.addEventListener('click',()=>{
+      tool=b.dataset.tool;
+      bar.querySelectorAll('[data-tool]').forEach(x=>x.classList.toggle('on',x===b));
+    }));
+    bar.querySelectorAll('.penSw').forEach(b=>b.addEventListener('click',()=>{
+      color=b.dataset.color;
+      if(tool==='eraser'){ tool='pen'; bar.querySelectorAll('[data-tool]').forEach(x=>x.classList.toggle('on',x.dataset.tool==='pen')); }
+      bar.querySelectorAll('.penSw').forEach(x=>x.classList.toggle('on',x===b));
+    }));
+    bar.querySelectorAll('.penWid').forEach(b=>b.addEventListener('click',()=>{
+      penSize=+b.dataset.size;
+      bar.querySelectorAll('.penWid').forEach(x=>x.classList.toggle('on',x===b));
+    }));
+    document.getElementById('penClear').addEventListener('click',penClear);
+    document.getElementById('penMove').addEventListener('click',()=>setPen(false));
+    if(toggleBtn) toggleBtn.addEventListener('click',()=>{
+      if(!penOn) setPen(true);                                  // 꺼짐 → 켜기(+도구바 펼침)
+      else if(!bar.classList.contains('show')) showBar();       // 켜짐+접힘 → 도구바 다시 펼치기
+      else setPen(false);                                       // 켜짐+펼침 → 끄기
+    });
+
+    // 더블탭(짧은 탭 2회)으로 펜↔이동 전환
+    let lastTap=0, lastXY=[0,0], downT=0, downXY=[0,0];
+    stage.addEventListener('pointerdown',e=>{ downT=e.timeStamp; downXY=[e.clientX,e.clientY]; },true);
+    stage.addEventListener('pointerup',e=>{
+      if(e.target.closest('#penBar')||e.target.closest('#navArrows')||e.target.closest('#nav')) return;
+      if(decoEditing||magSelecting) return;
+      // 딤 중: 펜 끄기(펜 모드)만 stage가 처리. 펜 켜기는 ov 오버레이 핸들러가 담당 → 중복 토글 방지
+      if(document.querySelector('.magOverlay') && !penOn) return;
+      const moved=Math.hypot(e.clientX-downXY[0],e.clientY-downXY[1]);
+      const isTap=(e.timeStamp-downT<250)&&moved<12;        // 짧고 거의 안 움직인 탭만
+      if(isTap){
+        const near=Math.hypot(e.clientX-lastXY[0],e.clientY-lastXY[1])<40;
+        if(e.timeStamp-lastTap<320 && near){
+          if(penOn && tool!=='eraser'){ const cp=pos({clientX:downXY[0],clientY:downXY[1]}); ctx.clearRect(cp[0]-16,cp[1]-16,32,32); } // 토글 직전 점 정리
+          setPen(!penOn); lastTap=0; return;
+        }
+        lastTap=e.timeStamp; lastXY=[e.clientX,e.clientY];
+      } else { lastTap=0; }
+    },true);
+  }
+
   /* ---- clickable: dim modals (floating button → overlay card) ---- */
   document.querySelectorAll('[data-modal]').forEach(btn=>{
     btn.addEventListener('click',()=>{
@@ -1134,8 +1474,12 @@
     });
   });
   document.querySelectorAll('.modal').forEach(m=>{
+    let mT;
     m.addEventListener('click',e=>{
-      if(e.target===m || e.target.hasAttribute('data-close')){ m.classList.remove('open'); }
+      if(e.target.hasAttribute('data-close')){ m.classList.remove('open'); return; }   // X 버튼: 즉시 닫기
+      if(e.target===m){                                                                 // 배경: 더블탭(펜 토글) 위해 지연 닫기
+        clearTimeout(mT); mT=setTimeout(()=>{ if(!penOn) m.classList.remove('open'); },380);
+      }
     });
   });
   window.addEventListener('keydown',e=>{
@@ -1146,6 +1490,8 @@
   document.querySelectorAll('.failOne').forEach(el=>{ failBars[el.dataset.year]=el; }); // 과락 막대 ↔ 연도 토글 연결
   renderDist();   // 디폴트: 2024만 활성화(yearOff) — 설명하며 2025·2026을 켠다
   setupMagnifier();   // 돋보기 버튼 → 영역 드래그 → 딤 오버레이로 확대
+  setupDeco();        // 2번~ 슬라이드 image1/image3 배치 + 직접 편집
+  setupPen();         // 판서: 더블탭으로 펜↔이동, 펜/형광펜/지우개/색상
   const totEl=document.getElementById('tot');
   if(totEl) totEl.textContent=String(slides.length).padStart(2,'0');
   slides[0].classList.add('active');
