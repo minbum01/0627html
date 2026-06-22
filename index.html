@@ -213,6 +213,29 @@
   .locBadge{display:inline-block;font-size:24px;font-weight:800;background:var(--blue);color:#fff;
             padding:4px 15px;border-radius:50px;letter-spacing:-.5px}
 
+  /* ===== S2: 카드 위로 스와이프 → 예시 공개 ===== */
+  .cmp .cmpCard{padding-bottom:42px;touch-action:pan-y}
+  .cmpHint{position:absolute;left:0;right:0;bottom:13px;text-align:center;font-size:16px;font-weight:800;
+           color:#9aa6c2;z-index:2;pointer-events:none;animation:hintBob 1.7s ease-in-out infinite}
+  @keyframes hintBob{0%,100%{transform:translateY(0);opacity:.7}50%{transform:translateY(-4px);opacity:1}}
+  .cmpReveal{position:absolute;inset:0;background:linear-gradient(165deg,var(--blue),var(--blue-bright));
+             color:#fff;padding:28px;display:flex;flex-direction:column;justify-content:center;gap:13px;
+             transform:translateY(101%);transition:transform .42s var(--ease);z-index:4}
+  .cmpCard.open .cmpReveal{transform:translateY(0)}
+  .rvTitle{font-size:27px;font-weight:900;letter-spacing:-.5px}
+  .rvLab{font-size:15px;font-weight:800;color:#cfdcff;letter-spacing:.5px;margin-top:8px}
+  .rvOrg{font-size:23px;font-weight:800;line-height:1.3;margin-top:2px}
+  .rvWork{font-size:19px;font-weight:500;line-height:1.5;color:#eaf1ff;margin-top:10px}
+  .rvBack{position:absolute;top:13px;right:16px;font-size:15px;font-weight:800;color:rgba(255,255,255,.82)}
+
+  /* ===== S2: 자주 묻는 질문 (딤 모달, 흰 카드) ===== */
+  .faqItem{padding:20px 0;border-top:1px solid #eef1f8}
+  .faqItem:first-child{border-top:none;padding-top:6px}
+  .faqQ{display:flex;gap:13px;align-items:flex-start;font-size:25px;font-weight:900;color:var(--navy);line-height:1.32}
+  .qBadge{flex:none;background:var(--blue);color:#fff;font-size:18px;font-weight:900;
+          border-radius:9px;padding:3px 12px;line-height:1.4}
+  .faqA{font-size:21px;font-weight:500;color:#44507a;line-height:1.56;margin-top:12px;padding-left:2px}
+
   .tl{margin-top:22px;background:#fff;color:var(--ink);border-radius:18px;padding:18px 32px;
       box-shadow:0 16px 36px rgba(4,16,48,.4);display:flex;align-items:center;gap:22px}
   .tlItem{display:flex;align-items:center;gap:13px;flex-shrink:0}
@@ -529,24 +552,72 @@
         <div class="badgeSlot" data-badge style="right:72px;top:60px;width:72px;height:72px"></div>
       </div>
 
-      <div class="cmp" style="margin-top:20px">
+      <div class="reqHead anim d2" style="justify-content:flex-end;margin-top:6px">
+        <button class="fab" data-modal="faqModal"><span class="fabIco">💬</span> 자주 묻는 질문</button>
+      </div>
+
+      <div class="cmp" style="margin-top:14px">
         <div class="cmpCard primary anim d3">
-          <div class="cmpIcon"><svg viewBox="0 0 24 24" fill="#1E4FC4"><path d="M12 2 2 7h20L12 2Z"/><rect x="4" y="9" width="2.4" height="9"/><rect x="8.5" y="9" width="2.4" height="9"/><rect x="13.1" y="9" width="2.4" height="9"/><rect x="17.6" y="9" width="2.4" height="9"/><rect x="2" y="19.5" width="20" height="2.4"/></svg></div>
-          <div class="cmpName">국가직<span class="en">NATIONAL</span></div>
-          <div class="cmpItem"><div class="labRow"><span class="lab">근무지</span><span class="locBadge">전국</span></div><div class="val">정부 부처 · 산하 소속기관</div></div>
-          <div class="cmpItem"><div class="lab">업무 성격</div><div class="val">국가 정책 집행 · 전문적·전국 단위 업무</div></div>
+            <div class="cmpIcon"><svg viewBox="0 0 24 24" fill="#1E4FC4"><path d="M12 2 2 7h20L12 2Z"/><rect x="4" y="9" width="2.4" height="9"/><rect x="8.5" y="9" width="2.4" height="9"/><rect x="13.1" y="9" width="2.4" height="9"/><rect x="17.6" y="9" width="2.4" height="9"/><rect x="2" y="19.5" width="20" height="2.4"/></svg></div>
+            <div class="cmpName">국가직<span class="en">NATIONAL</span></div>
+            <div class="cmpItem"><div class="labRow"><span class="lab">근무지</span><span class="locBadge">전국</span></div><div class="val">정부 부처 · 산하 소속기관</div></div>
+            <div class="cmpItem"><div class="lab">업무 성격</div><div class="val">국가 정책 집행 · 전문적·전국 단위 업무</div></div>
+            <div class="cmpHint">↑ 위로 스와이프 · 예시 보기</div>
+            <div class="cmpReveal">
+              <div class="rvBack">↓ 닫기</div>
+              <div class="rvTitle">국가직 예시</div>
+              <div class="rvLab">대표 기관</div>
+              <div class="rvOrg">국토교통부 · 행정안전부 등</div>
+              <div class="rvLab">예시 업무</div>
+              <div class="rvWork">전국 대학생 국가장학금 기준 개편, ‘K-패스’ 같은 5천만 국민 대상 정책 설계</div>
+            </div>
+          </div>
+          <div class="cmpCard anim d4">
+            <div class="cmpIcon"><svg viewBox="0 0 24 24" fill="#1E4FC4"><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v3h4a1 1 0 0 1 1 1v12H4Z"/><g fill="#fff"><rect x="6.5" y="7" width="2.2" height="2.2"/><rect x="10.3" y="7" width="2.2" height="2.2"/><rect x="6.5" y="11" width="2.2" height="2.2"/><rect x="10.3" y="11" width="2.2" height="2.2"/><rect x="17" y="11" width="2" height="2.2"/><rect x="6.5" y="15" width="2.2" height="2.2"/><rect x="10.3" y="15" width="2.2" height="2.2"/><rect x="17" y="15" width="2" height="2.2"/></g></svg></div>
+            <div class="cmpName">지방직<span class="en">LOCAL</span></div>
+            <div class="cmpItem"><div class="labRow"><span class="lab">근무지</span><span class="locBadge">지원한 지방자치단체</span></div><div class="val">시·도청 · 시·군·구청 · 주민센터</div></div>
+            <div class="cmpItem"><div class="lab">업무 성격</div><div class="val">지역 주민 밀착 행정 · 민원 처리 · 복지</div></div>
+            <div class="cmpHint">↑ 위로 스와이프 · 예시 보기</div>
+            <div class="cmpReveal">
+              <div class="rvBack">↓ 닫기</div>
+              <div class="rvTitle">지방직 예시</div>
+              <div class="rvLab">대표 기관</div>
+              <div class="rvOrg">경기도청 · 부산시청 등</div>
+              <div class="rvLab">예시 업무</div>
+              <div class="rvWork">우리 동네 골목상권 핫플 조성, 지역 내 대형 쇼핑몰 입점에 따른 교통 대책 수립</div>
+            </div>
+          </div>
+          <div class="cmpCard anim d5">
+            <div class="cmpIcon"><svg viewBox="0 0 24 24" fill="#1E4FC4"><rect x="11" y="9" width="2" height="12"/><circle cx="12" cy="7" r="3.2"/><path d="M12 1.4 13.1 4h-2.2z"/><rect x="8" y="20" width="8" height="2" rx="1"/></svg></div>
+            <div class="cmpName">서울시<span class="en">SEOUL</span></div>
+            <div class="cmpItem"><div class="labRow"><span class="lab">근무지</span><span class="locBadge">서울</span></div><div class="val">서울시청 · 25개 자치구청</div></div>
+            <div class="cmpItem"><div class="lab">업무 성격</div><div class="val">서울 시민 대상 행정<br>(지방직과 유사)</div></div>
+            <div class="cmpHint">↑ 위로 스와이프 · 예시 보기</div>
+            <div class="cmpReveal">
+              <div class="rvBack">↓ 닫기</div>
+              <div class="rvTitle">서울시 예시</div>
+              <div class="rvLab">대표 기관</div>
+              <div class="rvOrg">서울시청 · 동작구청 등</div>
+              <div class="rvLab">예시 업무</div>
+              <div class="rvWork">뚝섬 한강공원 드론 쇼 기획, ‘따릉이’·‘기후동행카드’ 등 서울형 랜드마크 인프라 확장</div>
+            </div>
+          </div>
         </div>
-        <div class="cmpCard anim d4">
-          <div class="cmpIcon"><svg viewBox="0 0 24 24" fill="#1E4FC4"><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v3h4a1 1 0 0 1 1 1v12H4Z"/><g fill="#fff"><rect x="6.5" y="7" width="2.2" height="2.2"/><rect x="10.3" y="7" width="2.2" height="2.2"/><rect x="6.5" y="11" width="2.2" height="2.2"/><rect x="10.3" y="11" width="2.2" height="2.2"/><rect x="17" y="11" width="2" height="2.2"/><rect x="6.5" y="15" width="2.2" height="2.2"/><rect x="10.3" y="15" width="2.2" height="2.2"/><rect x="17" y="15" width="2" height="2.2"/></g></svg></div>
-          <div class="cmpName">지방직<span class="en">LOCAL</span></div>
-          <div class="cmpItem"><div class="labRow"><span class="lab">근무지</span><span class="locBadge">지원한 지방자치단체</span></div><div class="val">시·도청 · 시·군·구청 · 주민센터</div></div>
-          <div class="cmpItem"><div class="lab">업무 성격</div><div class="val">지역 주민 밀착 행정 · 민원 처리 · 복지</div></div>
-        </div>
-        <div class="cmpCard anim d5">
-          <div class="cmpIcon"><svg viewBox="0 0 24 24" fill="#1E4FC4"><rect x="11" y="9" width="2" height="12"/><circle cx="12" cy="7" r="3.2"/><path d="M12 1.4 13.1 4h-2.2z"/><rect x="8" y="20" width="8" height="2" rx="1"/></svg></div>
-          <div class="cmpName">서울시<span class="en">SEOUL</span></div>
-          <div class="cmpItem"><div class="labRow"><span class="lab">근무지</span><span class="locBadge">서울</span></div><div class="val">서울시청 · 25개 자치구청</div></div>
-          <div class="cmpItem"><div class="lab">업무 성격</div><div class="val">서울 시민 대상 행정<br>(지방직과 유사)</div></div>
+      </div>
+
+      <!-- dim modal: 자주 묻는 질문 -->
+      <div class="modal" id="faqModal">
+        <div class="modalCard">
+          <button class="modalClose" data-close>×</button>
+          <div class="modalTag" style="color:#1E4FC4;background:#eaf1ff;border-color:#c9d9fb">💬 자주 묻는 질문</div>
+          <div class="faqItem">
+            <div class="faqQ"><span class="qBadge">Q2</span>지방직은 무조건 동주민센터(행정복지센터)에서만 일하나요?</div>
+            <div class="faqA">아닙니다. 시청·구청·도청 같은 본청이나 사업소(도서관·박물관·공원관리소 등)에서도 근무합니다. 신규 임용 때는 민원 업무를 배우러 주민센터에 많이 배치되지만, 연차가 쌓이면 본청과 사업소를 순환 근무합니다.</div>
+          </div>
+          <div class="faqItem">
+            <div class="faqQ"><span class="qBadge">Q3</span>국가직에서 지방직으로 갈 수 있나요?</div>
+            <div class="faqA">네, 갈 수 있습니다. 지방직→국가직보다 국가직→지방직이 비교적 수월한 편입니다. 결원으로 진행하는 전입 공모 시험(서류·면접)에 합격하거나 1:1 인사교류로 전환하며, 소속 부처 장관의 전출 승인이 필요합니다.</div>
+          </div>
         </div>
       </div>
 
@@ -863,6 +934,7 @@
       <button class="penWid" data-size="14" title="굵게"><i style="width:15px;height:15px"></i></button>
       <span class="sep"></span>
       <button class="penTool" id="penClear" title="이 슬라이드 판서 전체 지우기">🗑️</button>
+      <button class="penTool" id="penHide" title="도구바 닫기">✕</button>
     </div>
 
     <!-- 이미지(image1/image3) 편집 도구 -->
@@ -1174,7 +1246,7 @@
       if(e.timeStamp-oDownT>260 || moved>14){ oLastT=0; return; }      // 탭이 아니면 무시
       const near=Math.hypot(e.clientX-oLastP[0],e.clientY-oLastP[1])<45;
       if(e.timeStamp-oLastT<380 && near){                              // 더블탭 → 펜 토글
-        clearTimeout(closeT); setPenFn(!penOn); oLastT=0; return;
+        clearTimeout(closeT); setPenFn(!penOn, e.clientX, e.clientY); oLastT=0; return;
       }
       oLastT=e.timeStamp; oLastP=[e.clientX,e.clientY];                // 단일 탭 → 잠시 후 닫기(펜 아닐 때)
       clearTimeout(closeT); closeT=setTimeout(()=>{ if(!penOn) ov.remove(); },380);
@@ -1387,19 +1459,33 @@
     penClear=()=>ctx.clearRect(0,0,1280,720);   // 슬라이드 전환 시 호출됨
 
     let barTimer;
-    function showBar(){   // 상세 도구바 표시 + 2초 무조작 시 접힘(기본 플로팅)
+    function placeBar(sx,sy){   // sx,sy = stage(1280x720) 좌표. null이면 기본(우하단)
+      if(sx==null){ bar.style.left=''; bar.style.top=''; bar.style.right='14px'; bar.style.bottom='60px'; return; }
+      const bw=bar.offsetWidth, bh=bar.offsetHeight;     // .show 상태에서 측정
+      let x=sx - bw/2, y=sy + 18;                        // 커서 바로 아래 가운데
+      x=Math.max(8, Math.min(1280-bw-8, x));
+      y=Math.max(8, Math.min(720-bh-8, y));
+      bar.style.right='auto'; bar.style.bottom='auto';
+      bar.style.left=x+'px'; bar.style.top=y+'px';
+    }
+    function showBar(sx,sy){   // 상세 도구바 표시 + 2초 무조작 시 접힘
       if(!penOn) return;
       bar.classList.add('show');
+      if(sx!=null) placeBar(sx,sy);   // 좌표 있을 때만 재배치(빈 호출은 현재 위치 유지)
       clearTimeout(barTimer);
       barTimer=setTimeout(()=>bar.classList.remove('show'),2000);
     }
-    function setPen(on){
+    function setPen(on,sx,sy){
       penOn=on;
       canvas.classList.toggle('on',on);
       if(toggleBtn) toggleBtn.classList.toggle('on',on);
-      if(on) showBar(); else { bar.classList.remove('show'); clearTimeout(barTimer); }
+      if(on){ if(sx==null) placeBar(null); showBar(sx,sy); }   // 좌표 없는 켜기는 기본(우하단)
+      else { bar.classList.remove('show'); clearTimeout(barTimer); }
     }
-    setPenFn=setPen;   // 외부(딤 오버레이)에서 토글 가능하게
+    setPenFn=(on,cx,cy)=>{   // 외부(딤 오버레이)에서 토글 — client 좌표를 stage 좌표로 변환
+      if(cx==null) return setPen(on);
+      const p=pos({clientX:cx,clientY:cy}); setPen(on,p[0],p[1]);
+    };
     bar.addEventListener('pointerdown',()=>showBar());   // 도구바 누르면 다시 펼치고 타이머 리셋
     function pos(e){ const r=stage.getBoundingClientRect(); return [(e.clientX-r.left)/scale,(e.clientY-r.top)/scale]; }
     function stroke(a,b){
@@ -1439,6 +1525,7 @@
     }));
     document.getElementById('penClear').addEventListener('click',penClear);
     document.getElementById('penMove').addEventListener('click',()=>setPen(false));
+    document.getElementById('penHide').addEventListener('click',()=>{ bar.classList.remove('show'); clearTimeout(barTimer); });  // 도구바만 닫기(펜 모드 유지)
     if(toggleBtn) toggleBtn.addEventListener('click',()=>{
       if(!penOn) setPen(true);                                  // 꺼짐 → 켜기(+도구바 펼침)
       else if(!bar.classList.contains('show')) showBar();       // 켜짐+접힘 → 도구바 다시 펼치기
@@ -1449,7 +1536,7 @@
     let lastTap=0, lastXY=[0,0], downT=0, downXY=[0,0];
     stage.addEventListener('pointerdown',e=>{ downT=e.timeStamp; downXY=[e.clientX,e.clientY]; },true);
     stage.addEventListener('pointerup',e=>{
-      if(e.target.closest('#penBar')||e.target.closest('#navArrows')||e.target.closest('#nav')) return;
+      if(e.target.closest('#penBar')||e.target.closest('#navArrows')||e.target.closest('#nav')||e.target.closest('.cmpCard')) return;
       if(decoEditing||magSelecting) return;
       // 딤 중: 펜 끄기(펜 모드)만 stage가 처리. 펜 켜기는 ov 오버레이 핸들러가 담당 → 중복 토글 방지
       if(document.querySelector('.magOverlay') && !penOn) return;
@@ -1459,11 +1546,33 @@
         const near=Math.hypot(e.clientX-lastXY[0],e.clientY-lastXY[1])<40;
         if(e.timeStamp-lastTap<320 && near){
           if(penOn && tool!=='eraser'){ const cp=pos({clientX:downXY[0],clientY:downXY[1]}); ctx.clearRect(cp[0]-16,cp[1]-16,32,32); } // 토글 직전 점 정리
-          setPen(!penOn); lastTap=0; return;
+          const tp=pos({clientX:downXY[0],clientY:downXY[1]});   // 더블탭 지점 → 도구바를 그 자리에
+          setPen(!penOn, tp[0], tp[1]); lastTap=0; return;
         }
         lastTap=e.timeStamp; lastXY=[e.clientX,e.clientY];
       } else { lastTap=0; }
     },true);
+  }
+
+  /* ---- S2 비교카드: 위로 스와이프 → 예시 공개 (아래로 스와이프/탭 = 닫기) ---- */
+  function setupCmpSwipe(){
+    document.querySelectorAll('#s2 .cmpCard').forEach(card=>{
+      let sx=0,sy=0,t=0,on=false;
+      card.addEventListener('pointerdown',e=>{
+        if(penOn) return;                                   // 펜 모드 중엔 캔버스가 처리
+        sx=e.clientX; sy=e.clientY; t=e.timeStamp; on=true;
+        try{card.setPointerCapture(e.pointerId);}catch(_){}
+      });
+      card.addEventListener('pointerup',e=>{
+        if(!on) return; on=false;
+        const dx=e.clientX-sx, dy=e.clientY-sy, dt=e.timeStamp-t, move=Math.hypot(dx,dy);
+        if(Math.abs(dy)>34 && Math.abs(dy)>Math.abs(dx)){    // 세로 스와이프
+          card.classList.toggle('open', dy<0);              // 위=열기 / 아래=닫기
+        } else if(move<10 && dt<320){                        // 마우스 클릭/짧은 탭 → 토글
+          card.classList.toggle('open');
+        }
+      });
+    });
   }
 
   /* ---- clickable: dim modals (floating button → overlay card) ---- */
@@ -1492,6 +1601,7 @@
   setupMagnifier();   // 돋보기 버튼 → 영역 드래그 → 딤 오버레이로 확대
   setupDeco();        // 2번~ 슬라이드 image1/image3 배치 + 직접 편집
   setupPen();         // 판서: 더블탭으로 펜↔이동, 펜/형광펜/지우개/색상
+  setupCmpSwipe();    // S2 카드: 위로 스와이프 → 예시 공개(아래로/탭=닫기)
   const totEl=document.getElementById('tot');
   if(totEl) totEl.textContent=String(slides.length).padStart(2,'0');
   slides[0].classList.add('active');
