@@ -218,23 +218,28 @@
   .cmpHint{position:absolute;left:0;right:0;bottom:13px;text-align:center;font-size:16px;font-weight:800;
            color:#9aa6c2;z-index:2;pointer-events:none;animation:hintBob 1.7s ease-in-out infinite}
   @keyframes hintBob{0%,100%{transform:translateY(0);opacity:.7}50%{transform:translateY(-4px);opacity:1}}
-  .cmpReveal{position:absolute;inset:0;background:linear-gradient(165deg,var(--blue),var(--blue-bright));
+  .cmpReveal{position:absolute;inset:0;background:#26303f;
              color:#fff;padding:28px;display:flex;flex-direction:column;justify-content:center;gap:13px;
              transform:translateY(101%);transition:transform .42s var(--ease);z-index:4}
+  .cmp .cmpCard:nth-child(1) .cmpReveal{background:linear-gradient(160deg,#0e6f63,#16a085)}   /* 국가직 - 틸 */
+  .cmp .cmpCard:nth-child(2) .cmpReveal{background:linear-gradient(160deg,#b4530a,#e6841c)}   /* 지방직 - 앰버 */
+  .cmp .cmpCard:nth-child(3) .cmpReveal{background:linear-gradient(160deg,#7c2d6b,#b23f96)}   /* 서울시 - 플럼 */
   .cmpCard.open .cmpReveal{transform:translateY(0)}
   .rvTitle{font-size:27px;font-weight:900;letter-spacing:-.5px}
-  .rvLab{font-size:15px;font-weight:800;color:#cfdcff;letter-spacing:.5px;margin-top:8px}
+  .rvLab{font-size:15px;font-weight:800;color:rgba(255,255,255,.78);letter-spacing:.5px;margin-top:8px}
   .rvOrg{font-size:23px;font-weight:800;line-height:1.3;margin-top:2px}
-  .rvWork{font-size:19px;font-weight:500;line-height:1.5;color:#eaf1ff;margin-top:10px}
-  .rvBack{position:absolute;top:13px;right:16px;font-size:15px;font-weight:800;color:rgba(255,255,255,.82)}
+  .rvWork{font-size:19px;font-weight:500;line-height:1.5;color:rgba(255,255,255,.94);margin-top:10px}
+  .rvBack{position:absolute;top:13px;right:16px;font-size:15px;font-weight:800;color:rgba(255,255,255,.85)}
 
   /* ===== S2: 자주 묻는 질문 (딤 모달, 흰 카드) ===== */
-  .faqItem{padding:20px 0;border-top:1px solid #eef1f8}
-  .faqItem:first-child{border-top:none;padding-top:6px}
-  .faqQ{display:flex;gap:13px;align-items:flex-start;font-size:25px;font-weight:900;color:var(--navy);line-height:1.32}
-  .qBadge{flex:none;background:var(--blue);color:#fff;font-size:18px;font-weight:900;
-          border-radius:9px;padding:3px 12px;line-height:1.4}
-  .faqA{font-size:21px;font-weight:500;color:#44507a;line-height:1.56;margin-top:12px;padding-left:2px}
+  #faqModal .modalCard{max-width:1000px;max-height:none;padding:48px 56px 46px}
+  .faqItem{padding:24px 0;border-top:1px solid #eef1f8}
+  .faqItem:first-child{border-top:none;padding-top:8px}
+  .faqQ{display:flex;gap:14px;align-items:flex-start;font-size:29px;font-weight:900;color:var(--navy);line-height:1.32}
+  .qBadge{flex:none;background:var(--blue);color:#fff;font-size:21px;font-weight:900;
+          border-radius:10px;padding:4px 14px;line-height:1.4}
+  .faqA{font-size:24px;font-weight:500;color:#44507a;line-height:1.58;margin-top:14px;padding-left:2px}
+  .faqA b{color:var(--blue);font-weight:800}
 
   .tl{margin-top:22px;background:#fff;color:var(--ink);border-radius:18px;padding:18px 32px;
       box-shadow:0 16px 36px rgba(4,16,48,.4);display:flex;align-items:center;gap:22px}
@@ -603,20 +608,20 @@
             </div>
           </div>
         </div>
-      </div>
+      <!-- /.cmp end -->
 
-      <!-- dim modal: 자주 묻는 질문 -->
+      <!-- dim modal: 자주 묻는 질문 (FAQ) -->
       <div class="modal" id="faqModal">
         <div class="modalCard">
           <button class="modalClose" data-close>×</button>
           <div class="modalTag" style="color:#1E4FC4;background:#eaf1ff;border-color:#c9d9fb">💬 자주 묻는 질문</div>
           <div class="faqItem">
-            <div class="faqQ"><span class="qBadge">Q2</span>지방직은 무조건 동주민센터(행정복지센터)에서만 일하나요?</div>
-            <div class="faqA">아닙니다. 시청·구청·도청 같은 본청이나 사업소(도서관·박물관·공원관리소 등)에서도 근무합니다. 신규 임용 때는 민원 업무를 배우러 주민센터에 많이 배치되지만, 연차가 쌓이면 본청과 사업소를 순환 근무합니다.</div>
+            <div class="faqQ"><span class="qBadge">Q1</span>지방직은 무조건 동주민센터(행정복지센터)에서만 일하나요?</div>
+            <div class="faqA"><b>아닙니다.</b> 시청·구청·도청 같은 <b>본청</b>이나 <b>사업소</b>(도서관·박물관·공원관리소 등)에서도 근무합니다. 신규 임용 때는 민원 업무를 배우러 주민센터에 많이 배치되지만, 연차가 쌓이면 본청과 사업소를 <b>순환 근무</b>합니다.</div>
           </div>
           <div class="faqItem">
-            <div class="faqQ"><span class="qBadge">Q3</span>국가직에서 지방직으로 갈 수 있나요?</div>
-            <div class="faqA">네, 갈 수 있습니다. 지방직→국가직보다 국가직→지방직이 비교적 수월한 편입니다. 결원으로 진행하는 전입 공모 시험(서류·면접)에 합격하거나 1:1 인사교류로 전환하며, 소속 부처 장관의 전출 승인이 필요합니다.</div>
+            <div class="faqQ"><span class="qBadge">Q2</span>국가직에서 지방직으로 갈 수 있나요?</div>
+            <div class="faqA"><b>네, 갈 수 있습니다.</b> 지방직→국가직보다 <b>국가직→지방직이 비교적 수월</b>한 편입니다. 결원으로 진행하는 <b>전입 공모 시험</b>(서류·면접)에 합격하거나 <b>1:1 인사교류</b>로 전환하며, 소속 부처 장관의 <b>전출 승인</b>이 필요합니다.</div>
           </div>
         </div>
       </div>
