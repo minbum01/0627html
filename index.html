@@ -472,10 +472,10 @@
   .road{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:34px;align-items:stretch}
   .rp{border-radius:14px;padding:15px 20px;display:flex;flex-direction:column;justify-content:center;gap:3px;
       background:#eaf0ff;color:var(--navy)}
-  .rp.hot{background:linear-gradient(120deg,var(--blue),var(--blue-bright));color:#fff;box-shadow:0 8px 22px rgba(20,50,140,.4)}
+  .rp.hot{background:linear-gradient(120deg,#0e6f63,#16a085);color:#fff;box-shadow:0 8px 22px rgba(10,80,70,.4)}
   .rp b{font-size:26px;font-weight:900;letter-spacing:-.5px}
   .rp i{font-style:normal;font-size:26px;font-weight:800;opacity:.72}
-  .rp.hot i{opacity:1;color:#dbe6ff}
+  .rp.hot i{opacity:1;color:#a8f0e4}
   .rstep{position:relative;background:#fff;color:var(--ink);border-radius:16px;padding:24px 12px 20px;
          box-shadow:0 14px 30px rgba(4,16,48,.35);display:flex;flex-direction:column;align-items:center;
          gap:11px;overflow:hidden;text-align:center}
@@ -484,11 +484,11 @@
   .rstep .mon{font-style:italic;font-weight:900;font-size:26px;color:var(--blue);letter-spacing:-.5px;line-height:1}
   .rstep .ti{font-size:26px;font-weight:800;line-height:1.3;color:#23304f}
   .rstep .no{position:absolute;right:11px;top:10px;font-style:italic;font-weight:900;font-size:13px;color:#cdd8ef}
-  .rstep.real{background:linear-gradient(160deg,#b45309,#f59e0b);color:#fff;box-shadow:0 16px 34px rgba(120,60,0,.45)}
-  .rstep.real::before{background:linear-gradient(90deg,#fde68a,#f59e0b)}
-  .rstep.real .mon{color:#fff5cc}
-  .rstep.real .ti{color:#fff}
-  .rstep.real .no{color:rgba(255,255,255,.55)}
+  .rstep.real{background:#fff;color:var(--ink);box-shadow:0 14px 30px rgba(4,16,48,.35)}
+  .rstep.real::before{background:linear-gradient(90deg,var(--blue),var(--blue-bright))}
+  .rstep.real .mon{color:var(--blue)}
+  .rstep.real .ti{color:#23304f}
+  .rstep.real .no{color:#cdd8ef}
   .rstep:not(:last-child)::after{content:"›";position:absolute;right:-12px;top:50%;transform:translateY(-50%);
          color:#9ec1ff;font-weight:900;font-size:23px;z-index:3}
   .tkRow{margin-top:20px;background:#fff;border-radius:20px;padding:20px 28px 22px;
