@@ -498,9 +498,12 @@
   .tkLabel{font-size:24px;font-weight:900;color:var(--navy);letter-spacing:-.4px;line-height:1.25}
   .tkSub{font-size:17px;font-weight:600;color:#6b7a9e;line-height:1.5}
   .tkDiv{width:1px;align-self:stretch;background:#e4eaf5;flex-shrink:0}
-  .tkList{display:grid;grid-template-columns:repeat(3,auto);gap:9px 10px;align-items:center;flex:1}
+  .tkList{display:flex;flex-wrap:wrap;gap:8px;align-items:center;flex:1}
   .tkChip{background:#f0f4ff;border:1.5px solid #c5d3f5;color:var(--blue);
-          font-size:20px;font-weight:800;border-radius:50px;padding:8px 20px;letter-spacing:-.2px;white-space:nowrap;text-align:center}
+          font-size:18px;font-weight:800;border-radius:50px;padding:7px 17px;letter-spacing:-.2px;white-space:nowrap}
+  .tkChip.dim{background:#f7f9ff;border-color:#dde5f5;color:#8fa3cc;font-weight:700}
+  .tkMore{background:var(--blue);color:#fff;font-size:18px;font-weight:900;border-radius:50px;
+          padding:7px 18px;white-space:nowrap;letter-spacing:-.2px}
   .roadFoot{margin-top:26px;display:flex;align-items:center;gap:13px;background:#fff;color:var(--ink);
             border-radius:16px;padding:18px 26px;box-shadow:0 14px 32px rgba(4,16,48,.35);font-weight:700}
   .roadFoot .tag{flex-shrink:0;font-style:italic;font-weight:900;font-size:26px;color:#fff;background:var(--blue);
@@ -916,7 +919,7 @@
             <div class="tkIcon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></div>
             <div class="tkLabel">수준별 특강<br>라인업</div>
           </div>
-          <div class="tkSub">정규 강의 외 부족한 부분만<br>골라 듣는 해커스 특강</div>
+          <div class="tkSub">정규 강의 외 필요한 부분만<br>골라 듣는 해커스공무원 특강</div>
         </div>
         <div class="tkDiv"></div>
         <div class="tkList">
@@ -926,6 +929,10 @@
           <div class="tkChip">1회독 특강</div>
           <div class="tkChip">요약 특강</div>
           <div class="tkChip">빈출문제 특강</div>
+          <div class="tkChip dim">기출분석 특강</div>
+          <div class="tkChip dim">단원별 특강</div>
+          <div class="tkChip dim">동형문제 특강</div>
+          <div class="tkMore">+ 더 많은 특강</div>
         </div>
       </div>
     </section>
