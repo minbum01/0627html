@@ -521,29 +521,35 @@
   .benefitTitle em{font-style:normal;color:#FFC83D}
 
   /* ===== 혜택 슬라이드 A — 합불 0원 패스 특징 ===== */
-  .featGrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px}
+  .featGrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);gap:16px;margin-top:22px}
   .featCard{background:#fff;color:var(--ink);border-radius:22px;
-            padding:28px 30px;display:flex;align-items:flex-start;gap:20px;
+            padding:22px 26px;display:flex;align-items:flex-start;gap:18px;
             box-shadow:0 18px 44px rgba(4,16,48,.38);position:relative;overflow:hidden}
   .featCard::before{content:"";position:absolute;left:0;top:0;width:6px;height:100%;background:#e2e8f5}
-  .featCard:nth-child(1)::before{background:linear-gradient(180deg,#FFC83D,#f59e0b)}
-  .featCard:nth-child(2)::before{background:linear-gradient(180deg,#16a085,#0e6f63)}
-  .featCard:nth-child(3)::before{background:linear-gradient(180deg,#2C6BF0,#1E4FC4)}
-  .featCard:nth-child(4)::before{background:linear-gradient(180deg,#b23f96,#7c2d6b)}
-  .featIcon{width:52px;height:52px;border-radius:15px;flex-shrink:0;display:grid;place-items:center}
-  .featCard:nth-child(1) .featIcon{background:linear-gradient(135deg,#FFC83D,#f59e0b)}
-  .featCard:nth-child(2) .featIcon{background:linear-gradient(135deg,#16a085,#0e6f63)}
-  .featCard:nth-child(3) .featIcon{background:linear-gradient(135deg,#2C6BF0,#1E4FC4)}
-  .featCard:nth-child(4) .featIcon{background:linear-gradient(135deg,#b23f96,#7c2d6b)}
-  .featIcon svg{width:28px;height:28px}
-  .featBody{display:flex;flex-direction:column;gap:6px}
-  .featName{font-size:26px;font-weight:900;color:var(--navy);letter-spacing:-.5px}
-  .featDesc{font-size:20px;font-weight:600;color:#44507a;line-height:1.4}
-  .featNote{font-size:14px;font-weight:600;color:#9aa6c2;line-height:1.5;margin-top:6px}
-  .featMore{position:absolute;top:14px;right:16px;font-size:20px;line-height:1;opacity:.55;transition:.2s}
+  /* 왼쪽 대형 카드(200%) */
+  .featCard.featMain{grid-column:1;grid-row:1 / 4;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;padding:36px 36px}
+  .featCard.featMain::before{background:linear-gradient(180deg,#FFC83D,#f59e0b)}
+  /* 오른쪽 소형 3개 */
+  .featCard.featSub:nth-of-type(2)::before{background:linear-gradient(180deg,#16a085,#0e6f63)}
+  .featCard.featSub:nth-of-type(3)::before{background:linear-gradient(180deg,#2C6BF0,#1E4FC4)}
+  .featCard.featSub:nth-of-type(4)::before{background:linear-gradient(180deg,#b23f96,#7c2d6b)}
+  .featIcon{width:48px;height:48px;border-radius:14px;flex-shrink:0;display:grid;place-items:center}
+  .featCard.featMain .featIcon{width:60px;height:60px;border-radius:17px;background:linear-gradient(135deg,#FFC83D,#f59e0b)}
+  .featCard.featSub:nth-of-type(2) .featIcon{background:linear-gradient(135deg,#16a085,#0e6f63)}
+  .featCard.featSub:nth-of-type(3) .featIcon{background:linear-gradient(135deg,#2C6BF0,#1E4FC4)}
+  .featCard.featSub:nth-of-type(4) .featIcon{background:linear-gradient(135deg,#b23f96,#7c2d6b)}
+  .featIcon svg{width:26px;height:26px}
+  .featCard.featMain .featIcon svg{width:32px;height:32px}
+  .featBody{display:flex;flex-direction:column;gap:5px}
+  .featName{font-size:22px;font-weight:900;color:var(--navy);letter-spacing:-.5px}
+  .featCard.featMain .featName{font-size:28px}
+  .featDesc{font-size:18px;font-weight:600;color:#44507a;line-height:1.4}
+  .featCard.featMain .featDesc{font-size:20px}
+  .featNote{font-size:13px;font-weight:600;color:#9aa6c2;line-height:1.5;margin-top:4px}
+  .featMore{position:absolute;top:12px;right:14px;font-size:18px;line-height:1;opacity:.45;transition:.2s}
   .featCard[data-modal]:hover .featMore{opacity:1}
   .featCard[data-modal]{transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
-  .featCard[data-modal]:hover{transform:translateY(-6px);box-shadow:0 28px 56px rgba(4,16,48,.5)}
+  .featCard[data-modal]:hover{transform:translateY(-4px);box-shadow:0 28px 56px rgba(4,16,48,.5)}
 
   /* ===== 혜택 슬라이드 B — 패키지 옵션 ===== */
   .pkgRow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:28px}
@@ -1000,7 +1006,20 @@
       </div>
 
       <div class="featGrid">
-        <div class="featCard anim d2" data-modal="featModal1" style="cursor:pointer">
+        <!-- 왼쪽 대형: 200% 환급 -->
+        <div class="featCard featMain anim d2" data-modal="featModal2" style="cursor:pointer">
+          <div class="featIcon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div class="featBody">
+            <div class="featName">수강료 최대 200% 환급</div>
+            <div class="featDesc">합격하면 수강료 전액의<br><b style="font-size:72px;font-weight:900;color:#b45309;letter-spacing:-3px;line-height:1;display:inline-block">200%</b><br>돌려드립니다</div>
+            <div class="featNote">※ 미션 달성시 지급 · 제세공과금 본인부담 · 교재비 및 옵션가 제외</div>
+          </div>
+          <div class="featMore">🔍</div>
+        </div>
+        <!-- 오른쪽 소형 3개 -->
+        <div class="featCard featSub anim d3" data-modal="featModal1" style="cursor:pointer">
           <div class="featIcon">
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
           </div>
@@ -1010,18 +1029,7 @@
           </div>
           <div class="featMore">🔍</div>
         </div>
-        <div class="featCard anim d3" data-modal="featModal2" style="cursor:pointer">
-          <div class="featIcon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <div class="featBody">
-            <div class="featName">수강료 최대 200% 환급</div>
-            <div class="featDesc">합격하면 수강료 전액의<br><b style="font-size:52px;font-weight:900;color:#b45309;letter-spacing:-2px;line-height:1.1;display:inline-block">200%</b> 돌려드립니다</div>
-            <div class="featNote">※ 미션 달성시 지급 · 제세공과금 본인부담 · 교재비 및 옵션가 제외</div>
-          </div>
-          <div class="featMore">🔍</div>
-        </div>
-        <div class="featCard anim d4" data-modal="featModal3" style="cursor:pointer">
+        <div class="featCard featSub anim d4" data-modal="featModal3" style="cursor:pointer">
           <div class="featIcon">
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h13v13"/><path d="M4 19a2 2 0 0 0 2 2h13"/><path d="M9 10h6M9 14h4"/></svg>
           </div>
@@ -1031,7 +1039,7 @@
           </div>
           <div class="featMore">🔍</div>
         </div>
-        <div class="featCard anim d5" data-modal="featModal4" style="cursor:pointer">
+        <div class="featCard featSub anim d5" data-modal="featModal4" style="cursor:pointer">
           <div class="featIcon">
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           </div>
