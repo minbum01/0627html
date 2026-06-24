@@ -566,32 +566,27 @@
   .pkgBigDiscount{font-size:34px;font-weight:900;color:#fff;letter-spacing:-1px;white-space:nowrap}
 
   /* ===== 학원 실강패스 슬라이드 ===== */
-  .acSpecialRow{display:flex;gap:14px;margin-top:18px}
-  .acSpecialChip{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);border-radius:50px;
-                 padding:10px 24px;font-size:19px;font-weight:700;color:rgba(255,255,255,.85)}
-  .acSpecialChip b{color:#FFC83D;font-weight:900}
-  .acRow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:18px}
-  .acCard{background:#fff;color:var(--ink);border-radius:22px;padding:28px 28px 24px;
+  .acSpecialRow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+  .acSpecialChip{background:#fff;border-radius:16px;padding:18px 26px;
+                 display:flex;flex-direction:column;gap:4px;
+                 box-shadow:0 12px 30px rgba(4,16,48,.35)}
+  .acSpecialChipLabel{font-size:14px;font-weight:800;color:#9aa6c2;letter-spacing:.5px;text-transform:uppercase}
+  .acSpecialChipName{font-size:22px;font-weight:900;color:var(--navy);letter-spacing:-.5px}
+  .acSpecialChipPrice{font-size:34px;font-weight:900;color:var(--blue);letter-spacing:-1.5px;line-height:1}
+  .acRow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:16px}
+  .acCard{background:#fff;color:var(--ink);border-radius:22px;padding:26px 26px 22px;
           display:flex;flex-direction:column;gap:0;box-shadow:0 18px 44px rgba(4,16,48,.4);position:relative}
-  .acCard.acHot{background:linear-gradient(145deg,#0a2a70,#0d1e57);color:#fff}
   .acTierBadge{display:inline-block;font-size:13px;font-weight:900;letter-spacing:1px;text-transform:uppercase;
-               border-radius:6px;padding:4px 12px;margin-bottom:14px;align-self:flex-start}
-  .acCard:nth-child(1) .acTierBadge{background:#eaf1ff;color:var(--blue)}
-  .acCard:nth-child(2) .acTierBadge{background:rgba(255,255,255,.12);color:#FFC83D}
-  .acCard:nth-child(3) .acTierBadge{background:#eaf1ff;color:var(--blue)}
-  .acCardName{font-size:26px;font-weight:900;color:var(--navy);letter-spacing:-1px;line-height:1.2;margin-bottom:20px}
-  .acCard.acHot .acCardName{color:#fff}
-  .acPrices{display:flex;flex-direction:column;gap:6px;margin-top:auto}
-  .acOriginal{font-size:17px;font-weight:600;color:#aab;text-decoration:line-through}
-  .acCard.acHot .acOriginal{color:rgba(255,255,255,.4)}
-  .acMid{font-size:20px;font-weight:700;color:#7a8aaa}
-  .acCard.acHot .acMid{color:rgba(255,255,255,.55)}
-  .acFinalRow{margin-top:14px;padding-top:14px;border-top:2px solid #eef1f8}
-  .acCard.acHot .acFinalRow{border-color:rgba(255,255,255,.12)}
+               border-radius:6px;padding:4px 12px;margin-bottom:14px;align-self:flex-start;background:#eaf1ff;color:var(--blue)}
+  .acCard.acHot .acTierBadge{background:#fff7e0;color:#b45309}
+  .acCardName{font-size:24px;font-weight:900;color:var(--navy);letter-spacing:-1px;line-height:1.2;margin-bottom:16px}
+  .acPrices{display:flex;flex-direction:column;gap:4px;margin-top:auto}
+  .acOriginal{font-size:16px;font-weight:600;color:#bbc;text-decoration:line-through}
+  .acMid{font-size:19px;font-weight:700;color:#7a8aaa}
+  .acFinalRow{margin-top:12px;padding-top:12px;border-top:2px solid #eef1f8}
   .acFinalLabel{font-size:13px;font-weight:800;letter-spacing:.5px;color:#9aa6c2;text-transform:uppercase;margin-bottom:4px}
-  .acCard.acHot .acFinalLabel{color:rgba(255,255,255,.45)}
-  .acFinalPrice{font-size:40px;font-weight:900;color:var(--blue);letter-spacing:-2px;line-height:1}
-  .acCard.acHot .acFinalPrice{color:#FFC83D}
+  .acFinalPrice{font-size:38px;font-weight:900;color:var(--blue);letter-spacing:-2px;line-height:1}
+  .acCard.acHot .acFinalPrice{color:#b45309}
   /* 상단 소형 카드 */
   .pkgName{font-size:30px;font-weight:900;color:var(--navy);letter-spacing:-1.5px;line-height:1.1;white-space:nowrap}
   .pkgName em{font-style:normal;color:var(--blue)}
@@ -1176,8 +1171,16 @@
       </div>
 
       <div class="acSpecialRow anim d2">
-        <div class="acSpecialChip">7-8월 개강 · 기본이론반 2과목 <b>99,000원</b></div>
-        <div class="acSpecialChip">기본이론 4과목 출석미션반 <b>299,000원</b></div>
+        <div class="acSpecialChip">
+          <div class="acSpecialChipLabel">7-8월 개강 특가</div>
+          <div class="acSpecialChipName">기본이론반 2과목</div>
+          <div class="acSpecialChipPrice">99,000원</div>
+        </div>
+        <div class="acSpecialChip">
+          <div class="acSpecialChipLabel">7-8월 개강 특가</div>
+          <div class="acSpecialChipName">기본이론 4과목 출석미션반</div>
+          <div class="acSpecialChipPrice">299,000원</div>
+        </div>
       </div>
 
       <div class="acRow">
