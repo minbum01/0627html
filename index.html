@@ -533,21 +533,19 @@
   .featCard.featSub:nth-of-type(2)::before{background:linear-gradient(180deg,#16a085,#0e6f63)}
   .featCard.featSub:nth-of-type(3)::before{background:linear-gradient(180deg,#2C6BF0,#1E4FC4)}
   .featCard.featSub:nth-of-type(4)::before{background:linear-gradient(180deg,#b23f96,#7c2d6b)}
-  .featIcon{width:48px;height:48px;border-radius:14px;flex-shrink:0;display:grid;place-items:center}
-  .featCard.featMain .featIcon{width:60px;height:60px;border-radius:17px;background:linear-gradient(135deg,#FFC83D,#f59e0b)}
-  .featCard.featSub:nth-of-type(2) .featIcon{background:linear-gradient(135deg,#16a085,#0e6f63)}
-  .featCard.featSub:nth-of-type(3) .featIcon{background:linear-gradient(135deg,#2C6BF0,#1E4FC4)}
-  .featCard.featSub:nth-of-type(4) .featIcon{background:linear-gradient(135deg,#b23f96,#7c2d6b)}
-  .featIcon svg{width:26px;height:26px}
-  .featCard.featMain .featIcon svg{width:32px;height:32px}
-  .featBody{display:flex;flex-direction:column;gap:5px}
-  .featName{font-size:22px;font-weight:900;color:var(--navy);letter-spacing:-.5px}
-  .featCard.featMain .featName{font-size:28px}
-  .featDesc{font-size:18px;font-weight:600;color:#44507a;line-height:1.4}
-  .featCard.featMain .featDesc{font-size:20px}
+  .featBody{display:flex;flex-direction:column;gap:5px;justify-content:center}
+  .featName{font-size:24px;font-weight:900;color:var(--navy);letter-spacing:-.5px}
+  .featDesc{font-size:19px;font-weight:600;color:#44507a;line-height:1.45}
   .featNote{font-size:13px;font-weight:600;color:#9aa6c2;line-height:1.5;margin-top:4px}
-  .featMore{position:absolute;top:12px;right:14px;font-size:18px;line-height:1;opacity:.45;transition:.2s}
-  .featCard[data-modal]:hover .featMore{opacity:1}
+  /* 200% 대형 카드 전용 */
+  .featCard.featMain{background:linear-gradient(150deg,#fffbf2 0%,#fff8e8 50%,#fff 100%)}
+  .featCard.featMain::before{background:linear-gradient(180deg,#FFC83D,#f59e0b);width:8px}
+  .featMainInner{display:flex;flex-direction:column;gap:0;width:100%}
+  .featMainLabel{font-size:22px;font-weight:800;color:#9aa6c2;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+  .featMainPct{font-size:110px;font-weight:900;color:#b45309;letter-spacing:-6px;line-height:.9;margin-bottom:4px}
+  .featMainSub{font-size:44px;font-weight:900;color:var(--navy);letter-spacing:-2px;line-height:1}
+  .featMainLine{width:100%;height:2px;background:linear-gradient(90deg,#f5d78a,transparent);margin:20px 0}
+  .featMainBody{font-size:22px;font-weight:700;color:#44507a;line-height:1.5}
   .featCard[data-modal]{transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
   .featCard[data-modal]:hover{transform:translateY(-4px);box-shadow:0 28px 56px rgba(4,16,48,.5)}
 
@@ -1008,46 +1006,33 @@
       <div class="featGrid">
         <!-- 왼쪽 대형: 200% 환급 -->
         <div class="featCard featMain anim d2" data-modal="featModal2" style="cursor:pointer">
-          <div class="featIcon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <div class="featBody">
-            <div class="featName">수강료 최대 200% 환급</div>
-            <div class="featDesc">합격하면 수강료 전액의<br><b style="font-size:72px;font-weight:900;color:#b45309;letter-spacing:-3px;line-height:1;display:inline-block">200%</b><br>돌려드립니다</div>
+          <div class="featMainInner">
+            <div class="featMainLabel">수강료 최대</div>
+            <div class="featMainPct">200%</div>
+            <div class="featMainSub">환급</div>
+            <div class="featMainLine"></div>
+            <div class="featMainBody">합격하면 수강료 전액을<br>200% 돌려드립니다</div>
             <div class="featNote">※ 미션 달성시 지급 · 제세공과금 본인부담 · 교재비 및 옵션가 제외</div>
           </div>
-          <div class="featMore">🔍</div>
         </div>
         <!-- 오른쪽 소형 3개 -->
         <div class="featCard featSub anim d3" data-modal="featModal1" style="cursor:pointer">
-          <div class="featIcon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
-          </div>
           <div class="featBody">
             <div class="featName">9급 전 강좌 무제한 수강</div>
             <div class="featDesc">기본이론부터 동형모의고사까지<br>필요한 모든 강좌를 제한 없이</div>
           </div>
-          <div class="featMore">🔍</div>
         </div>
         <div class="featCard featSub anim d4" data-modal="featModal3" style="cursor:pointer">
-          <div class="featIcon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h13v13"/><path d="M4 19a2 2 0 0 0 2 2h13"/><path d="M9 10h6M9 14h4"/></svg>
-          </div>
           <div class="featBody">
             <div class="featName">한국사능력검정 강의 무료</div>
             <div class="featDesc">2027 한능검 대체 대비<br>한능검 전 강의 무료 제공</div>
           </div>
-          <div class="featMore">🔍</div>
         </div>
         <div class="featCard featSub anim d5" data-modal="featModal4" style="cursor:pointer">
-          <div class="featIcon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-          </div>
           <div class="featBody">
             <div class="featName">합격예측 모의고사 무료</div>
             <div class="featDesc">실전 감각과 현재 위치를 정확히 파악하는 모의고사 무료 제공</div>
           </div>
-          <div class="featMore">🔍</div>
         </div>
       </div>
 
@@ -1055,7 +1040,7 @@
       <div class="modal" id="featModal1">
         <div class="modalCard" style="max-width:700px">
           <button class="modalClose" data-close>×</button>
-          <div class="modalTag" style="color:#b45309;background:#fff7e0;border-color:#f5d78a">⭐ 9급 전 강좌 무제한 수강</div>
+          <div class="modalTag" style="color:#b45309;background:#fff7e0;border-color:#f5d78a">9급 전 강좌 무제한 수강</div>
           <h3>기본이론부터 동형모의고사까지, 제한 없이</h3>
           <div class="modalLead">패스 하나로 9급 공무원 시험 준비에 필요한 모든 강좌를 기간 내 무제한으로 수강할 수 있습니다. 과목별 기본이론, 심화 문제풀이, 기출분석, 동형모의고사까지 빠짐없이 포함됩니다.</div>
         </div>
@@ -1063,7 +1048,7 @@
       <div class="modal" id="featModal2">
         <div class="modalCard" style="max-width:700px">
           <button class="modalClose" data-close>×</button>
-          <div class="modalTag" style="color:#0e6f63;background:#e6faf6;border-color:#a8e8dd">💰 수강료 최대 200% 환급</div>
+          <div class="modalTag" style="color:#0e6f63;background:#e6faf6;border-color:#a8e8dd">수강료 최대 200% 환급</div>
           <h3>합격하면 낸 돈보다 더 돌려드립니다</h3>
           <div class="modalLead">합격 시 수강료의 <b>200%를 환급</b>합니다. 불합격 시에도 <b>100% 환급</b>이 보장되어 사실상 리스크 없이 도전할 수 있습니다.</div>
         </div>
@@ -1071,7 +1056,7 @@
       <div class="modal" id="featModal3">
         <div class="modalCard" style="max-width:700px">
           <button class="modalClose" data-close>×</button>
-          <div class="modalTag" style="color:#1E4FC4;background:#eaf1ff;border-color:#c9d9fb">📘 한국사능력검정 강의 무료</div>
+          <div class="modalTag" style="color:#1E4FC4;background:#eaf1ff;border-color:#c9d9fb">한국사능력검정 강의 무료</div>
           <h3>2027 한능검 대체, 지금부터 준비</h3>
           <div class="modalLead">2027년부터 9급 한국사 과목이 한국사능력검정시험(심화 3급 이상)으로 대체됩니다. 패스 등록 시 <b>한능검 전 강의를 추가 비용 없이 무료</b>로 제공합니다.</div>
         </div>
@@ -1079,7 +1064,7 @@
       <div class="modal" id="featModal4">
         <div class="modalCard" style="max-width:700px">
           <button class="modalClose" data-close>×</button>
-          <div class="modalTag" style="color:#7c2d6b;background:#fceef9;border-color:#e3b0d8">📝 합격예측 모의고사 무료</div>
+          <div class="modalTag" style="color:#7c2d6b;background:#fceef9;border-color:#e3b0d8">합격예측 모의고사 무료</div>
           <h3>내 위치를 정확히 파악하는 실전 모의고사</h3>
           <div class="modalLead">실제 시험과 동일한 환경에서 응시하는 <b>합격예측 모의고사를 무료</b>로 제공합니다. 현재 점수대와 합격 가능성을 수치로 확인하고 학습 전략을 조정할 수 있습니다.</div>
         </div>
