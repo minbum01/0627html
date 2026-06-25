@@ -628,9 +628,10 @@
   .acOriginal{font-size:16px;font-weight:600;color:#bbc;text-decoration:line-through}
   .acMid{font-size:19px;font-weight:700;color:#7a8aaa}
   .acFinalRow{margin-top:12px;padding-top:12px;border-top:2px solid #eef1f8}
-  .acFinalLabel{font-size:13px;font-weight:800;letter-spacing:.5px;color:#9aa6c2;text-transform:uppercase;margin-bottom:4px}
-  .acFinalPrice{font-size:40px;font-weight:900;color:var(--blue);letter-spacing:-2px;line-height:1}
+  .acFinalLabel{display:inline-block;font-size:13px;font-weight:900;letter-spacing:.3px;color:var(--blue);background:#eaf1ff;padding:3px 12px;border-radius:50px;margin-bottom:8px}
+  .acFinalPrice{font-size:48px;font-weight:900;color:var(--blue);letter-spacing:-2px;line-height:1}
   .acCard.acHot .acFinalPrice{color:#b45309}
+  .acCard.acHot .acFinalLabel{color:#b45309;background:#fff7e0}
   /* 실강패스 — 9급 커리큘럼 띠 (타이틀과 가격박스 사이) */
   .passCurr{margin-top:12px;background:#12244f;border:1px solid rgba(255,255,255,.10);
             border-radius:18px;padding:16px 22px 18px}
@@ -1644,9 +1645,11 @@
 
       <div class="acRow">
         <div class="acCard anim d3">
-          <div class="acCardName">실강패스 4과목</div>
-          <div style="font-size:14px;font-weight:800;color:#7a8aaa;margin-bottom:6px;letter-spacing:-.3px">9개월 과정 · 2027 국가직 시험까지</div>
-          <div class="acTier">일반반</div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span class="acCardName" style="margin-bottom:0">실강패스 4과목</span>
+            <span class="acTier" style="font-size:20px;padding:4px 14px;margin-bottom:0">일반반</span>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:#7a8aaa;margin:6px 0 0;letter-spacing:-.3px">9개월 과정 · 2027 국가직 시험까지</div>
           <div class="acPrices">
             <div class="acOriginal">5,745,000원</div>
             <div class="acMid">2,990,000원</div>
@@ -1657,9 +1660,11 @@
           </div>
         </div>
         <div class="acCard acHot anim d4">
-          <div class="acCardName">실강패스 4과목</div>
-          <div style="font-size:14px;font-weight:800;color:#7a8aaa;margin-bottom:6px;letter-spacing:-.3px">9개월 과정 · 2027 국가직 시험까지</div>
-          <div class="acTier">합격반</div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span class="acCardName" style="margin-bottom:0">실강패스 4과목</span>
+            <span class="acTier" style="font-size:20px;padding:4px 14px;margin-bottom:0">합격반</span>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:#7a8aaa;margin:6px 0 0;letter-spacing:-.3px">9개월 과정 · 2027 국가직 시험까지</div>
           <div class="acPrices">
             <div class="acOriginal">8,545,000원</div>
             <div class="acMid">5,290,000원</div>
@@ -1670,9 +1675,11 @@
           </div>
         </div>
         <div class="acCard anim d5">
-          <div class="acCardName">실강패스 4과목</div>
-          <div style="font-size:14px;font-weight:800;color:#7a8aaa;margin-bottom:6px;letter-spacing:-.3px">9개월 과정 · 2027 국가직 시험까지</div>
-          <div class="acTier">프리미엄반</div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span class="acCardName" style="margin-bottom:0">실강패스 4과목</span>
+            <span class="acTier" style="font-size:20px;padding:4px 14px;margin-bottom:0">프리미엄반</span>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:#7a8aaa;margin:6px 0 0;letter-spacing:-.3px">9개월 과정 · 2027 국가직 시험까지</div>
           <div class="acPrices">
             <div class="acOriginal">9,345,000원</div>
             <div class="acMid">5,640,000원</div>
