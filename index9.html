@@ -706,7 +706,7 @@
   .kkTitleBox{background:linear-gradient(140deg,#0c2150 0%,#1a3a7a 100%);border-radius:30px;padding:48px 52px;
               display:flex;flex-direction:column;justify-content:center;gap:10px;
               box-shadow:0 24px 60px rgba(4,16,48,.55);flex:1;position:relative}
-  .kkCrown{position:absolute;top:-28px;right:20px;font-size:68px;line-height:1;
+  .kkCrown{display:inline-block;font-size:52px;line-height:1;vertical-align:top;margin-left:6px;
            filter:drop-shadow(0 4px 16px rgba(250,225,0,.7));
            animation:crownBob 2.2s ease-in-out infinite}
   @keyframes crownBob{
@@ -863,8 +863,7 @@
 
       <div class="kkWrap">
         <div class="kkTitleBox anim d1">
-          <div class="kkCrown">👑</div>
-          <div class="kkTitleMid">찾았다! 오늘의 주인공!</div>
+          <div class="kkTitleMid">찾았다! 오늘의 주인공!<span class="kkCrown">👑</span></div>
           <div class="kkTitleBig">원샷원킬</div>
           <div class="kkTitleSub">해커스가 쏜다!</div>
         </div>
