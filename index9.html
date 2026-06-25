@@ -694,14 +694,16 @@
               box-shadow:0 24px 60px rgba(4,16,48,.55);flex:1}
   .kkTitleKicker{font-family:'Pretendard',sans-serif;font-size:15px;font-weight:700;
                  color:rgba(255,255,255,.45);letter-spacing:2.5px;text-transform:uppercase}
-  .kkTitleSub{font-family:'Pretendard',sans-serif;font-size:36px;font-weight:900;
-              color:#fff;letter-spacing:-1.5px;line-height:1.1;margin-top:8px}
-  .kkTitleBig{font-family:'Pretendard',sans-serif;font-size:100px;font-weight:900;
+  .kkTitleMid{font-family:'Pretendard',sans-serif;font-size:32px;font-weight:800;
+              color:rgba(255,255,255,.85);letter-spacing:-1px;line-height:1.15;margin-top:10px}
+  .kkTitleSub{font-family:'Pretendard',sans-serif;font-size:38px;font-weight:900;
+              color:#fff;letter-spacing:-1.5px;line-height:1.1}
+  .kkTitleBig{font-family:'Pretendard',sans-serif;font-size:96px;font-weight:900;
               color:#FAE100;letter-spacing:-5px;line-height:0.9}
-  .kkQrCard{background:#fff;border-radius:30px;padding:30px;
+  .kkQrCard{background:#fff;border-radius:30px;padding:24px;
             box-shadow:0 34px 80px rgba(4,16,48,.6);display:flex;flex-direction:column;
-            align-items:center;justify-content:center;gap:16px;flex:1}
-  .kkQrCard img{width:auto;height:auto;max-width:100%;max-height:340px;display:block;border-radius:14px}
+            align-items:center;justify-content:center;gap:12px;flex:1}
+  .kkQrCard img{width:100%;aspect-ratio:1/1;max-width:460px;display:block;border-radius:14px;object-fit:contain}
   .kkQrCard.qrEditOn{outline:3px dashed rgba(255,200,61,.95);outline-offset:8px;cursor:move}
   .qrReadout{display:none;position:absolute;left:50%;top:-44px;transform:translateX(-50%);
              white-space:nowrap;background:#1E4FC4;color:#fff;font-size:15px;font-weight:800;
@@ -808,6 +810,7 @@
       <div class="kkWrap">
         <div class="kkTitleBox anim d1">
           <div class="kkTitleKicker">참여 이벤트</div>
+          <div class="kkTitleMid">찾았다 오늘의 주인공!</div>
           <div class="kkTitleSub">해커스가 쏜다!</div>
           <div class="kkTitleBig">원샷원킬</div>
         </div>
