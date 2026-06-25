@@ -351,12 +351,12 @@
                       50%{box-shadow:0 12px 30px rgba(20,50,140,.5),0 0 0 9px rgba(44,107,240,.16)}}
 
   /* dim modal */
-  .modal{position:absolute;inset:0;z-index:75;display:flex;align-items:center;justify-content:center;padding:60px;
+  .modal{position:absolute;inset:0;z-index:75;display:flex;align-items:center;justify-content:center;padding:40px;
          background:rgba(4,12,32,.74);backdrop-filter:blur(3px);opacity:0;visibility:hidden;touch-action:none;
          transition:opacity .35s var(--ease),visibility .35s}
   .modal.open{opacity:1;visibility:visible}
   .modalCard{background:#fff;color:var(--ink);border-radius:24px;padding:38px 44px 34px;max-width:780px;width:100%;
-             max-height:600px;overflow-y:auto;
+             max-height:660px;overflow-y:auto;
              position:relative;box-shadow:0 40px 110px rgba(0,0,0,.55);
              transform:translateY(20px) scale(.97);transition:transform .4s var(--ease)}
   .modal.open .modalCard{transform:none}
@@ -387,10 +387,10 @@
   .subjMore{margin-top:auto;padding-top:18px;font-size:24px;font-weight:800;color:var(--blue);
             display:inline-flex;align-items:center;gap:8px}
   /* exam-info modal body */
-  .examGrid{margin-top:22px;display:flex;flex-direction:column;gap:14px}
-  .examItem{display:flex;gap:18px;align-items:baseline;border-top:1px solid #eef1f8;padding-top:14px}
-  .examItem .k{flex-shrink:0;width:150px;font-size:26px;font-weight:800;color:var(--blue)}
-  .examItem .v{font-size:26px;font-weight:600;color:#33405f;line-height:1.4}
+  .examGrid{margin-top:18px;display:flex;flex-direction:column;gap:12px}
+  .examItem{display:flex;gap:18px;align-items:baseline;border-top:1px solid #eef1f8;padding-top:12px}
+  .examItem .k{flex-shrink:0;width:150px;font-size:24px;font-weight:800;color:var(--blue)}
+  .examItem .v{font-size:24px;font-weight:600;color:#33405f;line-height:1.4}
   .subjCard.hot{background:linear-gradient(165deg,#e8f0ff,#ffffff);color:var(--ink);
                 border:2px solid var(--blue);box-shadow:0 24px 56px rgba(20,50,140,.5)}
   .subjGrade{display:flex;align-items:baseline;gap:13px}
@@ -1225,7 +1225,7 @@
           <button class="modalClose" data-close>×</button>
           <h3>9급 필기시험 안내</h3>
           <div class="examGrid">
-            <div class="examItem"><div class="k">시험 과목</div><div class="v">국어 · 영어 · 전공 2과목 <span style="display:inline-block;background:#ffe3e0;color:#d63b3b;font-weight:900;padding:2px 12px;border-radius:50px;margin:0 4px">한국사 제외</span> 총 4과목</div></div>
+            <div class="examItem"><div class="k">시험 과목</div><div class="v">국어 · 영어 · 전공 2과목 · 총 4과목</div></div>
             <div class="examItem"><div class="k">문항 수</div><div class="v">과목당 25문항 · 총 100문항</div></div>
             <div class="examItem"><div class="k">시험 시간</div><div class="v">총 110분</div></div>
             <div class="examItem"><div class="k">문제 유형</div><div class="v">4지선다형 객관식</div></div>
@@ -1244,7 +1244,6 @@
             <div class="examItem"><div class="k">전공</div><div class="v">전공 4과목 · 과목당 20문항</div></div>
             <div class="examItem"><div class="k">배점</div><div class="v">과목당 100점 만점 · 과목별 40점 미만 과락</div></div>
           </div>
-          <p class="modalFoot">※ 예시 수치입니다 — 실제 시험 시간·문항·배점은 확정 자료로 교체 예정.</p>
         </div>
       </div>
     </section>
