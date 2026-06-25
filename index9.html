@@ -747,7 +747,7 @@
   .kkPhoneScreen{background:#fff;border-radius:22px;padding:16px;width:100%;
                  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;flex:1}
   .kkPhoneBar{display:none}
-  .kkQrImgWrap{position:relative;border-radius:10px;overflow:hidden;width:100%;flex:1;min-height:0}
+  .kkQrImgWrap{position:relative;border-radius:10px;overflow:hidden;width:100%;flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
   .kkQrImgWrap img{width:100%;height:100%;display:block;object-fit:contain}
   .kkScanLine{position:absolute;left:0;right:0;height:3px;pointer-events:none;
               background:linear-gradient(90deg,transparent 0%,#00e87a 25%,#afffcf 50%,#00e87a 75%,transparent 100%);
@@ -2411,8 +2411,8 @@
     const card=document.querySelector('#sKakao .kkQrCard');
     if(!card) return;
     const img=card.querySelector('img');
-    const KEY='qr9pos2';
-    let st={right:0, top:0, w:340};
+    const KEY='qr9pos3';
+    let st={right:0, top:0, w:420};
     try{ const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s&&typeof s==='object') st=Object.assign(st,s); }catch(_){}
     // 현재 수치 표시(편집 모드에서만 보임) — 이 값을 알려주면 코드에 고정값으로 박아넣음
     const readout=document.createElement('div');
