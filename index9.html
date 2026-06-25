@@ -702,10 +702,10 @@
   .agTx em{font-style:normal;color:#FFC83D}
 
   /* ===== 참여 이벤트: 카카오톡 유도 ===== */
-  .kkWrap{flex:1;display:flex;align-items:stretch;justify-content:center;gap:32px;margin-top:10px;overflow:hidden;padding:4px 0}
+  .kkWrap{flex:1;display:flex;align-items:center;justify-content:center;gap:32px;margin-top:10px;overflow:hidden;padding:4px 0}
   .kkTitleBox{background:#fff;border-radius:30px;padding:44px 52px;
               display:flex;flex-direction:column;justify-content:center;gap:10px;
-              box-shadow:0 24px 60px rgba(4,16,48,.35);flex:1;position:relative}
+              box-shadow:0 24px 60px rgba(4,16,48,.35);flex:0 1 auto;max-width:880px;position:relative}
   .kkCrown{display:inline-block;font-size:52px;line-height:1;vertical-align:top;margin-left:6px;
            filter:drop-shadow(0 4px 16px rgba(250,225,0,.7));
            animation:crownBob 2.2s ease-in-out infinite}
@@ -733,20 +733,20 @@
     0%,100%{opacity:0;transform:translateX(-8px)}
     35%,65%{opacity:1;transform:translateX(0)}
   }
-  .kkQrCard{background:#1a1a2e;border-radius:52px;padding:18px 18px 22px;
-            box-shadow:0 0 0 4px #2e2e4a,0 0 0 7px #111,0 34px 80px rgba(4,16,48,.75);
-            display:none;flex-direction:column;align-items:center;gap:0;
+  .kkQrCard{background:#1a1a2e;border-radius:28px;padding:18px 18px 22px;
+            box-shadow:0 24px 60px rgba(4,16,48,.45);
+            display:flex;flex-direction:column;align-items:center;gap:0;
             flex:0 0 auto;width:45%;max-height:100%;
             position:relative}
-  .kkQrCard::before{content:'';position:absolute;left:-11px;top:110px;
+  .kkQrCard::before{display:none;content:'';position:absolute;left:-11px;top:110px;
                     width:5px;height:52px;background:#2e2e4a;border-radius:3px 0 0 3px;
                     box-shadow:0 64px 0 #2e2e4a}
-  .kkQrCard::after{content:'';position:absolute;right:-11px;top:150px;
+  .kkQrCard::after{display:none;content:'';position:absolute;right:-11px;top:150px;
                    width:5px;height:72px;background:#2e2e4a;border-radius:0 3px 3px 0}
-  .kkPhoneNotch{width:88px;height:10px;background:#111;border-radius:0 0 10px 10px;margin:0 auto 14px;flex-shrink:0}
+  .kkPhoneNotch{display:none}
   .kkPhoneScreen{background:#fff;border-radius:22px;padding:16px;width:100%;
                  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;flex:1}
-  .kkPhoneBar{width:80px;height:5px;background:rgba(255,255,255,.25);border-radius:3px;margin:14px auto 0;flex-shrink:0}
+  .kkPhoneBar{display:none}
   .kkQrImgWrap{position:relative;border-radius:10px;overflow:hidden;width:100%;flex:1;min-height:0}
   .kkQrImgWrap img{width:100%;height:100%;display:block;object-fit:contain}
   .kkScanLine{position:absolute;left:0;right:0;height:3px;pointer-events:none;
@@ -2411,8 +2411,8 @@
     const card=document.querySelector('#sKakao .kkQrCard');
     if(!card) return;
     const img=card.querySelector('img');
-    const KEY='qr9pos';
-    let st={right:-12, top:-150, w:402};
+    const KEY='qr9pos2';
+    let st={right:0, top:0, w:340};
     try{ const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s&&typeof s==='object') st=Object.assign(st,s); }catch(_){}
     // 현재 수치 표시(편집 모드에서만 보임) — 이 값을 알려주면 코드에 고정값으로 박아넣음
     const readout=document.createElement('div');
