@@ -733,9 +733,9 @@
     0%,100%{opacity:0;transform:translateX(-8px)}
     35%,65%{opacity:1;transform:translateX(0)}
   }
-  .kkQrCard{display:none;background:#1a1a2e;border-radius:52px;padding:18px 18px 22px;
+  .kkQrCard{background:#1a1a2e;border-radius:52px;padding:18px 18px 22px;
             box-shadow:0 0 0 4px #2e2e4a,0 0 0 7px #111,0 34px 80px rgba(4,16,48,.75);
-            display:flex;flex-direction:column;align-items:center;gap:0;
+            display:none;flex-direction:column;align-items:center;gap:0;
             flex:0 0 auto;width:45%;max-height:100%;
             position:relative}
   .kkQrCard::before{content:'';position:absolute;left:-11px;top:110px;
@@ -768,7 +768,7 @@
   .kkQrCap .kkChat{background:#FAE100;color:#3C1E1E;font-weight:900;font-size:17px;padding:7px 16px;border-radius:50px}
 
   /* ===== 참여 이벤트: 상품 박스 그리드 ===== */
-  .prizeGrid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);
+  .prizeGrid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);
              gap:18px;margin-top:30px;flex:1}
   .prizeBox{position:relative;background:#fff;border-radius:22px;cursor:pointer;overflow:hidden;
             display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
@@ -892,7 +892,7 @@
       <div class="head">
         <div>
           <div class="benefitKicker anim">참여 이벤트</div>
-          <div class="benefitTitle anim d1">오늘의 깜짝 상품 <em>7</em></div>
+          <div class="benefitTitle anim d1">오늘의 깜짝 선물 <em>6</em></div>
         </div>
         <div class="badgeSlot" data-badge style="right:72px;top:60px;width:72px;height:72px"></div>
       </div>
@@ -906,25 +906,21 @@
           <div class="pbNo">2</div>
           <div class="pbHint">Touch to open</div>
         </div>
-        <div class="prizeBox anim d2" data-modal="prizeModal3">
+        <div class="prizeBox anim d2" data-modal="prizeModal4">
           <div class="pbNo">3</div>
           <div class="pbHint">Touch to open</div>
         </div>
-        <div class="prizeBox anim d2" data-modal="prizeModal4">
+        <div class="prizeBox anim d3" data-modal="prizeModal5">
           <div class="pbNo">4</div>
           <div class="pbHint">Touch to open</div>
         </div>
-        <div class="prizeBox anim d3" data-modal="prizeModal5">
+        <div class="prizeBox anim d3" data-modal="prizeModal6">
           <div class="pbNo">5</div>
           <div class="pbHint">Touch to open</div>
         </div>
-        <div class="prizeBox anim d3" data-modal="prizeModal6">
+        <div class="prizeBox anim d3" data-modal="prizeModal7">
           <div class="pbNo">6</div>
           <div class="pbHint">Touch to open</div>
-        </div>
-        <div class="prizeBox pbWide anim d3" data-modal="prizeModal7">
-          <div class="pbNo">7</div>
-          <div class="pbHint">응원문구 챌린지</div>
         </div>
       </div>
 
@@ -936,7 +932,7 @@
           <div class="prizeMini">어디서 오셨나요?</div>
           <div class="missionTimer" data-timer>
             <svg viewBox="0 0 120 120"><circle class="mtTrack" cx="60" cy="60" r="54"/><circle class="mtProg" cx="60" cy="60" r="54"/></svg>
-            <div class="mtNum">30</div>
+            <div class="mtNum">90</div>
             <div class="mtHint">탭하면 시작</div>
           </div>
           <button class="missionDone" data-clear="1">완료</button>
@@ -951,25 +947,10 @@
           <div class="prizeMini">최연소 막내는 누구?</div>
           <div class="missionTimer" data-timer>
             <svg viewBox="0 0 120 120"><circle class="mtTrack" cx="60" cy="60" r="54"/><circle class="mtProg" cx="60" cy="60" r="54"/></svg>
-            <div class="mtNum">30</div>
+            <div class="mtNum">90</div>
             <div class="mtHint">탭하면 시작</div>
           </div>
           <button class="missionDone" data-clear="2">완료</button>
-          <div class="clearStamp">CLEAR</div>
-        </div>
-      </div>
-      <div class="modal" id="prizeModal3">
-        <div class="modalCard prizeCard">
-          <button class="modalClose" data-close>×</button>
-          <div class="prizeEmoji">👑 🦉</div>
-          <div class="prizeQ">가장 나이 많은 수험생<em>?!</em></div>
-          <div class="prizeMini">오늘의 인생 선배님!</div>
-          <div class="missionTimer" data-timer>
-            <svg viewBox="0 0 120 120"><circle class="mtTrack" cx="60" cy="60" r="54"/><circle class="mtProg" cx="60" cy="60" r="54"/></svg>
-            <div class="mtNum">30</div>
-            <div class="mtHint">탭하면 시작</div>
-          </div>
-          <button class="missionDone" data-clear="3">완료</button>
           <div class="clearStamp">CLEAR</div>
         </div>
       </div>
@@ -981,7 +962,7 @@
           <div class="prizeMini">생일 축하합니다!</div>
           <div class="missionTimer" data-timer>
             <svg viewBox="0 0 120 120"><circle class="mtTrack" cx="60" cy="60" r="54"/><circle class="mtProg" cx="60" cy="60" r="54"/></svg>
-            <div class="mtNum">30</div>
+            <div class="mtNum">90</div>
             <div class="mtHint">탭하면 시작</div>
           </div>
           <button class="missionDone" data-clear="4">완료</button>
@@ -996,7 +977,7 @@
           <div class="prizeMini">여러 명이면 가위바위보로!</div>
           <div class="missionTimer" data-timer>
             <svg viewBox="0 0 120 120"><circle class="mtTrack" cx="60" cy="60" r="54"/><circle class="mtProg" cx="60" cy="60" r="54"/></svg>
-            <div class="mtNum">30</div>
+            <div class="mtNum">90</div>
             <div class="mtHint">탭하면 시작</div>
           </div>
           <button class="missionDone" data-clear="5">완료</button>
@@ -1011,7 +992,7 @@
           <div class="prizeMini">해커스랑 운명인가요?</div>
           <div class="missionTimer" data-timer>
             <svg viewBox="0 0 120 120"><circle class="mtTrack" cx="60" cy="60" r="54"/><circle class="mtProg" cx="60" cy="60" r="54"/></svg>
-            <div class="mtNum">30</div>
+            <div class="mtNum">90</div>
             <div class="mtHint">탭하면 시작</div>
           </div>
           <button class="missionDone" data-clear="6">완료</button>
@@ -1022,11 +1003,11 @@
         <div class="modalCard prizeCard">
           <button class="modalClose" data-close>×</button>
           <div class="prizeEmoji">✍️ 💛</div>
-          <div class="prizeQ">해커스 응원문구 챌린지<em>!</em></div>
-          <div class="prizeMini">공무원·단기합격·원샷원킬·해커스 — 가장 위트있게!</div>
+          <div class="prizeQ">키워드로 만드는 센스 문구<em>!</em></div>
+          <div class="prizeMini">공무원·단기합격·원샷원킬·해커스 — 키워드를 활용해 센스있게!</div>
           <div class="missionTimer" data-timer>
             <svg viewBox="0 0 120 120"><circle class="mtTrack" cx="60" cy="60" r="54"/><circle class="mtProg" cx="60" cy="60" r="54"/></svg>
-            <div class="mtNum">30</div>
+            <div class="mtNum">90</div>
             <div class="mtHint">탭하면 시작</div>
           </div>
           <button class="missionDone" data-clear="7">완료</button>
@@ -2405,7 +2386,7 @@
   /* 미션 타이머: 탭하면 30 → 0초 카운트다운 */
   document.querySelectorAll('[data-timer]').forEach(t=>{
     const numEl=t.querySelector('.mtNum'), prog=t.querySelector('.mtProg');
-    const C=339.292, TOTAL=30; let iv=null, left=TOTAL;
+    const C=339.292, TOTAL=90; let iv=null, left=TOTAL;
     function render(){
       numEl.textContent=left;
       prog.style.strokeDashoffset=(C*(1-left/TOTAL)).toFixed(2);
