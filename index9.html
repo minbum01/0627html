@@ -220,18 +220,12 @@
   .cmpHint{position:absolute;left:0;right:0;bottom:13px;text-align:center;font-size:16px;font-weight:800;
            color:#9aa6c2;z-index:2;pointer-events:none;animation:hintBob 1.7s ease-in-out infinite}
   @keyframes hintBob{0%,100%{transform:translateY(0);opacity:.7}50%{transform:translateY(-4px);opacity:1}}
-  @keyframes neonFlicker{
-    0%  {opacity:0;text-shadow:none}
-    35% {opacity:.8;text-shadow:0 0 8px var(--nc),0 0 22px var(--nc2)}
-    42% {opacity:.08}
-    52% {opacity:1;text-shadow:0 0 14px var(--nc),0 0 44px var(--nc2),0 0 90px var(--nc3)}
-    58% {opacity:.5}
-    66% {opacity:1;text-shadow:0 0 14px var(--nc),0 0 44px var(--nc2),0 0 90px var(--nc3)}
-    100%{opacity:1;text-shadow:0 0 10px var(--nc),0 0 34px var(--nc2),0 0 70px var(--nc3)}
-  }
-  @keyframes neonPulse{
-    0%,100%{text-shadow:0 0 10px var(--nc),0 0 34px var(--nc2),0 0 70px var(--nc3)}
-    50%    {text-shadow:0 0 22px var(--nc),0 0 66px var(--nc2),0 0 140px var(--nc3)}
+  @keyframes stampIn{
+    0%  {opacity:0;transform:scale(1.55)}
+    45% {opacity:1;transform:scale(0.93)}
+    68% {transform:scale(1.04)}
+    84% {transform:scale(0.98)}
+    100%{opacity:1;transform:scale(1)}
   }
   .cmpReveal{position:absolute;inset:0;background:#26303f;
              color:#fff;padding:28px;display:flex;flex-direction:column;justify-content:center;gap:13px;
@@ -707,18 +701,15 @@
               box-shadow:0 24px 60px rgba(4,16,48,.55);flex:1}
   .kkTitleKicker{font-family:'Pretendard',sans-serif;font-size:15px;font-weight:700;
                  color:rgba(255,255,255,.4);letter-spacing:2.5px;text-transform:uppercase}
-  .kkTitleMid{font-family:'Pretendard',sans-serif;font-size:34px;font-weight:800;
-              color:#fff;letter-spacing:-1px;line-height:1.15;margin-top:10px;opacity:0;
-              --nc:#fff;--nc2:#99ccff;--nc3:#1e4fc4}
-  .kkTitleBig{font-family:'Pretendard',sans-serif;font-size:96px;font-weight:900;
-              color:#FAE100;letter-spacing:-5px;line-height:0.9;opacity:0;
-              --nc:#FAE100;--nc2:#FFC000;--nc3:#ff8800}
-  .kkTitleSub{font-family:'Pretendard',sans-serif;font-size:36px;font-weight:900;
-              color:#fff;letter-spacing:-1.5px;line-height:1.2;opacity:0;
-              --nc:#fff;--nc2:#e8f4ff;--nc3:#7bb8ff}
-  #sKakao.active .kkTitleMid{animation:neonFlicker .9s ease-out 1.0s both}
-  #sKakao.active .kkTitleBig{animation:neonFlicker 1.1s ease-out 1.6s both,neonPulse 2.8s ease-in-out 2.8s infinite}
-  #sKakao.active .kkTitleSub{animation:neonFlicker .8s ease-out 2.3s both}
+  .kkTitleMid{font-family:'Pretendard',sans-serif;font-size:30px;font-weight:800;
+              color:rgba(255,255,255,.9);letter-spacing:-0.5px;line-height:1.2;margin-top:8px;opacity:0}
+  .kkTitleBig{font-family:'Pretendard',sans-serif;font-size:72px;font-weight:900;
+              color:#FAE100;letter-spacing:-4px;line-height:1.0;opacity:0}
+  .kkTitleSub{font-family:'Pretendard',sans-serif;font-size:72px;font-weight:900;
+              color:#fff;letter-spacing:-4px;line-height:1.0;opacity:0}
+  #sKakao.active .kkTitleMid{animation:stampIn .45s ease-out 0.9s both}
+  #sKakao.active .kkTitleBig{animation:stampIn .45s ease-out 1.25s both}
+  #sKakao.active .kkTitleSub{animation:stampIn .45s ease-out 1.6s both}
   .kkQrCard{background:#fff;border-radius:30px;padding:10px 10px 14px;
             box-shadow:0 34px 80px rgba(4,16,48,.6);display:flex;flex-direction:column;
             align-items:center;justify-content:center;gap:10px;flex:1}
