@@ -702,7 +702,7 @@
   .agTx em{font-style:normal;color:#FFC83D}
 
   /* ===== 참여 이벤트: 카카오톡 유도 ===== */
-  .kkWrap{flex:1;display:flex;align-items:stretch;justify-content:center;gap:32px;margin-top:10px}
+  .kkWrap{flex:1;display:flex;align-items:stretch;justify-content:center;gap:32px;margin-top:10px;overflow:hidden;padding:4px 0}
   .kkTitleBox{background:linear-gradient(140deg,#0c2150 0%,#1a3a7a 100%);border-radius:30px;padding:48px 52px;
               display:flex;flex-direction:column;justify-content:center;gap:10px;
               box-shadow:0 24px 60px rgba(4,16,48,.55);flex:1;position:relative}
@@ -735,7 +735,8 @@
   }
   .kkQrCard{background:#1a1a2e;border-radius:52px;padding:18px 18px 22px;
             box-shadow:0 0 0 4px #2e2e4a,0 0 0 7px #111,0 34px 80px rgba(4,16,48,.75);
-            display:flex;flex-direction:column;align-items:center;gap:0;flex:1;
+            display:flex;flex-direction:column;align-items:center;gap:0;
+            flex:0 0 auto;width:45%;max-height:100%;
             position:relative}
   .kkQrCard::before{content:'';position:absolute;left:-11px;top:110px;
                     width:5px;height:52px;background:#2e2e4a;border-radius:3px 0 0 3px;
